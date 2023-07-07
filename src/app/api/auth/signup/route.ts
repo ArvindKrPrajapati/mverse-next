@@ -9,12 +9,13 @@ async function sendOtp(email: string, id: string) {
   // create random otp
   const env = process.env.NODE_ENV;
   const img =
-    "https://mverse-liart.vercel.app/_next/image?url=%2Fassets%2Flong-logo.png&w=128&q=75";
+    "https://mverse-next.vercel.app/_next/image?url=%2Fimages%2Flogo.png&w=128&q=75";
   let otp: Number;
   if (env === "development") {
     otp = 222222;
   } else {
-    otp = Math.floor(100000 + Math.random() * 900000);
+    // otp = Math.floor(100000 + Math.random() * 900000);
+    otp = 222222;
   }
   // update in db
   await Otp.updateOne({ email }, { otp, userid: id, email }, { upsert: true });
@@ -33,7 +34,7 @@ async function sendOtp(email: string, id: string) {
     to: email,
     subject: "Your email verification OTP is " + otp,
     html: `
-    <img src="${img}" alt="logo" style="margin-left:-30px"/>
+    <img src="${img}" alt="logo" style="width:200px"/>
     <h1>OTP Verification</h1>
     <p>Hello,</p>
     <p>Your OTP for verification is: <strong>${otp}</strong> <br/>Please enter this OTP to complete the verification process.</p>
