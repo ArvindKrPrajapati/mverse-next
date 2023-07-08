@@ -3,7 +3,6 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { AccountCircle } from "../_icons";
 import Image from "next/image";
-import LineMenuIcon from "../_icons/LineMenu";
 import useModal from "@/hooks/useModal";
 import Modal from "../Modal";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -11,6 +10,7 @@ import Login from "../Login";
 import Signup from "../Signup";
 import Verify from "../Verify";
 import userCurrentUser from "@/hooks/userCurrentUser";
+import MyPic from "./MyPic";
 
 export default function Navbar() {
   const { isOpen, onClose, onOpen, disabled, toggleDisabled } = useModal();
@@ -81,7 +81,7 @@ export default function Navbar() {
         </div>
         {/* end */}
         <div onClick={decideRoute}>
-          <AccountCircle width={28} />
+          <MyPic user={getUser} />
         </div>
       </div>
       <Modal

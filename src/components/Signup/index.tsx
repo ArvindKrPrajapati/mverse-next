@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import EyeIcon from "../_icons/Eye";
+import { EyeIcon } from "../_icons";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { mversePost } from "@/lib/apiCalls";
 import useModal from "@/hooks/useModal";
@@ -149,7 +149,7 @@ export default function Signup() {
               className="absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer"
               onClick={handlePasswordToggle}
             >
-              <EyeIcon visible={passwordVisible} color="silver" width={20} />
+              <EyeIcon active={passwordVisible} color="silver" width={20} />
             </div>
           </div>
         </div>

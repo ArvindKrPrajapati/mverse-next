@@ -1,5 +1,6 @@
 "use client";
 import userCurrentUser from "@/hooks/userCurrentUser";
+import { useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
 type props = {
@@ -9,9 +10,12 @@ type props = {
 };
 export default function Profile({ params }: props) {
   const { logout } = userCurrentUser();
+  const router = useRouter();
+
   const logmeout = () => {
     logout();
     toast.success("logout success");
+    router.refresh();
   };
   return (
     <div className="p-3">
