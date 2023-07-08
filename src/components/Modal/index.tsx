@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useState } from "react";
-import CloseIcon from "../_icons/Close";
+import { CloseIcon } from "../_icons";
 
 type ModalProps = {
   isOpen: boolean;

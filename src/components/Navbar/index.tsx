@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import AccountCircle from "../_icons/AccountCircle";
+import { AccountCircle } from "../_icons";
 import Image from "next/image";
 import LineMenuIcon from "../_icons/LineMenu";
 import useModal from "@/hooks/useModal";
