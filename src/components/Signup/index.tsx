@@ -110,14 +110,11 @@ export default function Signup() {
     <>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="name"
-          >
+          <label className="block  text-sm font-bold mb-2" htmlFor="name">
             Full Name
           </label>
           <input
-            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
             id="name"
             type="text"
             value={name}
@@ -125,14 +122,11 @@ export default function Signup() {
           />
         </div>
         <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="email"
-          >
+          <label className="block  text-sm font-bold mb-2" htmlFor="email">
             Email
           </label>
           <input
-            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
             id="email"
             type="text"
             value={email}
@@ -140,10 +134,7 @@ export default function Signup() {
           />
         </div>
         <div className="mb-6">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="password"
-          >
+          <label className="block  text-sm font-bold mb-2" htmlFor="password">
             Password
           </label>
           <div className="relative">
