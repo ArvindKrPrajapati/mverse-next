@@ -2,6 +2,7 @@ import User from "@/models/user.model";
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import dbConnect from "@/lib/dbConnect";
 
 export async function POST(request: Request) {
   try {
@@ -31,6 +32,7 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
+    await dbConnect();
     const data = await User.findOne({ email, accountCreated: true });
     if (!data) {
       return NextResponse.json(
