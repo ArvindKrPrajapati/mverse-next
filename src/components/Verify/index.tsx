@@ -4,12 +4,14 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { mversePost } from "@/lib/apiCalls";
 import useModal from "@/hooks/useModal";
 import toast from "react-hot-toast";
+import userCurrentUser from "@/hooks/userCurrentUser";
 
 export default function Verify() {
   const email = localStorage.getItem("rawemail");
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
   const { toggleDisabled } = useModal();
+  const { setUser } = userCurrentUser();
 
   const router = useRouter();
   const pathname = usePathname();
@@ -45,10 +47,8 @@ export default function Verify() {
       });
       if (res.success) {
         toast.success("Account created successfully");
-        localStorage.clear();
-        localStorage.setItem("token", res.token);
-        localStorage.setItem("user", JSON.stringify(res.data));
-        router.replace("/profile/" + res.data.id);
+        setUser(res.data, res.token);
+        router.replace("/");
       } else {
         toast.error(res.error);
       }

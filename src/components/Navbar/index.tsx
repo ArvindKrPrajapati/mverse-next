@@ -10,6 +10,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Login from "../Login";
 import Signup from "../Signup";
 import Verify from "../Verify";
+import userCurrentUser from "@/hooks/userCurrentUser";
 
 export default function Navbar() {
   const { isOpen, onClose, onOpen, disabled, toggleDisabled } = useModal();
@@ -19,23 +20,17 @@ export default function Navbar() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const getLoginUser = () => {
-    let user: any = localStorage.getItem("user");
-    if (user) {
-      return JSON.parse(user);
-    }
-  };
+  const { getUser } = userCurrentUser();
 
   const decideRoute = () => {
     const rawemail = localStorage.getItem("rawemail");
-    const token = localStorage.getItem("token");
     if (rawemail) {
       openModal("verify");
       return;
     }
-    if (token) {
+    if (getUser()?.id) {
       // push to profile
-      const userObj = getLoginUser();
+      const userObj = getUser();
       router.push("/profile/" + userObj?.id);
       return;
     }
@@ -66,8 +61,8 @@ export default function Navbar() {
     if (!a) {
       onClose();
     } else {
-      if (getLoginUser()?.id) {
-        router.replace("/profile/" + getLoginUser().id);
+      if (getUser()?.id) {
+        router.replace("/profile/" + getUser().id);
       } else {
         onOpen();
       }

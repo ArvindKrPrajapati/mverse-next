@@ -5,6 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { mversePost } from "@/lib/apiCalls";
 import useModal from "@/hooks/useModal";
 import toast from "react-hot-toast";
+import userCurrentUser from "@/hooks/userCurrentUser";
 
 export default function Signup() {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -12,6 +13,7 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const { toggleDisabled } = useModal();
+  const { setUser } = userCurrentUser();
 
   const router = useRouter();
   const pathname = usePathname();
@@ -82,10 +84,8 @@ export default function Signup() {
       });
       if (res.success) {
         toast.success("login successfully");
-        localStorage.clear();
-        localStorage.setItem("token", res.token);
-        localStorage.setItem("user", JSON.stringify(res.data));
-        router.replace("/profile/" + res.data.id);
+        setUser(res.data, res.token);
+        router.replace("/");
       } else {
         toast.error(res.error);
       }
