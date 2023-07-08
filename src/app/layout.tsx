@@ -17,7 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${font.className}`}>
+      <body
+        className={`${font.className} dark:bg-slate-800 dark:text-slate-50`}
+      >
         <ToasterProvider />
         <Navbar />
         {children}

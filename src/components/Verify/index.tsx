@@ -65,7 +65,7 @@ export default function Verify() {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <p className="text-green-900 text-sm mb-3 font-semibold">
+        <p className="text-green-600 text-sm mb-3 font-semibold">
           OTP sent to {email}
         </p>
         <div className="mb-4">

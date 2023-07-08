@@ -77,10 +77,12 @@ export default function Navbar() {
 
   return (
     <>
-      <div className=" flex items-center justify-between px-5 shadow sm:shadow-none py-2 h-55 sticky top-0 bg-white">
+      <div className="dark:bg-slate-900 dark:text-slate-50 h-[50px] flex items-center justify-between px-5 shadow sm:shadow-none py-2 h-55 sticky top-0 bg-white">
         {/* left */}
         <div>
-          <Image src="/images/logo.png" width={100} height={10} alt="logo" />
+          <Link href="/">
+            <Image src="/images/logo.png" width={100} height={10} alt="logo" />
+          </Link>
         </div>
         {/* end */}
         <div onClick={decideRoute}>

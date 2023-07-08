@@ -48,8 +48,8 @@ export default function Modal({
               : "translate-y-[100vh] opacity-0"
           }}`}
         >
-          <div className="translate h-full lg:h-auto md:h-auto border-0 md:rounded-md shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-            <div className="flex item-center p-6 md:rounded-t justify-center relative border-b-[1px]">
+          <div className="dark:bg-slate-900 translate h-full lg:h-auto md:h-auto border-0 md:rounded-md shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+            <div className="flex item-center p-6 md:rounded-t justify-center relative border-b-[1px] dark:border-slate-800">
               <button
                 onClick={handleClose}
                 className="p-1 border-0 hover:opacity-70 transition absolute left-9"
