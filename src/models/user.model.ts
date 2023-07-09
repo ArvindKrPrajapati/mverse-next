@@ -4,6 +4,7 @@ interface IUser extends Document {
   name: string;
   email: string;
   channelName?: string;
+  description: string;
   dp?: string;
   cover?: string;
   isVerified: boolean;
@@ -35,6 +36,10 @@ const userSchema = new Schema<IUser>(
       trim: true,
       unique: true,
       sparse: true,
+    },
+    description: {
+      type: String,
+      trim: true,
     },
     dp: {
       type: String,

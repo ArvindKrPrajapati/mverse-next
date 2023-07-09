@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { mversePost } from "@/lib/apiCalls";
 import toast from "react-hot-toast";
+import Button from "../Button";
 type props = {
   toggleDisabled: () => void;
 };
@@ -23,7 +24,7 @@ export default function Verify({ toggleDisabled }: props) {
     localStorage.removeItem("rawemail");
     const current = new URLSearchParams(Array.from(searchParams.entries())); // -> has to use this form
     const value = q;
-    current.set("auth", value);
+    current.set("user", value);
     const search = current.toString();
     const query = search ? `?${search}` : "";
     router.push(`${pathname}${query}`);
@@ -79,14 +80,11 @@ export default function Verify({ toggleDisabled }: props) {
             onChange={(e) => handleChange(e)}
           />
         </div>
-
-        <button
-          className="disabled:opacity-40 bg-gradient-to-r from-indigo-500 to-purple-500 hover:bg-gradient-to-r hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+        <Button
+          label={loading ? "loading....." : "verify OTP"}
           type="submit"
           disabled={loading}
-        >
-          {loading ? "loading....." : "verify OTP"}
-        </button>
+        />
       </form>
       <p className="mt-4 text-center text-sm">
         wrong email ?{" "}

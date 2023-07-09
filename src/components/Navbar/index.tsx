@@ -9,6 +9,7 @@ import Login from "../Login";
 import Signup from "../Signup";
 import Verify from "../Verify";
 import MyPic from "./MyPic";
+import CreateChannel from "../CreateChannel";
 
 export default function Navbar({ currentUser }: any) {
   const { isOpen, onClose, onOpen, disabled, toggleDisabled } = useModal();
@@ -24,6 +25,10 @@ export default function Navbar({ currentUser }: any) {
       openModal("verify");
       return;
     }
+    if (currentUser?._id && !currentUser?.channelName) {
+      openModal("channel");
+      return;
+    }
     if (currentUser?._id) {
       // push to profile
       router.push("/profile/" + currentUser?._id);
@@ -34,7 +39,7 @@ export default function Navbar({ currentUser }: any) {
 
   const openModal = (value: string) => {
     const current = new URLSearchParams(Array.from(searchParams.entries())); // -> has to use this form
-    current.set("auth", value);
+    current.set("user", value);
     const search = current.toString();
     const query = search ? `?${search}` : "";
     router.push(`${pathname}${query}`);
@@ -43,7 +48,7 @@ export default function Navbar({ currentUser }: any) {
 
   const closeModal = () => {
     const current = new URLSearchParams(Array.from(searchParams.entries())); // -> has to use this form
-    current.delete("auth");
+    current.delete("user");
     const search = current.toString();
     const query = search ? `?${search}` : "";
     router.push(`${pathname}${query}`);
@@ -51,12 +56,12 @@ export default function Navbar({ currentUser }: any) {
   };
 
   useEffect(() => {
-    const a: string | null = searchParams.get("auth");
+    const a: string | null = searchParams.get("user");
     setAuth(a);
     if (!a) {
       onClose();
     } else {
-      if (currentUser?._id) {
+      if (currentUser?._id && currentUser?.channelName) {
         router.replace("/profile/" + currentUser._id);
       } else {
         onOpen();
@@ -87,21 +92,30 @@ export default function Navbar({ currentUser }: any) {
       <Modal
         isOpen={isOpen}
         onClose={closeModal}
-        disabled={disabled}
+        disabled={!auth ? true : disabled}
+        showLogout={auth == "channel" ? true : false}
         title={
           auth == "signup"
             ? "Create new account"
             : auth == "verify"
             ? "Enter OTP to verify"
-            : "Welcome back | Login"
+            : auth == "login"
+            ? "Welcome back | Login"
+            : auth == "channel"
+            ? "Create Channel"
+            : "loading title"
         }
         body={
           auth === "signup" ? (
             <Signup toggleDisabled={toggleDisabled} />
           ) : auth === "verify" ? (
             <Verify toggleDisabled={toggleDisabled} />
-          ) : (
+          ) : auth == "login" ? (
             <Login toggleDisabled={toggleDisabled} />
+          ) : auth == "channel" ? (
+            <CreateChannel user={currentUser} toggleDisabled={toggleDisabled} />
+          ) : (
+            <main>loading</main>
           )
         }
       />

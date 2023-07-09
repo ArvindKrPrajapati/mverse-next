@@ -2,6 +2,7 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import { CloseIcon } from "../_icons";
+import Logout from "../Logout";
 
 type ModalProps = {
   isOpen: boolean;
@@ -9,6 +10,7 @@ type ModalProps = {
   body?: React.ReactElement;
   disabled?: boolean;
   title: string;
+  showLogout?: boolean;
 };
 
 export default function Modal({
@@ -17,6 +19,7 @@ export default function Modal({
   body,
   disabled,
   title,
+  showLogout = false,
 }: ModalProps) {
   const [showModal, setShowModal] = useState(isOpen);
 
@@ -57,6 +60,7 @@ export default function Modal({
                 <CloseIcon />
               </button>
               <div className="text-lg font-semibold">{title}</div>
+              {showLogout ? <Logout /> : null}
             </div>
             <div className="relative p-6 flex-auto">{body}</div>
           </div>
