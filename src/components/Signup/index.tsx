@@ -3,16 +3,16 @@ import React, { useState } from "react";
 import { EyeIcon } from "../_icons";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { mversePost } from "@/lib/apiCalls";
-import useModal from "@/hooks/useModal";
 import toast from "react-hot-toast";
-
-export default function Signup() {
+type props = {
+  toggleDisabled: () => void;
+};
+export default function Signup({ toggleDisabled }: props) {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
-  const { toggleDisabled } = useModal();
 
   const router = useRouter();
   const pathname = usePathname();

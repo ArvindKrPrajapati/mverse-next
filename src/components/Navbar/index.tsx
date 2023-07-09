@@ -100,11 +100,11 @@ export default function Navbar() {
         }
         body={
           auth === "signup" ? (
-            <Signup />
+            <Signup toggleDisabled={toggleDisabled} />
           ) : auth === "verify" ? (
-            <Verify />
+            <Verify toggleDisabled={toggleDisabled} />
           ) : (
-            <Login />
+            <Login toggleDisabled={toggleDisabled} />
           )
         }
       />
