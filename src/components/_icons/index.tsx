@@ -87,7 +87,12 @@ export function CloseIcon({ width, color }: props) {
 
 export function AddIcon({ width, color }: props) {
   return (
-    <svg width={width || "24px"} fill={color || "#000"} viewBox="0 0 24 24">
+    <svg
+      className="dark:fill-slate-50"
+      width={width || "24px"}
+      fill={color || "#000"}
+      viewBox="0 0 24 24"
+    >
       <path d="M17,13H13V17H11V13H7V11H11V7H13V11H17M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3Z" />
     </svg>
   );
@@ -95,7 +100,12 @@ export function AddIcon({ width, color }: props) {
 
 export function HomeIcon({ width, color }: props) {
   return (
-    <svg width={width || "24px"} fill={color || "#000"} viewBox="0 0 24 24">
+    <svg
+      className="dark:fill-slate-50"
+      width={width || "24px"}
+      fill={color || "#000"}
+      viewBox="0 0 24 24"
+    >
       <path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
     </svg>
   );
@@ -103,7 +113,12 @@ export function HomeIcon({ width, color }: props) {
 
 export function LibraryIcon({ width, color }: props) {
   return (
-    <svg width={width || "24px"} fill={color || "#000"} viewBox="0 0 24 24">
+    <svg
+      className="dark:fill-slate-50"
+      width={width || "24px"}
+      fill={color || "#000"}
+      viewBox="0 0 24 24"
+    >
       <path d="M4,6H2V20A2,2 0 0,0 4,22H18V20H4V6M20,2H8A2,2 0 0,0 6,4V16A2,2 0 0,0 8,18H20A2,2 0 0,0 22,16V4A2,2 0 0,0 20,2M10,15H8V13H10V15M10,11H8V9H10V11M10,7H8V5H10V7M20,15H18V13H20V15M20,11H18V9H20V11M20,7H18V5H20V7Z" />
     </svg>
   );
@@ -111,7 +126,12 @@ export function LibraryIcon({ width, color }: props) {
 
 export function LineMenuIcon({ width, color }: props) {
   return (
-    <svg width={width || "24px"} fill={color || "#000"} viewBox="0 0 24 24">
+    <svg
+      className="dark:fill-slate-50"
+      width={width || "24px"}
+      fill={color || "#000"}
+      viewBox="0 0 24 24"
+    >
       <path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
     </svg>
   );
@@ -119,7 +139,12 @@ export function LineMenuIcon({ width, color }: props) {
 
 export function MovieIcon({ width, color }: props) {
   return (
-    <svg width={width || "24px"} color={color || "#000"} viewBox="0 0 24 24">
+    <svg
+      className="dark:fill-slate-50"
+      width={width || "24px"}
+      color={color || "#000"}
+      viewBox="0 0 24 24"
+    >
       <path d="M20.84 2.18L16.91 2.96L19.65 6.5L21.62 6.1L20.84 2.18M13.97 3.54L12 3.93L14.75 7.46L16.71 7.07L13.97 3.54M9.07 4.5L7.1 4.91L9.85 8.44L11.81 8.05L9.07 4.5M4.16 5.5L3.18 5.69A2 2 0 0 0 1.61 8.04L2 10L6.9 9.03L4.16 5.5M2 10V20C2 21.11 2.9 22 4 22H20C21.11 22 22 21.11 22 20V10H2Z" />
     </svg>
   );
@@ -151,7 +176,12 @@ export function ShareIcon({ width, color }: props) {
 
 export function TvIcon({ width, color }: props) {
   return (
-    <svg width={width || "24px"} fill={color || "#000"} viewBox="0 0 24 24">
+    <svg
+      className="dark:fill-slate-50"
+      width={width || "24px"}
+      fill={color || "#000"}
+      viewBox="0 0 24 24"
+    >
       <path d="M8.16,3L6.75,4.41L9.34,7H4C2.89,7 2,7.89 2,9V19C2,20.11 2.89,21 4,21H20C21.11,21 22,20.11 22,19V9C22,7.89 21.11,7 20,7H14.66L17.25,4.41L15.84,3L12,6.84L8.16,3M4,9H17V19H4V9M19.5,9A1,1 0 0,1 20.5,10A1,1 0 0,1 19.5,11A1,1 0 0,1 18.5,10A1,1 0 0,1 19.5,9M19.5,12A1,1 0 0,1 20.5,13A1,1 0 0,1 19.5,14A1,1 0 0,1 18.5,13A1,1 0 0,1 19.5,12Z" />
     </svg>
   );

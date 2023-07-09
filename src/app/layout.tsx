@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import "./globals.css";
 import { Nunito } from "next/font/google";
 import ToasterProvider from "@/providers/ToasterProvider";
+import SideBarContainer from "@/components/Sidebar/SideBarContainer";
 
 const font = Nunito({ subsets: ["latin"] });
 
@@ -22,7 +23,10 @@ export default function RootLayout({
       >
         <ToasterProvider />
         <Navbar />
-        {children}
+        <div className="flex">
+          <SideBarContainer />
+          <>{children}</>
+        </div>
       </body>
     </html>
   );
