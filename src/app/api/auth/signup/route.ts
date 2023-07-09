@@ -41,12 +41,15 @@ async function sendOtp(email: string, id: string) {
     <p>Regards <br/>Team Mverse</p>
   `,
   };
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      return { success: false, error: "Error while sending" };
-    } else {
-      return { success: true, data: { message: "otp send", email } };
-    }
+  return await new Promise((resolve: any, reject: any) => {
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+        reject({ success: false, error: "Error while sending" });
+      } else {
+        resolve({ success: true, data: { message: "otp send", email } });
+      }
+    });
   });
   return { success: true, data: { message: "otp send", email } };
 }
