@@ -14,8 +14,7 @@ async function sendOtp(email: string, id: string) {
   if (env === "development") {
     otp = 222222;
   } else {
-    // otp = Math.floor(100000 + Math.random() * 900000);
-    otp = 222222;
+    otp = Math.floor(100000 + Math.random() * 900000);
   }
   // update in db
   await Otp.updateOne({ email }, { otp, userid: id, email }, { upsert: true });
@@ -41,6 +40,9 @@ async function sendOtp(email: string, id: string) {
     <p>Regards <br/>Team Mverse</p>
   `,
   };
+  if (env === "development") {
+    return { success: true, data: { message: "otp send", email } };
+  }
   return await new Promise((resolve: any, reject: any) => {
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
@@ -51,7 +53,6 @@ async function sendOtp(email: string, id: string) {
       }
     });
   });
-  return { success: true, data: { message: "otp send", email } };
 }
 
 export async function POST(request: Request) {
