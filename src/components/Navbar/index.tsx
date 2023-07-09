@@ -11,6 +11,7 @@ import Signup from "../Signup";
 import Verify from "../Verify";
 import userCurrentUser from "@/hooks/userCurrentUser";
 import MyPic from "./MyPic";
+import ClientOnly from "../ClientOnly";
 
 export default function Navbar() {
   const { isOpen, onClose, onOpen, disabled, toggleDisabled } = useModal();
@@ -81,7 +82,9 @@ export default function Navbar() {
         </div>
         {/* end */}
         <div onClick={decideRoute}>
-          <MyPic user={getUser} />
+          <ClientOnly>
+            <MyPic user={getUser} />
+          </ClientOnly>
         </div>
       </div>
       <Modal
