@@ -4,7 +4,6 @@ import { EyeIcon } from "../_icons";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { mversePost } from "@/lib/apiCalls";
 import toast from "react-hot-toast";
-import userCurrentUser from "@/hooks/userCurrentUser";
 
 type props = {
   toggleDisabled: () => void;
@@ -15,7 +14,6 @@ export default function Login({ toggleDisabled }: props) {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-  const { setUser } = userCurrentUser();
 
   const router = useRouter();
   const pathname = usePathname();
@@ -86,7 +84,7 @@ export default function Login({ toggleDisabled }: props) {
       });
       if (res.success) {
         toast.success("login successfully");
-        setUser(res.data, res.token);
+        router.refresh();
         router.replace("/");
       } else {
         toast.error(res.error);

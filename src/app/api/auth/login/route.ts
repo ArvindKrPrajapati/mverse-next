@@ -50,17 +50,22 @@ export async function POST(request: Request) {
       );
     }
     const jwt_secret = process.env.JWT_SECRET as string;
-    const token = jwt.sign({ id: data._id }, jwt_secret);
-    return NextResponse.json({
+    const token = jwt.sign({ _id: data._id }, jwt_secret);
+    const user = {
+      _id: data._id,
+      eamil: data.email,
+      name: data.name,
+      dp: data.dp,
+      channleName: data.channelName,
+    };
+    const res: NextResponse = NextResponse.json({
       success: true,
-      data: {
-        id: data._id,
-        email: data.email,
-        name: data.name,
-        dp: data.dp,
-      },
+      data: user,
       token,
     });
+    res.cookies.set("token", token);
+    res.cookies.set("user", JSON.stringify(user));
+    return res;
   } catch (error) {
     console.log("login error : ", error);
     return NextResponse.json({ success: false, error: "server error" });

@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { mversePost } from "@/lib/apiCalls";
 import toast from "react-hot-toast";
-import userCurrentUser from "@/hooks/userCurrentUser";
 type props = {
   toggleDisabled: () => void;
 };
@@ -11,7 +10,6 @@ export default function Verify({ toggleDisabled }: props) {
   const email = localStorage.getItem("rawemail");
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
-  const { setUser } = userCurrentUser();
 
   const router = useRouter();
   const pathname = usePathname();
@@ -47,7 +45,8 @@ export default function Verify({ toggleDisabled }: props) {
       });
       if (res.success) {
         toast.success("Account created successfully");
-        setUser(res.data, res.token);
+        localStorage.clear();
+        router.refresh();
         router.replace("/");
       } else {
         toast.error(res.error);

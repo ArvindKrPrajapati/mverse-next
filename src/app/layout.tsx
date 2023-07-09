@@ -3,6 +3,7 @@ import "./globals.css";
 import { Nunito } from "next/font/google";
 import ToasterProvider from "@/providers/ToasterProvider";
 import SideBarContainer from "@/components/Sidebar/SideBarContainer";
+import { getCurrentUser } from "@/lib/serverCookies";
 
 const font = Nunito({ subsets: ["latin"] });
 
@@ -16,13 +17,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const currentUser = getCurrentUser();
+
   return (
     <html lang="en">
       <body
         className={`${font.className} dark:bg-slate-800 dark:text-slate-50`}
       >
         <ToasterProvider />
-        <Navbar />
+        <Navbar currentUser={currentUser} />
         <div className="flex">
           <SideBarContainer />
           <div className="sm:p-4">{children}</div>

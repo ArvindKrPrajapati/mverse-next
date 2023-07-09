@@ -35,19 +35,25 @@ export async function POST(request: Request) {
         }
       );
       const jwt_secret = process.env.JWT_SECRET as string;
-      const token = jwt.sign({ id: validOtp.userid._id }, jwt_secret);
+      const token = jwt.sign({ _id: validOtp.userid._id }, jwt_secret);
       //    delete otp
       await Otp.findByIdAndDelete(validOtp._id);
-      return NextResponse.json({
+      const userObj = {
+        _id: validOtp._id,
+        email: validOtp.email,
+        name: validOtp.userid.name,
+        dp: validOtp.userid.dp,
+      };
+      const res: NextResponse = NextResponse.json({
         success: true,
-        data: {
-          id: validOtp.userid._id,
-          email: validOtp.email,
-          name: validOtp.userid.name,
-          dp: validOtp.userid.dp,
-        },
+        data: userObj,
         token,
       });
+
+      res.cookies.set("token", token);
+      res.cookies.set("user", JSON.stringify(userObj));
+
+      return res;
     }
     return NextResponse.json({
       success: false,

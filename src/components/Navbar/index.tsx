@@ -8,11 +8,9 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Login from "../Login";
 import Signup from "../Signup";
 import Verify from "../Verify";
-import userCurrentUser from "@/hooks/userCurrentUser";
 import MyPic from "./MyPic";
-import ClientOnly from "../ClientOnly";
 
-export default function Navbar() {
+export default function Navbar({ currentUser }: any) {
   const { isOpen, onClose, onOpen, disabled, toggleDisabled } = useModal();
   const [auth, setAuth] = useState<string | null>();
 
@@ -20,18 +18,15 @@ export default function Navbar() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const { getUser } = userCurrentUser();
-
   const decideRoute = () => {
     const rawemail = localStorage.getItem("rawemail");
     if (rawemail) {
       openModal("verify");
       return;
     }
-    if (getUser()?.id) {
+    if (currentUser?._id) {
       // push to profile
-      const userObj = getUser();
-      router.push("/profile/" + userObj?.id);
+      router.push("/profile/" + currentUser?._id);
       return;
     }
     openModal("login");
@@ -61,8 +56,8 @@ export default function Navbar() {
     if (!a) {
       onClose();
     } else {
-      if (getUser()?.id) {
-        router.replace("/profile/" + getUser().id);
+      if (currentUser?._id) {
+        router.replace("/profile/" + currentUser._id);
       } else {
         onOpen();
       }
@@ -86,9 +81,7 @@ export default function Navbar() {
         </div>
         {/* end */}
         <div onClick={decideRoute}>
-          <ClientOnly>
-            <MyPic user={getUser} />
-          </ClientOnly>
+          <MyPic user={currentUser} />
         </div>
       </div>
       <Modal
