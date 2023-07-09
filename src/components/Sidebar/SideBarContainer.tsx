@@ -15,7 +15,7 @@ export default function SideBarContainer() {
         className={`ml-0 ${isMenuOpen ? "md:ml-[230px]" : "md:ml-[75px]"}`}
       ></div>
       <div
-        className="fixed top-[10px] px-5 hidden md:block"
+        className="fixed z-20 top-[10px] px-5 hidden md:block"
         onClick={toggleSideBar}
       >
         <LineMenuIcon width={30} />

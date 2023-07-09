@@ -25,7 +25,7 @@ export default function RootLayout({
         <Navbar />
         <div className="flex">
           <SideBarContainer />
-          <>{children}</>
+          <div className="sm:p-4">{children}</div>
         </div>
       </body>
     </html>

@@ -72,7 +72,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="dark:bg-slate-900 dark:text-slate-50 h-[50px] flex items-center justify-between px-5 pl-2 shadow sm:shadow-none py-2 h-55 sticky top-0 bg-white">
+      <div className="dark:bg-slate-900 dark:text-slate-50 h-[50px] flex items-center justify-between px-5 pl-2 shadow sm:shadow-none py-2 h-55 sticky top-0 bg-white z-20">
         {/* left */}
         <div className="flex items-center md:ml-14">
           <Link href="/">
