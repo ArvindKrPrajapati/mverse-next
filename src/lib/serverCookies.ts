@@ -7,7 +7,11 @@ export const getToken = () => {
 };
 export const getCurrentUser = () => {
   const user: any = cookies().get("user")?.value;
-  return user ? JSON.parse(user) : null;
+  try {
+    return user ? JSON.parse(user) : null;
+  } catch (error) {
+    return null;
+  }
 };
 
 export function getUserIdFromAuth(request: Request) {

@@ -6,7 +6,7 @@ export async function GET(request: Request) {
     success: true,
     data: { message: "logged out successfully" },
   });
-  res.cookies.set("user", "", setCookiesOptions);
-  res.cookies.set("token", "", setCookiesOptions);
+  res.cookies.set("user", "user", setCookiesOptions);
+  res.cookies.set("token", "token", setCookiesOptions);
   return res;
 }
