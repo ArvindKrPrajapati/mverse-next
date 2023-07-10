@@ -1,6 +1,6 @@
-import { limit } from "@/lib/constants";
+import { limit, setCookiesOptions } from "@/lib/constants";
 import dbConnect from "@/lib/dbConnect";
-import { getToken, getUserIdFromAuth } from "@/lib/serverCookies";
+import { getUserIdFromAuth } from "@/lib/serverCookies";
 import User from "@/models/user.model";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -89,7 +89,7 @@ export async function POST(request: NextRequest) {
     });
 
     // set new cookie for user
-    res.cookies.set("user", JSON.stringify(user));
+    res.cookies.set("user", JSON.stringify(user), setCookiesOptions);
 
     // return response
     return res;
