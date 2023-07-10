@@ -94,6 +94,7 @@ export async function POST(request: NextRequest) {
       value: JSON.stringify(user),
       httpOnly: true,
       path: "/",
+      expires: new Date("9999-12-12"),
     });
 
     // return response

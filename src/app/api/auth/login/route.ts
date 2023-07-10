@@ -69,12 +69,14 @@ export async function POST(request: Request) {
       value: token,
       httpOnly: true,
       path: "/",
+      expires: new Date("9999-12-12"),
     });
     res.cookies.set({
       name: "user",
       value: JSON.stringify(user),
       httpOnly: true,
       path: "/",
+      expires: new Date("9999-12-12"),
     });
     return res;
   } catch (error) {
