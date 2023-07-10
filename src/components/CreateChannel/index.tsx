@@ -63,12 +63,13 @@ export default function CreateChannel({ toggleDisabled, user }: props) {
       } else {
         toast.error(res.error);
       }
-    } catch (error) {
-      console.log("channel submit error:", error);
-      toast.error("something went wrong");
-    } finally {
       toggleDisabled();
       setLoading(false);
+    } catch (error) {
+      toggleDisabled();
+      setLoading(false);
+      console.log("channel submit error:", error);
+      toast.error("something went wrong");
     }
   };
 

@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dbConnect from "@/lib/dbConnect";
-import { setCookiesOptions } from "@/lib/constants";
 
 export async function POST(request: Request) {
   try {
@@ -65,8 +64,18 @@ export async function POST(request: Request) {
       data: user,
       token,
     });
-    res.cookies.set("token", token, setCookiesOptions);
-    res.cookies.set("user", JSON.stringify(user), setCookiesOptions);
+    res.cookies.set({
+      name: "token",
+      value: token,
+      httpOnly: true,
+      path: "/",
+    });
+    res.cookies.set({
+      name: "user",
+      value: JSON.stringify(user),
+      httpOnly: true,
+      path: "/",
+    });
     return res;
   } catch (error) {
     console.log("login error : ", error);

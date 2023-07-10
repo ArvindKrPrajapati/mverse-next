@@ -3,7 +3,6 @@ import Otp from "@/models/otp.model";
 import User from "@/models/user.model";
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
-import { setCookiesOptions } from "@/lib/constants";
 
 export async function POST(request: Request) {
   const { email, otp } = await request.json();
@@ -51,8 +50,18 @@ export async function POST(request: Request) {
         token,
       });
 
-      res.cookies.set("token", token, setCookiesOptions);
-      res.cookies.set("user", JSON.stringify(userObj), setCookiesOptions);
+      res.cookies.set({
+        name: "token",
+        value: token,
+        httpOnly: true,
+        path: "/",
+      });
+      res.cookies.set({
+        name: "user",
+        value: JSON.stringify(userObj),
+        httpOnly: true,
+        path: "/",
+      });
 
       return res;
     }
