@@ -11,6 +11,6 @@ export const mversePost = async (url: string, data: any) => {
 };
 
 export const mverseGet = async (url: string) => {
-  const res = await fetch(url);
+  const res = await fetch(url, { cache: "no-store" });
   return res.json();
 };
