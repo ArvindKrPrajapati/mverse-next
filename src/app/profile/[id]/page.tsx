@@ -1,3 +1,4 @@
+import Logout from "@/components/Logout";
 import React from "react";
 type props = {
   params: {
@@ -5,5 +6,5 @@ type props = {
   };
 };
 export default function Profile({ params }: props) {
-  return <main>hello</main>;
+  return <Logout />;
 }

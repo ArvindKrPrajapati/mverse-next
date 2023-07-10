@@ -1,1 +1,1 @@
-export const mverseToken = () => localStorage.getItem("token");
+export const limit = 20;

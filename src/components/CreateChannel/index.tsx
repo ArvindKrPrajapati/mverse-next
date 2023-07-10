@@ -3,35 +3,73 @@ import React, { useState } from "react";
 import Button from "../Button";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { mverseGet, mversePost } from "@/lib/apiCalls";
 type props = {
   toggleDisabled: () => void;
   user: any;
 };
 export default function CreateChannel({ toggleDisabled, user }: props) {
   const [loading, setLoading] = useState(false);
+  const [searching, setSearching] = useState(false);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const router = useRouter();
+  const [data, setData] = useState([]);
+
+  const validateNameLength = (name: string) => {
+    return name.length <= 3;
+  };
 
   const handleChange = async (text: string) => {
     setName(text);
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name) {
-      toast.error("Channel name is required");
+    if (validateNameLength(text)) {
+      setData([]);
       return;
     }
-    setLoading(true);
-    toggleDisabled();
-    setTimeout(() => {
-      toast.success("work in progress");
+    try {
+      setSearching(true);
+      const res = await mverseGet("/api/user/channel?limit=1&name=" + text);
+      if (res.success) {
+        setData(res.data);
+      } else {
+        toast.error(res.error);
+      }
+    } catch (error) {
+      console.log("create channel error:", error);
+      toast.error("something went wrong");
+    } finally {
+      setSearching(false);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (validateNameLength(name) || data.length) {
+      toast.error("Invalid channel name");
+      return;
+    }
+    try {
+      setLoading(true);
       toggleDisabled();
-      router.refresh();
-      router.replace("/profile/" + user?._id);
+      const res = await mversePost("/api/user/channel", {
+        channelName: name,
+        description,
+      });
+      console.log(res);
+      if (res.success) {
+        toast.success("Channel created successfully");
+        router.replace("/profile/" + res.data.username);
+        router.refresh();
+      } else {
+        toast.error(res.error);
+      }
+    } catch (error) {
+      console.log("channel submit error:", error);
+      toast.error("something went wrong");
+    } finally {
+      toggleDisabled();
       setLoading(false);
-    }, 2000);
+    }
   };
 
   return (
@@ -53,6 +91,23 @@ export default function CreateChannel({ toggleDisabled, user }: props) {
             maxLength={25}
             onChange={(e) => handleChange(e.target.value)}
           />
+          <p className="text-[0.7em] mt-1">
+            {!validateNameLength(name) && !searching ? (
+              <div>
+                {!data.length ? (
+                  <p className="text-green-400">{name} is available</p>
+                ) : (
+                  <p className="text-red-400">{name} is not available</p>
+                )}
+              </div>
+            ) : (
+              <label>
+                {searching
+                  ? "searching..."
+                  : "Enter at least 4 letter to search"}
+              </label>
+            )}
+          </p>
         </div>
         <div className="mb-4">
           <label
@@ -72,7 +127,7 @@ export default function CreateChannel({ toggleDisabled, user }: props) {
         <Button
           label={loading ? "processing.." : "Create channel"}
           type="submit"
-          disabled={loading}
+          disabled={loading || searching}
         />
       </form>
     </main>

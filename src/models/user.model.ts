@@ -3,6 +3,7 @@ import { Schema, Document, model, Types, models } from "mongoose";
 interface IUser extends Document {
   name: string;
   email: string;
+  username: String;
   channelName?: string;
   description: string;
   dp?: string;
@@ -23,6 +24,10 @@ const userSchema = new Schema<IUser>(
     name: {
       type: String,
       required: true,
+      trim: true,
+    },
+    username: {
+      type: String,
       trim: true,
     },
     email: {

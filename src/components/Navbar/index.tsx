@@ -22,19 +22,31 @@ export default function Navbar({ currentUser }: any) {
   const decideRoute = () => {
     const rawemail = localStorage.getItem("rawemail");
     if (rawemail) {
+      setAuth("verify");
       openModal("verify");
       return;
     }
-    if (currentUser?._id && !currentUser?.channelName) {
+    if (currentUser?.username) {
+      router.push("/profile/" + currentUser.username);
+      return;
+    }
+
+    if (currentUser?._id) {
+      setAuth("channel");
       openModal("channel");
       return;
     }
-    if (currentUser?._id) {
-      // push to profile
-      router.push("/profile/" + currentUser?._id);
+    if (!currentUser?._id) {
+      const a: string | null = searchParams.get("user");
+      if (a === "signup") {
+        setAuth("signup");
+        openModal("signup");
+        return;
+      }
+      setAuth("login");
+      openModal("login");
       return;
     }
-    openModal("login");
   };
 
   const openModal = (value: string) => {
@@ -52,20 +64,14 @@ export default function Navbar({ currentUser }: any) {
     const search = current.toString();
     const query = search ? `?${search}` : "";
     router.push(`${pathname}${query}`);
-    onClose();
   };
 
   useEffect(() => {
     const a: string | null = searchParams.get("user");
-    setAuth(a);
     if (!a) {
       onClose();
     } else {
-      if (currentUser?._id && currentUser?.channelName) {
-        router.replace("/profile/" + currentUser._id);
-      } else {
-        onOpen();
-      }
+      decideRoute();
     }
     // eslint-disable-next-line
   }, [searchParams]);
@@ -92,7 +98,7 @@ export default function Navbar({ currentUser }: any) {
       <Modal
         isOpen={isOpen}
         onClose={closeModal}
-        disabled={!auth ? true : disabled}
+        disabled={disabled}
         showLogout={auth == "channel" ? true : false}
         title={
           auth == "signup"

@@ -57,6 +57,7 @@ export async function POST(request: Request) {
       name: data.name,
       dp: data.dp,
       channleName: data.channelName,
+      username: data.username,
     };
     const res: NextResponse = NextResponse.json({
       success: true,

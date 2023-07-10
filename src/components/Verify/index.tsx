@@ -81,7 +81,7 @@ export default function Verify({ toggleDisabled }: props) {
           />
         </div>
         <Button
-          label={loading ? "loading....." : "verify OTP"}
+          label={loading ? "proccessing....." : "verify OTP"}
           type="submit"
           disabled={loading}
         />

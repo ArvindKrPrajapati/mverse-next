@@ -138,7 +138,7 @@ export default function Login({ toggleDisabled }: props) {
         <Button
           type="submit"
           disabled={loading}
-          label={loading ? "loading....." : "Login"}
+          label={loading ? "processing....." : "Login"}
         />
       </form>
       <p className="mt-4 text-center text-sm">

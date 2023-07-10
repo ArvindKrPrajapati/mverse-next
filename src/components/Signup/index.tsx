@@ -155,7 +155,7 @@ export default function Signup({ toggleDisabled }: props) {
           </div>
         </div>
         <Button
-          label={loading ? "loading....." : "signup"}
+          label={loading ? "proccessing....." : "signup"}
           type="submit"
           disabled={loading}
         />
