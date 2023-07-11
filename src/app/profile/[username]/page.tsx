@@ -45,6 +45,7 @@ export default async function Profile({ params }: props) {
           />
         </div>
       </div>
+      <Logout />
     </main>
   );
 }

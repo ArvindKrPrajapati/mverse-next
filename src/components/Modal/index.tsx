@@ -60,7 +60,7 @@ export default function Modal({
                 <CloseIcon />
               </button>
               <div className="text-lg font-semibold">{title}</div>
-              {showLogout ? <Logout /> : null}
+              {showLogout ? <Logout className="absolute right-9" /> : null}
             </div>
             <div className="relative p-6 flex-auto">{body}</div>
           </div>
