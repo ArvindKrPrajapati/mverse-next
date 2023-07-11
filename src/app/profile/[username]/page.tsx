@@ -22,7 +22,7 @@ export default async function Profile({ params }: props) {
         <main className="md:flex">
           <div className="flex justify-center md:block">
             <div className="w-1/6 max-w-[120px] min-w-[80px] aspect-square">
-              <GenerateUserPicture user={data} />
+              <GenerateUserPicture user={data} className="text-[50px]" />
             </div>
           </div>
           <div className="md:ml-5">

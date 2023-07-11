@@ -6,8 +6,9 @@ type props = {
     dp?: string;
     channelName?: string;
   };
+  className?: string;
 };
-export default function GenerateUserPicture({ user }: props) {
+export default function GenerateUserPicture({ user, className }: props) {
   if (user?.dp) {
     return (
       <Image
@@ -22,7 +23,9 @@ export default function GenerateUserPicture({ user }: props) {
 
   if (user?.channelName || user?.name) {
     return (
-      <div className="w-full h-full rounded-full bg-indigo-400 flex justify-center items-center font-bold">
+      <div
+        className={`w-full h-full rounded-full bg-indigo-400 flex justify-center items-center font-bold ${className}`}
+      >
         <p style={{ fontSize: "" }}>
           {user?.channelName ? (
             <>{user.channelName[0]}</>
