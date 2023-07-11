@@ -78,7 +78,7 @@ export async function POST(request: NextRequest) {
       eamil: data.email,
       name: data.name,
       dp: data.dp,
-      channleName: data.channelName,
+      channelName: data.channelName,
       username: data.username,
     };
 

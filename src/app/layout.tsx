@@ -20,15 +20,15 @@ export default function RootLayout({
   const currentUser = getCurrentUser();
 
   return (
-    <html lang="en">
+    <html lang="en" className="h-full">
       <body
-        className={`${font.className} dark:bg-slate-800 dark:text-slate-50`}
+        className={`${font.className} dark:bg-slate-800 dark:text-slate-50 h-full`}
       >
         <ToasterProvider />
         <Navbar currentUser={currentUser} />
         <div className="flex">
           <SideBarContainer />
-          <div className="sm:p-4">{children}</div>
+          <div className="w-full">{children}</div>
         </div>
       </body>
     </html>

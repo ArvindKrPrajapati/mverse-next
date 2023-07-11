@@ -56,7 +56,7 @@ export async function POST(request: Request) {
       eamil: data.email,
       name: data.name,
       dp: data.dp,
-      channleName: data.channelName,
+      channelName: data.channelName,
       username: data.username,
     };
     const res: NextResponse = NextResponse.json({

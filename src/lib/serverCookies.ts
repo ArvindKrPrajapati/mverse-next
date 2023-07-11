@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
 
 export const getToken = () => {
   const clientCookies = cookies();
@@ -16,7 +17,7 @@ export const getCurrentUser = () => {
 
 export function getUserIdFromAuth(request: Request) {
   const auth = request.headers.get("authorization") || getToken();
-  let id = "";
+  let id: any = null;
   let token;
   if (auth && auth.startsWith("Bearer ")) {
     token = auth.split(" ")[1];
@@ -31,5 +32,14 @@ export function getUserIdFromAuth(request: Request) {
       id = decoded._id;
     } catch (error) {}
   }
-  return id;
+
+  return getValidId(id);
 }
+
+export const getValidId = (id: any) => {
+  const isValidMyId = mongoose.Types.ObjectId.isValid(id);
+  if (isValidMyId) {
+    return new mongoose.Types.ObjectId(id);
+  }
+  return null;
+};
