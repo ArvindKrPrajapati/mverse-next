@@ -55,7 +55,6 @@ export default function CreateChannel({ toggleDisabled, user }: props) {
         channelName: name,
         description,
       });
-      console.log(res);
       if (res.success) {
         toast.success("Channel created successfully");
         router.replace("/profile/" + res.data.username);
