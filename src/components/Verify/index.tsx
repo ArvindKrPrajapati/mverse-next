@@ -29,7 +29,13 @@ export default function Verify({ toggleDisabled }: props) {
     const query = search ? `?${search}` : "";
     router.push(`${pathname}${query}`);
   };
-
+  const closeModal = () => {
+    const current = new URLSearchParams(Array.from(searchParams.entries())); // -> has to use this form
+    current.delete("user");
+    const search = current.toString();
+    const query = search ? `?${search}` : "";
+    router.push(`${pathname}${query}`);
+  };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const _otp = otp || 0;
@@ -48,7 +54,8 @@ export default function Verify({ toggleDisabled }: props) {
         toast.success("Account created successfully");
         localStorage.clear();
         router.refresh();
-        router.replace("/");
+        // router.replace("/");
+        closeModal();
       } else {
         toast.error(res.error);
       }

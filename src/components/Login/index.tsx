@@ -24,6 +24,14 @@ export default function Login({ toggleDisabled }: props) {
     setPasswordVisible(!passwordVisible);
   };
 
+  const closeModal = () => {
+    const current = new URLSearchParams(Array.from(searchParams.entries())); // -> has to use this form
+    current.delete("user");
+    const search = current.toString();
+    const query = search ? `?${search}` : "";
+    router.push(`${pathname}${query}`);
+  };
+
   const handleChange = (
     input: string,
     e: React.ChangeEvent<HTMLInputElement>
@@ -86,7 +94,8 @@ export default function Login({ toggleDisabled }: props) {
       if (res.success) {
         toast.success("login successfully");
         router.refresh();
-        router.replace("/");
+        // router.replace("/");
+        closeModal();
       } else {
         toast.error(res.error);
       }

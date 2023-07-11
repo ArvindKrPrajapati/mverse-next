@@ -1,6 +1,6 @@
 "use client";
 import { mverseGet } from "@/lib/apiCalls";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { LogoutIcon } from "../_icons";
@@ -10,7 +10,16 @@ export default function Logout({ className }: any) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const { toggleDisabled } = useModal();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
+  const closeModal = () => {
+    const current = new URLSearchParams(Array.from(searchParams.entries())); // -> has to use this form
+    current.delete("user");
+    const search = current.toString();
+    const query = search ? `?${search}` : "";
+    router.push(`${pathname}${query}`);
+  };
   const logmeout = async () => {
     try {
       setLoading(true);
@@ -20,7 +29,8 @@ export default function Logout({ className }: any) {
       setLoading(false);
       toggleDisabled();
       router.refresh();
-      router.replace("/");
+      // router.replace("/");
+      closeModal();
     } catch (error) {
       console.log("logout error:", error);
       toast.error("something went wrong");

@@ -1,8 +1,8 @@
 import { getChannelByUsername } from "@/actions/getChannelByUsername";
-import Button from "@/components/Button";
 import Cover from "@/components/Cover";
 import GenerateUserPicture from "@/components/GenerateUserPicture";
 import Logout from "@/components/Logout";
+import SubscribeButton from "@/components/SubscribeButton";
 import { handleViews } from "@/lib/common";
 import { getCurrentUser } from "@/lib/serverCookies";
 import React from "react";
@@ -39,9 +39,10 @@ export default async function Profile({ params }: props) {
           </div>
         </main>
         <div className="w-[120px] mx-auto md:mx-0">
-          <Button
-            label={data.isSubscribed ? "unsubscribe" : "subscribe"}
-            className="w-[120px] rounded-full"
+          <SubscribeButton
+            isSubscribed={data.isSubscribed}
+            username={data.username}
+            currentUser={currentUser}
           />
         </div>
       </div>
