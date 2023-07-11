@@ -18,28 +18,30 @@ export default async function Profile({ params }: props) {
   return (
     <main>
       <Cover user={data} />
-      <div className="p-5 px-10 md:flex mditems-center">
-        <div className="flex justify-center md:block">
-          <div className="w-1/6 max-w-[120px] min-w-[80px] aspect-square">
-            <GenerateUserPicture user={data} />
+      <div className="p-5 px-10 md:flex justify-between">
+        <main className="md:flex">
+          <div className="flex justify-center md:block">
+            <div className="w-1/6 max-w-[120px] min-w-[80px] aspect-square">
+              <GenerateUserPicture user={data} />
+            </div>
           </div>
-        </div>
-        <div className="md:ml-5">
-          <div className="text-center md:text-left my-3 md:m-0">
-            <p className="text-3xl font-bold">{data.channelName}</p>
-            <p className="text-xs font-semibold  dark:text-gray-300">
-              {data.username} &nbsp; <br className="block md:hidden " />
-              {handleViews(data.subscribers)} subscribers
-            </p>
-            <p className="text-xs mt-2 font-semibold  dark:text-gray-300">
-              {data.description}
-            </p>
+          <div className="md:ml-5">
+            <div className="text-center md:text-left my-3 md:m-0">
+              <p className="text-3xl font-bold">{data.channelName}</p>
+              <p className="text-xs font-semibold  dark:text-gray-300">
+                {data.username} &nbsp; <br className="block md:hidden " />
+                {handleViews(data.subscribers)} subscribers
+              </p>
+              <p className="text-xs mt-2 font-semibold  dark:text-gray-300">
+                {data.description}
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="flex justify-center md:block">
+        </main>
+        <div className="w-[120px] mx-auto md:mx-0">
           <Button
             label={data.isSubscribed ? "unsubscribe" : "subscribe"}
-            className="w-[120px] rounded-full md:absolute md:right-9"
+            className="w-[120px] rounded-full"
           />
         </div>
       </div>

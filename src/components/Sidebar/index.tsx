@@ -42,7 +42,7 @@ export default function Sidebar({ isMenuOpen }: props) {
 
   return (
     <div
-      className="w-[75px] md:w-[230px] fixed left-0 z-10  transition duration-1000 "
+      className="w-[75px] lg:w-[230px] fixed left-0 z-10  transition duration-1000 "
       style={!isMenuOpen ? { width: "75px" } : {}}
     >
       <div className="md:h-screen md:p-3 flex md:block md:relative fixed bottom-0 w-full justify-between dark:bg-slate-900 bg-white transition duration-300">
@@ -51,14 +51,16 @@ export default function Sidebar({ isMenuOpen }: props) {
             <Link
               href={item.href}
               key={index}
-              className={`w-full block md:flex items-center hover:bg-slate-600 px-3 py-2 md:rounded-lg transition duration-300 ${
-                pathname === item.href ? "bg-slate-600" : ""
+              className={`w-full block lg:flex items-center md:hover:bg-slate-600 px-3 py-2 md:rounded-lg transition duration-300 ${
+                pathname === item.href ? "md:bg-slate-600" : ""
               }`}
               style={!isMenuOpen ? { display: "block" } : {}}
             >
               <div className="flex justify-center">{item.icon}</div>
               <p
-                className="md:text-base text-[0.6em] text-center font-medium md:ml-3 transition duration-300"
+                className={`lg:text-base md:my-1 lg:my-0 text-[0.6em] text-center font-medium lg:ml-3 transition duration-300 ${
+                  pathname === item.href ? "text-gray-500 md:text-gray-200" : ""
+                }`}
                 style={
                   !isMenuOpen ? { fontSize: "0.6em", marginLeft: "0" } : {}
                 }

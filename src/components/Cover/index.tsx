@@ -7,7 +7,7 @@ type props = {
 
 export default function Cover({ user }: props) {
   return (
-    <main className="flex justify-center items-center w-full aspect-[7/1] dark:bg-gray-700 bg-gray-300">
+    <main className="flex justify-center items-center w-full aspect-[6/1] md:aspect-[7/1] xl:aspect-[8/1] dark:bg-gray-700 bg-gray-300">
       {user?.cover ? (
         <Image
           src={user.cover}

@@ -12,7 +12,9 @@ export default function SideBarContainer() {
   return (
     <>
       <div
-        className={`ml-0 ${isMenuOpen ? "md:ml-[230px]" : "md:ml-[75px]"}`}
+        className={`ml-0 md:ml-[75px] ${
+          isMenuOpen ? "lg:ml-[230px]" : "lg:ml-[75px]"
+        }`}
       ></div>
       <div
         className="fixed z-20 top-[10px] px-5 hidden md:block"
