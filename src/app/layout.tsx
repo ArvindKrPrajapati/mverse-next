@@ -28,7 +28,7 @@ export default function RootLayout({
         <Navbar currentUser={currentUser} />
         <div className="flex">
           <SideBarContainer />
-          <div className="w-full">{children}</div>
+          <div className="w-full mb-[70px] md:mb-0">{children}</div>
         </div>
       </body>
     </html>
