@@ -4,7 +4,7 @@ import React from "react";
 
 export default function UploadPage() {
   return (
-    <ProtectedContainer>
+    <ProtectedContainer className="px-0 ">
       <UploadForm />
     </ProtectedContainer>
   );

@@ -4,13 +4,15 @@ import Container from ".";
 import ToastBeforeRedirect from "./ToastBeforeRedirect";
 
 export default function ProtectedContainer({
+  className,
   children,
 }: {
+  className?: string;
   children: React.ReactNode;
 }) {
   const currentUser = getCurrentUser();
   if (currentUser?._id) {
-    return <Container>{children}</Container>;
+    return <Container className={className}>{children}</Container>;
   }
   return <ToastBeforeRedirect />;
 }

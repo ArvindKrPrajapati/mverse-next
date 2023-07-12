@@ -1,14 +1,17 @@
 "use client";
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 import { EyeIcon } from "../_icons";
 type Props = {
   type: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: any) => void;
   parentClassName?: string;
   labelClassName?: string;
   inputClassName?: string;
   label: string;
   value?: any;
+  cols?: number;
+  rows?: number;
+  disable?: boolean;
 };
 export default function Input({
   type,
@@ -18,6 +21,9 @@ export default function Input({
   inputClassName,
   label,
   value,
+  cols,
+  rows,
+  disable,
 }: Props) {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -30,13 +36,26 @@ export default function Input({
         {label}
       </label>
       <div className="relative">
-        <input
-          className={`appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline ${inputClassName}`}
-          id={label}
-          type={passwordVisible ? "text" : type}
-          value={value}
-          onChange={onChange}
-        />
+        {type == "textarea" ? (
+          <textarea
+            disabled={disable}
+            id={label}
+            value={value}
+            onChange={onChange}
+            rows={rows}
+            cols={cols}
+            className={`resize-none appearance text-gray-800 text-sm border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline ${inputClassName}`}
+          ></textarea>
+        ) : (
+          <input
+            disabled={disable}
+            className={`appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline ${inputClassName}`}
+            id={label}
+            type={passwordVisible ? "text" : type}
+            value={value}
+            onChange={onChange}
+          />
+        )}
         {type === "password" ? (
           <div
             className="absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer"
