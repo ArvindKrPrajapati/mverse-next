@@ -98,7 +98,7 @@ export default function UploadForm() {
     setDuration(value);
   };
   return (
-    <main className="md:flex w-full md:mt-20">
+    <main className="md:flex w-full md:mt-20 max-w-7xl mx-auto lg:px-6">
       <div className="sticky top-[50px] z-20 md:static md:w-[50%] md:mt-5">
         <MversePlayer
           onLoadedMetaData={handleLoadedMetaData}
