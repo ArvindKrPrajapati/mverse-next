@@ -41,6 +41,7 @@ const schema = new Schema<IVideo>(
     by: {
       type: Schema.Types.ObjectId,
       ref: "user",
+      required: true,
     },
     pinned: {
       type: Boolean,

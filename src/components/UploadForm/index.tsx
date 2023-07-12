@@ -78,6 +78,7 @@ export default function UploadForm() {
         thumbnail,
         link,
         description,
+        duration,
       });
       if (res.success) {
         toast.success(res.data.message);
@@ -94,7 +95,7 @@ export default function UploadForm() {
     }
   };
   const handleLoadedMetaData = (e: any) => {
-    const value = Math.round(e.target.duration);
+    const value = Math.floor(e.target.duration);
     setDuration(value);
   };
   return (
