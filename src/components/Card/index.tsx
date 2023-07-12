@@ -10,14 +10,14 @@ type props = {
 export default function Card({ item, horizontal = false }: props) {
   return (
     <Link
-      href={"/play/" + item.id}
+      href={"/play/" + item._id}
       className={`${horizontal ? "md:flex" : ""}`}
     >
       <div className="relative">
         <Image
+          height={562}
           width={1000}
-          height={600}
-          src={item.image}
+          src={item.thumbnail}
           className="sm:rounded-lg w-full bg-slate-200 dark:bg-slate-900"
           alt="thumbnail"
           style={horizontal ? { minWidth: "300px" } : {}}
@@ -32,7 +32,7 @@ export default function Card({ item, horizontal = false }: props) {
             horizontal ? "md:hidden" : "block"
           }`}
         >
-          <GenerateUserPicture user={item.user} />
+          <GenerateUserPicture user={item.by} />
         </div>
         <div className="ml-3">
           <p className="font-bold text-normal max-two-line">{item.title}</p>
@@ -42,12 +42,12 @@ export default function Card({ item, horizontal = false }: props) {
                 horizontal ? "md:block mr-2" : ""
               }`}
             >
-              <GenerateUserPicture user={item.user} />
+              <GenerateUserPicture user={item.by} />
             </div>
-            <p className="text-sm font-medium">{item.user.name}</p>
+            <p className="text-sm font-medium">{item.by.channelName}</p>
           </div>
           <p className="text-sm">
-            {handleViews(item.views)} views &#x2022;{" "}
+            {handleViews(item.views || 0)} views &#x2022;{" "}
             {formatDate(item.createdAt)}
           </p>
           {horizontal ? (

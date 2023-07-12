@@ -30,6 +30,7 @@ const userSchema = new Schema<IUser>(
       type: String,
       trim: true,
       unique: true,
+      sparse: true,
     },
     email: {
       type: String,

@@ -128,7 +128,7 @@ export async function GET(request: NextRequest) {
       channelName: name,
     })
       .select("channelName")
-      .sort({ datetime: -1 })
+      .sort({ createdAt: -1 })
       .skip(skip)
       .limit(_limit);
     return NextResponse.json({ success: true, data: res, limit: _limit, skip });
