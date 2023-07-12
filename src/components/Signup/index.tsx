@@ -5,6 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { mversePost } from "@/lib/apiCalls";
 import toast from "react-hot-toast";
 import Button from "../Button";
+import Input from "../Input";
 type props = {
   toggleDisabled: () => void;
 };
@@ -110,50 +111,26 @@ export default function Signup({ toggleDisabled }: props) {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label className="block  text-sm font-bold mb-2" htmlFor="name">
-            Full Name
-          </label>
-          <input
-            className="appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
-            id="name"
-            type="text"
-            value={name}
-            onChange={(e) => handleChange("name", e)}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block  text-sm font-bold mb-2" htmlFor="email">
-            Email
-          </label>
-          <input
-            className="appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
-            id="email"
-            type="text"
-            value={email}
-            onChange={(e) => handleChange("email", e)}
-          />
-        </div>
-        <div className="mb-6">
-          <label className="block  text-sm font-bold mb-2" htmlFor="password">
-            Password
-          </label>
-          <div className="relative">
-            <input
-              type={passwordVisible ? "text" : "password"}
-              id="password"
-              value={password}
-              onChange={(e) => handleChange("password", e)}
-              className="w-full border border-gray-300 rounded px-3 py-[6px] focus:outline-none"
-            />
-            <div
-              className="absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer"
-              onClick={handlePasswordToggle}
-            >
-              <EyeIcon active={passwordVisible} color="silver" width={20} />
-            </div>
-          </div>
-        </div>
+        <Input
+          label="Full Name"
+          type="text"
+          value={name}
+          onChange={(e) => handleChange("name", e)}
+        />
+        <Input
+          label="Email"
+          type="text"
+          value={email}
+          onChange={(e) => handleChange("email", e)}
+        />
+        <Input
+          type="password"
+          label="Password"
+          value={password}
+          onChange={(e) => handleChange("password", e)}
+          parentClassName="mb-6"
+        />
+
         <Button
           label={loading ? "proccessing....." : "signup"}
           type="submit"

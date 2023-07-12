@@ -9,6 +9,7 @@ export default function ToastBeforeRedirect() {
   useEffect(() => {
     toast.error("login first");
     router.push("?user=login");
+    // eslint-disable-next-line
   }, []);
   return (
     <div className="h-[80vh] w-full flex justify-center items-center">

@@ -4,6 +4,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { mversePost } from "@/lib/apiCalls";
 import toast from "react-hot-toast";
 import Button from "../Button";
+import Input from "../Input";
 type props = {
   toggleDisabled: () => void;
 };
@@ -75,18 +76,12 @@ export default function Verify({ toggleDisabled }: props) {
         <p className="text-green-600 text-sm mb-3 font-semibold">
           OTP sent to {email}
         </p>
-        <div className="mb-4">
-          <label className="block  text-sm font-bold mb-2" htmlFor="otp">
-            OTP
-          </label>
-          <input
-            className="appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
-            id="otp"
-            type="number"
-            value={otp}
-            onChange={(e) => handleChange(e)}
-          />
-        </div>
+        <Input
+          label="OTP"
+          type="number"
+          value={otp}
+          onChange={(e) => handleChange(e)}
+        />
         <Button
           label={loading ? "proccessing....." : "verify OTP"}
           type="submit"
