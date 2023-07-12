@@ -99,7 +99,7 @@ export default function UploadForm() {
   };
   return (
     <main className="md:flex w-full md:mt-20 max-w-7xl mx-auto lg:px-6">
-      <div className="sticky top-[50px] z-20 md:static md:w-[50%] md:mt-5">
+      <div className="md:w-[50%] md:mt-5">
         <MversePlayer
           onLoadedMetaData={handleLoadedMetaData}
           url={link.endsWith(".mp4") || link.endsWith(".mkv") ? link : ""}
