@@ -1,29 +1,10 @@
 import React from "react";
 import Card from "../Card";
-import { mverseGet } from "@/lib/apiCalls";
 type props = {
-  url: string;
+  data: any;
   horizontal?: boolean;
 };
-export default async function CardList({ url, horizontal = false }: props) {
-  const res = await mverseGet(url);
-  let data = [];
-  if (res.success) {
-    data = res.data.map((item: any) => ({
-      id: item.tmdb_id,
-      title: item.title,
-      image: item.backdrop_path,
-      duration: 2200,
-      views: 2100,
-      description: item.overview,
-      createdAt: item.createdAt,
-      user: {
-        name: item.video[0].source,
-        dp: "https://wallpapercave.com/wp/wp6120167.jpg",
-      },
-    }));
-  }
-
+export default async function CardList({ data, horizontal = false }: props) {
   return (
     <>
       <div
@@ -52,7 +33,6 @@ export default async function CardList({ url, horizontal = false }: props) {
           );
         })}
       </div>
-      {/* <div className="h-[80px]"></div> */}
     </>
   );
 }
