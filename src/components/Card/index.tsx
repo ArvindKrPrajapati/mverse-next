@@ -6,8 +6,13 @@ import GenerateUserPicture from "../GenerateUserPicture";
 type props = {
   item: any;
   horizontal?: boolean;
+  description?: boolean;
 };
-export default function Card({ item, horizontal = false }: props) {
+export default function Card({
+  item,
+  horizontal = false,
+  description = true,
+}: props) {
   return (
     <Link
       href={"/play/" + item._id}
@@ -50,7 +55,7 @@ export default function Card({ item, horizontal = false }: props) {
             {handleViews(item.views || 0)} views &#x2022;{" "}
             {formatDate(item.createdAt)}
           </p>
-          {horizontal ? (
+          {horizontal && description ? (
             <div className="hidden md:block">
               <p className="text-[0.8em] mt-2 opacity-1 max-two-line">
                 {item.description}

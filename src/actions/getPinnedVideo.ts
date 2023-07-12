@@ -3,24 +3,28 @@ import Video from "@/models/video.model";
 import { limit as constLimit } from "@/lib/constants";
 import User from "@/models/user.model";
 
-export async function getAllVideos(skip = 0, limit = constLimit) {
+export async function getPinnedVideos(
+  skip = 0,
+  limit = constLimit,
+  username: string
+) {
   try {
     // connect db
-    await dbConnect();
-    // justr to connect with user modal cause it was giving error to find videos because of ref
-    const res = await User.findOne();
-    console.log(res);
+    username = decodeURIComponent(username);
 
+    await dbConnect();
+    //  get userid using username
+
+    const { _id } = await User.findOne({ username });
     // get user
-    const data = await Video.find()
+    const data = await Video.find({ by: _id, pinned: true })
       .populate("by", "_id channelName dp")
       .sort({ craetedAt: -1 })
       .skip(skip)
       .limit(limit);
+
     return data;
   } catch (error) {
-    console.log("get error", error);
-
     throw new Error("failed to get data from db");
   }
 }

@@ -3,8 +3,13 @@ import Card from "../Card";
 type props = {
   data: any;
   horizontal?: boolean;
+  description?: boolean;
 };
-export default async function CardList({ data, horizontal = false }: props) {
+export default async function CardList({
+  data,
+  horizontal = false,
+  description = true,
+}: props) {
   return (
     <>
       <div
@@ -19,7 +24,11 @@ export default async function CardList({ data, horizontal = false }: props) {
                 key={index}
                 className="py-2 sm:p-2 w-full sm:w-1/2 md:w-full"
               >
-                <Card item={item} horizontal={horizontal} />
+                <Card
+                  item={item}
+                  horizontal={horizontal}
+                  description={description}
+                />
               </div>
             );
           }
@@ -28,7 +37,11 @@ export default async function CardList({ data, horizontal = false }: props) {
               key={index}
               className="py-2 sm:p-2 w-full sm:w-1/2 lg:w-1/3 min-[1200px]:w-1/4 sm:max-w-[500px]"
             >
-              <Card item={item} horizontal={horizontal} />
+              <Card
+                item={item}
+                horizontal={horizontal}
+                description={description}
+              />
             </div>
           );
         })}
