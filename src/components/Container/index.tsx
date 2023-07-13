@@ -8,7 +8,7 @@ export default function Container({
   children: React.ReactNode;
 }) {
   return (
-    <div className={`md:max-w-7xl px-6 md:px-8 lg:px-10 mx-auto ${className}`}>
+    <div className={`md:max-w-7xl md:px-8 lg:px-10 mx-auto ${className}`}>
       {children}
     </div>
   );
