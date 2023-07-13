@@ -7,7 +7,7 @@ export async function getVideoById(_id: string) {
     // connect db
 
     await dbConnect();
-
+    const user = await User.findOne();
     // get video
     const data = await Video.findById(_id).populate("by", "_id channelName dp");
 

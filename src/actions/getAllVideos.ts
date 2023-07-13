@@ -8,7 +8,7 @@ export async function getAllVideos(skip = 0, limit = constLimit) {
     // connect db
     await dbConnect();
     // justr to connect with user modal cause it was giving error to find videos because of ref
-    // const res = await User.findOne();
+    const res = await User.findOne();
     // console.log(res);
 
     // get user
