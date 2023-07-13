@@ -18,7 +18,7 @@ export default async function Profile({ params }: props) {
         <p className="text-sm font-bold my-3">Pinned Videos</p>
       ) : null}
       <CardList data={pinnedData} />
-      <CardList data={data} />
+      <CardList data={data} horizontal={true} />
     </main>
   );
 }

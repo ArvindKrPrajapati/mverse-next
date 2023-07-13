@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.max-two-line {
+  overflow: hidden;
+  width: 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
 @layer base {
   label {
     @apply dark:text-slate-400 text-gray-700;
