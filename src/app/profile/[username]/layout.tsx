@@ -39,7 +39,7 @@ export default async function ProfileLayout({ children, params }: Props) {
         </div>
       </Container>
       <hr className="bg-gray-600 h-[1px] border-none" />
-      <Container>{children}</Container>
+      {children}
     </main>
   );
 }
