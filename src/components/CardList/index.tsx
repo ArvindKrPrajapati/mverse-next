@@ -5,14 +5,25 @@ import HorizontalCard from "../Card/HorizontalCard";
 type props = {
   data: any;
   horizontal?: boolean;
+  description?: boolean;
 };
-export default async function CardList({ data, horizontal }: props) {
+export default async function CardList({
+  data,
+  horizontal,
+  description = false,
+}: props) {
   return (
     <Container className="px-0 lg:px-6">
       <div className={`flex flex-wrap`}>
         {data.map((item: any, index: number) => {
           if (horizontal) {
-            return <HorizontalCard key={index} item={item} />;
+            return (
+              <HorizontalCard
+                key={index}
+                item={item}
+                description={description}
+              />
+            );
           }
           return (
             <div
