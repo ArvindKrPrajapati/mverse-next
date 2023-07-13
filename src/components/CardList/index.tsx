@@ -12,7 +12,7 @@ export default async function CardList({ data, horizontal }: props) {
       <div className={`flex flex-wrap`}>
         {data.map((item: any, index: number) => {
           if (horizontal) {
-            return <HorizontalCard item={item} />;
+            return <HorizontalCard key={index} item={item} />;
           }
           return (
             <div

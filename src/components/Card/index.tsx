@@ -29,14 +29,6 @@ export default function Card({ item }: props) {
         </div>
         <div className="ml-3">
           <p className="font-bold text-sm max-two-line">{item.title}</p>
-          <div>
-            <div
-              className={`w-[25px] hidden rounded-full h-[25px] bg-slate-200`}
-            >
-              <GenerateUserPicture user={item.by} />
-            </div>
-            <p className="text-xs font-medium">{item.by.channelName}</p>
-          </div>
           <p className="text-xs">
             {handleViews(item.views || 0)} views &#x2022;{" "}
             {formatDate(item.createdAt)}
