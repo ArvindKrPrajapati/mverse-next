@@ -4,7 +4,7 @@ import Container from "../Container";
 import HorizontalCard from "../Card/HorizontalCard";
 type props = {
   data: any;
-  horizontal: boolean;
+  horizontal?: boolean;
 };
 export default async function CardList({ data, horizontal }: props) {
   return (
