@@ -14,7 +14,7 @@ export default async function AboutUser({ params }: Props) {
   const data = await getChannelByUsername(params.username, currentUser?._id);
 
   return (
-    <Container>
+    <Container className="px-6">
       <div className="p-3">
         <p className="font-extrabold text-base">About Channel</p>
         <p className="text-normal">{data.description}</p>
