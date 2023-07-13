@@ -18,7 +18,7 @@ export async function getAllVideosByUserId(
     const { _id } = await User.findOne({ username });
     // get user
     const data = await Video.find({ by: _id })
-      .populate("by", "_id channelName dp")
+      .populate("by", "_id channelName dp username")
       .sort({ craetedAt: -1 })
       .skip(skip)
       .limit(limit);

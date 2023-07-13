@@ -23,9 +23,12 @@ export default function Card({ item }: props) {
       </div>
       <div className={`flex m-2`}>
         <div className="w-[35px]">
-          <div className={`w-[35px] rounded-full h-[35px] bg-slate-200`}>
+          <Link
+            href={"/profile/" + item.by.username}
+            className={`w-[35px] rounded-full h-[35px] bg-slate-200`}
+          >
             <GenerateUserPicture user={item.by} />
-          </div>
+          </Link>
         </div>
         <div className="ml-3">
           <p className="font-bold text-sm max-two-line">{item.title}</p>

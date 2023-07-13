@@ -227,7 +227,7 @@ export default function MversePlayer({ url, title, onLoadedMetaData }: Props) {
         </div>
         <div className="controls" ref={controls} onClick={hideControls}>
           {/* header */}
-          <div className="video-header">{title || "no title"}</div>
+          <div className="video-header max-one-line">{title || "no title"}</div>
           {/* middle */}
           <div className="video-controls">
             <div

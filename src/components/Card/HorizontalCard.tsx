@@ -30,11 +30,12 @@ export default function HorizontalCard({ item, description = false }: Props) {
           <p className="font-bold text-sm max-two-line">{item.title}</p>
           {description ? (
             <div className="flex items-center my-1">
-              <div
+              <Link
+                href={"/profile/" + item.by.username}
                 className={`w-[25px] mr-2 rounded-full h-[25px] bg-slate-200`}
               >
                 <GenerateUserPicture user={item.by} />
-              </div>
+              </Link>
               <p className="text-xs font-medium">{item.by.channelName}</p>
             </div>
           ) : null}

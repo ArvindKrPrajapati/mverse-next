@@ -24,7 +24,7 @@ export default function GenerateUserPicture({ user, className }: props) {
   if (user?.channelName || user?.name) {
     return (
       <div
-        className={`w-full h-full rounded-full bg-indigo-400 flex justify-center items-center font-bold ${className}`}
+        className={`w-full aspect-square rounded-full bg-indigo-400 flex justify-center items-center font-bold ${className}`}
       >
         <p style={{ fontSize: "" }}>
           {user?.channelName ? (
