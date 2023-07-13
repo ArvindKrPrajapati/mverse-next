@@ -3,36 +3,32 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import GenerateUserPicture from "../GenerateUserPicture";
-type props = {
+type Props = {
   item: any;
 };
-export default function Card({ item }: props) {
+export default function HorizontalCard({ item }: Props) {
   return (
-    <Link href={"/play/" + item._id}>
+    <Link
+      className="w-full px-6 p-2 flex items-start"
+      href={"/play/" + item._id}
+    >
       <div className="relative">
         <Image
           height={562}
           width={1000}
           src={item.thumbnail}
-          className="sm:rounded-lg w-full aspect-[16/10] bg-slate-200 dark:bg-slate-900"
+          className="w-full aspect-[16/10] rounded-lg"
           alt="thumbnail"
         />
         <p className="bg-black text-white text-[0.6em]  rounded-sm px-1 absolute right-[6px] bottom-[6px]">
           {formatTime(item.duration)}
         </p>
       </div>
-      <div className={`flex m-2`}>
-        <div className="w-[35px]">
-          <div className={`w-[35px] rounded-full h-[35px] bg-slate-200`}>
-            <GenerateUserPicture user={item.by} />
-          </div>
-        </div>
+      <div className={`flex m-2 w-full`}>
         <div className="ml-3">
           <p className="font-bold text-sm max-two-line">{item.title}</p>
-          <div>
-            <div
-              className={`w-[25px] hidden rounded-full h-[25px] bg-slate-200`}
-            >
+          <div className="flex items-center my-1">
+            <div className={`w-[25px] mr-2 rounded-full h-[25px] bg-slate-200`}>
               <GenerateUserPicture user={item.by} />
             </div>
             <p className="text-xs font-medium">{item.by.channelName}</p>

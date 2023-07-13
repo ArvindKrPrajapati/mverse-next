@@ -1,14 +1,19 @@
 import React from "react";
 import Card from "../Card";
 import Container from "../Container";
+import HorizontalCard from "../Card/HorizontalCard";
 type props = {
   data: any;
+  horizontal: boolean;
 };
-export default async function CardList({ data }: props) {
+export default async function CardList({ data, horizontal }: props) {
   return (
     <Container className="px-0 lg:px-6">
       <div className={`flex flex-wrap`}>
         {data.map((item: any, index: number) => {
+          if (horizontal) {
+            return <HorizontalCard item={item} />;
+          }
           return (
             <div
               key={index}

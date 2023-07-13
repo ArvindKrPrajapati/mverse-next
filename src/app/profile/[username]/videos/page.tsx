@@ -11,7 +11,7 @@ export default async function ChannelVideos({ params }: props) {
   const data = await getAllVideosByUserId(0, limit, params.username);
   return (
     <main>
-      <CardList data={data} />
+      <CardList horizontal={true} data={data} />
     </main>
   );
 }
