@@ -3,6 +3,8 @@ import ChannelDetails from "@/components/Channeldetails";
 import Container from "@/components/Container";
 import { getCurrentUser } from "@/lib/serverCookies";
 import TabHeader from "./TabHeader";
+import Link from "next/link";
+import { SettingIcon } from "@/components/MversePlayer/icons";
 type Props = {
   children: React.ReactNode;
   params: { username: string };
@@ -10,32 +12,40 @@ type Props = {
 export default async function ProfileLayout({ children, params }: Props) {
   const currentUser = getCurrentUser();
   const data = await getChannelByUsername(params.username, currentUser?._id);
+
+  const username = decodeURIComponent(params.username);
   const options = [
     {
       name: "home",
-      route: "/profile/" + decodeURIComponent(params.username),
+      route: "/profile/" + username,
     },
     {
       name: "videos",
-      route: "/profile/" + decodeURIComponent(params.username) + "/videos",
+      route: "/profile/" + username + "/videos",
     },
     {
       name: "playlist",
-      route: "/profile/" + decodeURIComponent(params.username) + "/playlist",
+      route: "/profile/" + username + "/playlist",
     },
     {
       name: "about",
-      route: "/profile/" + decodeURIComponent(params.username) + "/about",
+      route: "/profile/" + username + "/about",
     },
   ];
   return (
     <main>
       <ChannelDetails data={data} />
       <Container>
-        <div className="flex overflow-auto">
+        <div className="flex overflow-auto items-center">
           {options.map((item, index) => (
             <TabHeader key={index} route={item.route} name={item.name} />
           ))}
+          {currentUser?.username === username ? (
+            <Link href="/settings" className="flex items-center gap-2">
+              <SettingIcon width={20} />
+              settings
+            </Link>
+          ) : null}
         </div>
       </Container>
       <hr className="bg-gray-600 h-[1px] border-none" />

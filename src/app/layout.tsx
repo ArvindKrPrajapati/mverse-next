@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body
-        className={`${font.className} dark:bg-slate-800 dark:text-slate-50 h-full`}
+        className={`${font.className} dark:bg-neutral-900 dark:text-slate-50 h-full`}
       >
         <ToasterProvider />
         <Navbar currentUser={currentUser} />

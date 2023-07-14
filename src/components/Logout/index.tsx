@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { LogoutIcon } from "../_icons";
 import useModal from "@/hooks/useModal";
 
-export default function Logout({ className }: any) {
+export default function Logout({ className, text = false }: any) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const { toggleDisabled } = useModal();
@@ -40,9 +40,10 @@ export default function Logout({ className }: any) {
     <button
       onClick={logmeout}
       disabled={loading}
-      className={`p-1 border-0 hover:opacity-70 transition disabled:opacity-50 ${className}`}
+      className={`p-1 border-0 hover:opacity-70 transition disabled:opacity-50 flex items-center ${className}`}
     >
       <LogoutIcon />
+      {text ? <p className="text-gray-200 pl-2">Logout</p> : null}
     </button>
   );
 }

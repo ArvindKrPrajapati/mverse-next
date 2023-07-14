@@ -15,7 +15,7 @@ export default function Card({ item }: props) {
           height={562}
           width={1000}
           src={item.thumbnail}
-          className="sm:rounded-lg w-full aspect-[16/10] bg-slate-200 dark:bg-slate-900"
+          className="sm:rounded-lg w-full aspect-[16/10] bg-slate-200 dark:bg-neutral-950"
           alt="thumbnail"
         />
         <p className="bg-black text-white text-[0.6em]  rounded-sm px-1 absolute right-[6px] bottom-[6px]">

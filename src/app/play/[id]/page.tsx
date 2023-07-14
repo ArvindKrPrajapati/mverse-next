@@ -27,7 +27,7 @@ export default async function PlayPage({ params }: Props) {
 
   const videoData = await getAllVideosByUserId(0, limit, data.by.username);
   return (
-    <div className="xl:p-8 fixed md:relative w-full h-full top-0 z-30 dark:bg-slate-800 overflow-auto">
+    <div className="xl:p-8 fixed md:relative w-full h-full top-0 z-30 dark:bg-neutral-900 overflow-auto">
       <div className="xl:flex gap-5">
         <div className="xl:w-2/3">
           <div className="md:hidden w-full aspect-video"></div>

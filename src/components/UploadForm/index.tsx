@@ -106,7 +106,7 @@ export default function UploadForm() {
           url={link.endsWith(".mp4") || link.endsWith(".mkv") ? link : ""}
         />
       </div>
-      <Container className="p-0 m-0 md:w-[50%]">
+      <Container className="p-6 m-0 md:w-[50%]">
         <form className="my-4 w-full" onSubmit={handleSubmit}>
           <p className="text-xl font-bold mb-3">Upload video</p>
           <div className="w-full">

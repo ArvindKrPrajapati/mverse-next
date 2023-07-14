@@ -41,12 +41,12 @@ export default function DescriptionModal({ description }: Props) {
 
   return (
     <div
-      className="fixed w-full xl:w-1/4 h-desc-height  xl:h-full xl:top-0 bottom-0 right-0 dark:bg-slate-900 bg-white overflow-auto"
+      className="fixed w-full xl:w-1/4 h-desc-height  xl:h-full xl:top-0 bottom-0 right-0 dark:bg-neutral-950 bg-white overflow-auto"
       style={{
         zIndex: "1000",
       }}
     >
-      <div className="dark:bg-slate-900 translate h-full lg:h-auto md:h-auto border-0 md:rounded-md shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+      <div className="dark:bg-neutral-950 translate h-full lg:h-auto md:h-auto border-0 md:rounded-md shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
         <header className="bg-inherit flex sticky top-0 items-center justify-between px-4 py-1 border-b-[1px] border-gray-600">
           <p className="dark:text-gray-300 text-center">Description</p>
           <button
