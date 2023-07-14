@@ -1,6 +1,7 @@
 "use client";
 import Button from "@/components/Button";
 import GenerateUserPicture from "@/components/GenerateUserPicture";
+import SubscribeButton from "@/components/SubscribeButton";
 import { handleViews } from "@/lib/common";
 import Link from "next/link";
 import React from "react";
@@ -11,6 +12,7 @@ type Props = {
   isSubscribed: boolean;
   username: string;
   className?: string;
+  currentUser?: any;
 };
 export default function ChannelDesc({
   user,
@@ -19,6 +21,7 @@ export default function ChannelDesc({
   isSubscribed,
   username,
   className,
+  currentUser,
 }: Props) {
   return (
     <div
@@ -36,9 +39,11 @@ export default function ChannelDesc({
         </div>
       </section>
       <div>
-        <Button
-          label={isSubscribed ? "unsubscribe" : "subscribe"}
-          className="rounded-full text-xs"
+        <SubscribeButton
+          username={username}
+          isSubscribed={isSubscribed}
+          currentUser={currentUser}
+          className="text-xs"
         />
       </div>
     </div>

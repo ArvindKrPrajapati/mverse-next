@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import GenerateUserPicture from "../GenerateUserPicture";
+import ClientOnly from "../ClientOnly";
 type props = {
   item: any;
 };
@@ -22,15 +23,17 @@ export default function Card({ item }: props) {
         </p>
       </div>
       <div className={`flex m-2`}>
-        <div className="w-[35px]">
-          <Link
-            href={"/profile/" + item.by.username}
-            className={`w-[35px] rounded-full h-[35px] bg-slate-200`}
-          >
-            <GenerateUserPicture user={item.by} />
-          </Link>
+        <div className="w-[40px]">
+          <ClientOnly>
+            <Link
+              href={"/profile/" + item.by.username}
+              className={`w-[40px] rounded-full aspect-square bg-slate-200`}
+            >
+              <GenerateUserPicture user={item.by} />
+            </Link>
+          </ClientOnly>
         </div>
-        <div className="ml-3">
+        <div className="ml-3 w-full">
           <p className="font-bold text-sm max-two-line">{item.title}</p>
           <div className="flex md:block flex-wra">
             <p className="text-xs font-medium">{item.by.channelName} &nbsp;</p>

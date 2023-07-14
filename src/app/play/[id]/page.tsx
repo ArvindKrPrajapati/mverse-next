@@ -49,6 +49,7 @@ export default async function PlayPage({ params }: Props) {
               subscribers={channelData.subscribers}
               isSubscribed={channelData.isSubscribed}
               username={channelData.username}
+              currentUser={currentUser}
             />
             <ActionButtons />
           </div>

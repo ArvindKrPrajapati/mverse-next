@@ -8,11 +8,13 @@ type Props = {
   username: string;
   isSubscribed: boolean;
   currentUser?: any;
+  className?: string;
 };
 export default function SubscribeButton({
   username,
   isSubscribed,
   currentUser,
+  className,
 }: Props) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -43,7 +45,7 @@ export default function SubscribeButton({
   return (
     <Button
       label={isSubscribed ? "unsubscribe" : "subscribe"}
-      className="w-[120px] rounded-full"
+      className={`w-[120px] rounded-full ${className}`}
       onClick={handleClick}
       disabled={loading}
     />

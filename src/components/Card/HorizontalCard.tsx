@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import GenerateUserPicture from "../GenerateUserPicture";
+import ClientOnly from "../ClientOnly";
 type Props = {
   item: any;
   description?: boolean;
@@ -30,12 +31,14 @@ export default function HorizontalCard({ item, description = false }: Props) {
           <p className="font-bold text-sm max-two-line">{item.title}</p>
           {description ? (
             <div className="flex items-center my-1">
-              <Link
-                href={"/profile/" + item.by.username}
-                className={`w-[25px] mr-2 rounded-full h-[25px] bg-slate-200`}
-              >
-                <GenerateUserPicture user={item.by} />
-              </Link>
+              <ClientOnly>
+                <Link
+                  href={"/profile/" + item.by.username}
+                  className={`w-[25px] mr-2 rounded-full h-[25px] bg-slate-200`}
+                >
+                  <GenerateUserPicture user={item.by} />
+                </Link>
+              </ClientOnly>
               <p className="text-xs font-medium">{item.by.channelName}</p>
             </div>
           ) : null}
