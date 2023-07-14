@@ -261,3 +261,16 @@ export function LogoutIcon({ width, color }: props) {
     </svg>
   );
 }
+
+export function ChevronRight({ width, color }: props) {
+  return (
+    <svg
+      width={width || "24px"}
+      fill={color || "#000"}
+      className="dark:fill-slate-50"
+      viewBox="0 0 24 24"
+    >
+      <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+    </svg>
+  );
+}
