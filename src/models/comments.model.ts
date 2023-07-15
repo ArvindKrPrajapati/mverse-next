@@ -1,4 +1,4 @@
-import { Schema, model, Document, Types } from "mongoose";
+import { Schema, model, Document, Types, models } from "mongoose";
 import IUser from "./user.model";
 import IVideo from "./video.model";
 
@@ -74,7 +74,7 @@ const ReplySchema = new Schema<IReply>(
   { timestamps: true }
 );
 
-const Comment = model<IComment>("Comment", CommentSchema);
-const Reply = model<IReply>("Reply", ReplySchema);
+const Comment = models.Comment || model<IComment>("Comment", CommentSchema);
+const Reply = models.Reply || model<IReply>("Reply", ReplySchema);
 
 export { Comment, Reply };

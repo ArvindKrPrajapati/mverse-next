@@ -4,7 +4,7 @@ import { mversePost } from "@/lib/apiCalls";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
-export default function AddComment({ videoId }: any) {
+export default function AddComment({ videoId, fetchComments }: any) {
   const [commentValue, setCommentValue] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -17,6 +17,11 @@ export default function AddComment({ videoId }: any) {
         content: commentValue,
         videoId,
       });
+      if (res.success) {
+        fetchComments();
+      } else {
+        toast.error(res.error);
+      }
     } catch (error) {
       toast.error("something went wrong");
     } finally {
@@ -26,7 +31,7 @@ export default function AddComment({ videoId }: any) {
   };
 
   return (
-    <div className="h-[60px] bg-neutral-900">
+    <div className="h-[60px] bg-neutral-800">
       <form className="h-full flex" onSubmit={handleCommentSubmit}>
         <textarea
           value={commentValue}
@@ -34,7 +39,7 @@ export default function AddComment({ videoId }: any) {
           onChange={(e) => {
             setCommentValue(e.target.value);
           }}
-          className="p-2 outline-none h-full w-full text-sm resize-none dark:bg-neutral-900 dark:text-gray-200"
+          className="p-3 outline-none h-full w-full text-sm resize-none dark:bg-neutral-800 dark:text-gray-200"
         ></textarea>
         <button
           type="submit"

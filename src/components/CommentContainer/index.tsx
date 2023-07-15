@@ -4,8 +4,13 @@ import { CloseIcon } from "../_icons";
 import GenerateUserPicture from "../GenerateUserPicture";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import AddComment from "@/app/play/[id]/AddComment";
+import toast from "react-hot-toast";
+import { mverseGet } from "@/lib/apiCalls";
+import SingleComment from "./SingleComment";
 
 export default function CommentContainer({ id }: any) {
+  const [loading, setLoading] = useState(true);
+  const [comments, setComments] = useState<any>([]);
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
@@ -24,6 +29,23 @@ export default function CommentContainer({ id }: any) {
     router.push("?modal=comment");
     setOpen(true);
   };
+  const _init = async () => {
+    try {
+      const res = await mverseGet("/api/video/comment?videoId=" + id);
+      if (res.success) {
+        setComments(res.data);
+      } else {
+        toast.error(res.error);
+      }
+    } catch (error) {
+      toast.error("something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    _init();
+  }, []);
 
   useEffect(() => {
     const modal = searchParams.get("modal");
@@ -40,11 +62,10 @@ export default function CommentContainer({ id }: any) {
         <p className="text-sm">comments</p>
         <div className="flex gap-2 items-center my-2">
           <div className="w-[30px]">
-            <GenerateUserPicture user={{ name: "Arvind" }} />
+            <GenerateUserPicture user={comments[0]?.author} />
           </div>
           <p className="text-xs max-two-line" onClick={openModal}>
-            hello this is awsome comment by anyone hello this is awsome comment
-            by anyone hello this is awsome comment by anyone
+            {comments[0]?.content || "no comments"}
           </p>
         </div>
       </div>
@@ -67,11 +88,25 @@ export default function CommentContainer({ id }: any) {
               <CloseIcon />
             </button>
           </header>
-          <section className="h-full p-3 overflow-auto">
+          <section className="h-full overflow-auto">
             {/* show comment here */}
+            {loading ? (
+              "loading..."
+            ) : (
+              <div>
+                {comments.map((item: any, key: number) => (
+                  <SingleComment
+                    key={key}
+                    id={item._id}
+                    user={item.author}
+                    content={item.content}
+                  />
+                ))}
+              </div>
+            )}
           </section>
           <footer>
-            <AddComment videoId={id} />
+            <AddComment videoId={id} fetchComments={_init} />
           </footer>
         </div>
       </div>
