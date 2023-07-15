@@ -17,9 +17,7 @@ export default function DescriptionModal({ description }: Props) {
     if (modal === "desc") {
       setOpen(true);
     } else {
-      setTimeout(() => {
-        setOpen(false);
-      }, 300);
+      setOpen(false);
     }
   };
 

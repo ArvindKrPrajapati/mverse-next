@@ -12,6 +12,7 @@ import { limit } from "@/lib/constants";
 import { ChevronRight } from "@/components/_icons";
 import Link from "next/link";
 import DescriptionModal from "@/components/DescriptionModal";
+import CommentContainer from "@/components/CommentContainer";
 type Props = {
   params: {
     id: string;
@@ -69,9 +70,8 @@ export default async function PlayPage({ params }: Props) {
             />
           </div>
         </div>
-        <div className="w-1/3 hidden xl:block"></div>
+        <CommentContainer id={params.id} />
       </div>
-      <hr className="h-[1px] border-none bg-gray-500" />
       <CardList data={videoData} />
     </div>
   );
