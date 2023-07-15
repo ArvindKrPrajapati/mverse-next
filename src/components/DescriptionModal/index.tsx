@@ -56,7 +56,7 @@ export default function DescriptionModal({ description }: Props) {
             <CloseIcon />
           </button>
         </header>
-        <div className="p-3 text-sm">{description}</div>
+        <div className="p-3 text-sm whitespace-pre">{description}</div>
       </div>
     </div>
   );
