@@ -60,7 +60,13 @@ export default async function PlayPage({ params }: Props) {
               username={channelData.username}
               currentUser={currentUser}
             />
-            <ActionButtons />
+            <ActionButtons
+              currentUserId={currentUser?._id}
+              videoId={params.id}
+              likes={data.likes}
+              dislikes={data.dislikes}
+              reaction={data.raection}
+            />
           </div>
         </div>
         <div className="w-1/3 hidden xl:block"></div>
