@@ -5,11 +5,16 @@ import ToastBeforeRedirect from "./ToastBeforeRedirect";
 
 export default function ProtectedContainer({
   children,
+  byId = false,
 }: {
   children: React.ReactNode;
+  byId?: boolean;
 }) {
   const currentUser = getCurrentUser();
-  if (currentUser?._id) {
+  if (byId && currentUser?._id) {
+    return <>{children}</>;
+  }
+  if (currentUser?.username) {
     return <>{children}</>;
   }
   return <ToastBeforeRedirect />;

@@ -99,7 +99,7 @@ export default function Navbar({ currentUser }: any) {
         isOpen={isOpen}
         onClose={closeModal}
         disabled={disabled}
-        showLogout={auth == "channel" ? true : false}
+        showSettings={auth == "channel" ? true : false}
         title={
           auth == "signup"
             ? "Create new account"

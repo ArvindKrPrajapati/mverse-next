@@ -3,6 +3,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { CloseIcon } from "../_icons";
 import Logout from "../Logout";
+import Link from "next/link";
+import { SettingIcon } from "../MversePlayer/icons";
 
 type ModalProps = {
   isOpen: boolean;
@@ -10,7 +12,7 @@ type ModalProps = {
   body?: React.ReactElement;
   disabled?: boolean;
   title: string;
-  showLogout?: boolean;
+  showSettings?: boolean;
 };
 
 export default function Modal({
@@ -19,7 +21,7 @@ export default function Modal({
   body,
   disabled,
   title,
-  showLogout = false,
+  showSettings = false,
 }: ModalProps) {
   const [showModal, setShowModal] = useState(isOpen);
 
@@ -60,7 +62,11 @@ export default function Modal({
                 <CloseIcon />
               </button>
               <div className="text-lg font-semibold">{title}</div>
-              {showLogout ? <Logout className="absolute right-9" /> : null}
+              {showSettings ? (
+                <Link href="/settings" className="absolute right-9">
+                  <SettingIcon />
+                </Link>
+              ) : null}
             </div>
             <div className="relative p-6 flex-auto">{body}</div>
           </div>
