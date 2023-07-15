@@ -28,7 +28,7 @@ export default function DescriptionModal({ description }: Props) {
     current.delete("modal");
     const search = current.toString();
     const query = search ? `?${search}` : "";
-    router.push(`${pathname}${query}`);
+    router.replace(`${pathname}${query}`);
   };
 
   useEffect(() => {
