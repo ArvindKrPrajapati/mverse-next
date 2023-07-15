@@ -48,7 +48,7 @@ export default function ActionButtons({
         videoId,
       });
       if (res.success) {
-        toast.success(res.data.message);
+        // toast.success(res.data.message);
         router.refresh();
       } else {
         toast.error(res.error);
