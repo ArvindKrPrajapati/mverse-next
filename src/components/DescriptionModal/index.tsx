@@ -39,7 +39,7 @@ export default function DescriptionModal({ description }: Props) {
 
   return (
     <div
-      className="fixed w-full xl:w-1/4 h-desc-height  xl:h-full xl:top-0 bottom-0 right-0 dark:bg-neutral-950 bg-white overflow-auto"
+      className="fixed w-full xl:w-1/4 h-desc-height  xl:h-full xl:top-[50px] bottom-0 right-0 dark:bg-neutral-950 bg-white overflow-auto"
       style={{
         zIndex: "1000",
       }}
