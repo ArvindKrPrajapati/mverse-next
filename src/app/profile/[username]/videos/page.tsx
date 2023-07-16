@@ -9,9 +9,15 @@ type props = {
 };
 export default async function ChannelVideos({ params }: props) {
   const data = await getAllVideosByUserId(0, limit, params.username);
+  const decodedUsername = decodeURIComponent(params.username);
+
   return (
     <main>
-      <CardList horizontal={true} data={data} />
+      <CardList
+        horizontal={true}
+        data={data}
+        loadMoreFromUrl={`/api/user/channel/${decodedUsername}/videos`}
+      />
     </main>
   );
 }

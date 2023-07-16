@@ -17,7 +17,8 @@ export default function SideBarContainer() {
         }`}
       ></div>
       <div
-        className="fixed z-20 top-[10px] px-5 hidden md:block"
+        className="fixed  top-[10px] px-5 hidden md:block"
+        style={{ zIndex: "60" }}
         onClick={toggleSideBar}
       >
         <LineMenuIcon width={30} />

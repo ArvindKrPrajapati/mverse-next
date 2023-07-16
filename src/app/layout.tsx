@@ -26,7 +26,7 @@ export default function RootLayout({
       >
         <ToasterProvider />
         <Navbar currentUser={currentUser} />
-        <div className="flex">
+        <div className="flex mt-[50px]">
           <SideBarContainer />
           <div className="w-full mb-[70px] md:mb-0">{children}</div>
         </div>

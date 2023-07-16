@@ -14,6 +14,8 @@ export async function GET(request: NextRequest) {
     const data = await getAllVideos(skip, _limit);
     return NextResponse.json({
       success: true,
+      limit: _limit,
+      skip,
       data,
     });
   } catch (error) {

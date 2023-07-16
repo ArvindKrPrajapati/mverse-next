@@ -27,6 +27,8 @@ export default async function PlayPage({ params }: Props) {
   );
 
   const videoData = await getAllVideosByUserId(0, limit, data.by.username);
+  const decodedUsername = decodeURIComponent(data.by.username);
+
   return (
     <div className="xl:p-8 fixed md:relative w-full h-full top-0 z-30 dark:bg-neutral-900 overflow-auto">
       <div className="xl:flex gap-5">
@@ -72,7 +74,10 @@ export default async function PlayPage({ params }: Props) {
         </div>
         <CommentContainer id={params.id} />
       </div>
-      <CardList data={videoData} />
+      <CardList
+        data={videoData}
+        loadMoreFromUrl={`/api/user/channel/${decodedUsername}/videos`}
+      />
     </div>
   );
 }

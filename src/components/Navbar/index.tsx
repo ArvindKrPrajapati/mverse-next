@@ -78,7 +78,10 @@ export default function Navbar({ currentUser }: any) {
 
   return (
     <>
-      <div className="dark:bg-neutral-950 dark:text-slate-50 h-[50px] flex items-center justify-between px-5 pl-2 shadow sm:shadow-none py-2 h-55 sticky top-0 bg-white z-20">
+      <div
+        className="dark:bg-neutral-950 dark:text-slate-50 h-[50px] flex items-center justify-between px-5 pl-2 shadow sm:shadow-none py-2 fixed w-full  top-0 bg-white z-20"
+        style={{ zIndex: "60" }}
+      >
         {/* left */}
         <div className="flex items-center md:ml-14">
           <Link href="/">

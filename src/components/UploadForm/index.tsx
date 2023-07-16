@@ -73,7 +73,7 @@ export default function UploadForm() {
     }
     try {
       setLoading(true);
-      const res = await mversePost("/api/user/channel/video", {
+      const res = await mversePost("/api/video", {
         title,
         thumbnail,
         link,
