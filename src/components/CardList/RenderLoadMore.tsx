@@ -10,10 +10,8 @@ export default function RenderLoadMore({
 }: any) {
   return (
     <LoadMore url={loadMoreFromUrl}>
-      <ChildComponent horizontal={horizontal} description={description} />
+      {/* items will be automatically passed from loadmore to its child componentZ */}
+      <DecideCard horizontal={horizontal} description={description} />
     </LoadMore>
   );
 }
-const ChildComponent = ({ item, horizontal, description }: any) => (
-  <DecideCard horizontal={horizontal} description={description} item={item} />
-);
