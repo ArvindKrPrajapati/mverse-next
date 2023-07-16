@@ -21,7 +21,7 @@
     "eslint-config-next": "13.4.8",
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.3.1",
-    "next": "13.4.8",
+    "next": "^13.4.10",
     "nodemailer": "^6.9.3",
     "postcss": "8.4.24",
     "react": "18.2.0",
