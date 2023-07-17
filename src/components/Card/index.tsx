@@ -9,8 +9,8 @@ type props = {
 };
 export default function Card({ item }: props) {
   return (
-    <Link href={"/play/" + item._id} className="active:bg-transparent">
-      <div className="relative">
+    <>
+      <Link href={"/play/" + item._id} className="relative">
         <Image
           height={562}
           width={1000}
@@ -21,7 +21,7 @@ export default function Card({ item }: props) {
         <p className="bg-black text-white text-[0.6em]  rounded-sm px-1 absolute right-[6px] bottom-[6px]">
           {formatTime(item.duration)}
         </p>
-      </div>
+      </Link>
       <div className={`flex m-2`}>
         <div className="w-[40px]">
           <ClientOnly>
@@ -33,7 +33,7 @@ export default function Card({ item }: props) {
             </Link>
           </ClientOnly>
         </div>
-        <div className="ml-3 w-full">
+        <Link href={"/play/" + item._id} className="ml-3 w-full">
           <p className="font-bold text-sm max-two-line">{item.title}</p>
           <div className="flex md:block flex-wra">
             <p className="text-xs font-medium">{item.by.channelName} &nbsp;</p>
@@ -42,8 +42,8 @@ export default function Card({ item }: props) {
               {formatDate(item.createdAt)}
             </p>
           </div>
-        </div>
+        </Link>
       </div>
-    </Link>
+    </>
   );
 }
