@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+body a {
+  -webkit-tap-highlight-color: transparent;
+}
 .max-two-line {
   overflow: hidden;
   width: 100%;
@@ -16,6 +19,7 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
 }
+
 @layer base {
   label {
     @apply dark:text-slate-400 text-gray-700;
