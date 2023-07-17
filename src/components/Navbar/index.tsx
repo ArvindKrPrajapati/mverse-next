@@ -94,7 +94,7 @@ export default function Navbar({ currentUser }: any) {
           </Link>
         </div>
         {/* end */}
-        <div onClick={decideRoute}>
+        <div onClick={decideRoute} className="cursor-pointer">
           <MyPic user={currentUser} />
         </div>
       </div>

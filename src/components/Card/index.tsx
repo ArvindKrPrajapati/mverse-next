@@ -9,7 +9,7 @@ type props = {
 };
 export default function Card({ item }: props) {
   return (
-    <Link href={"/play/" + item._id}>
+    <Link href={"/play/" + item._id} className="active:bg-transparent">
       <div className="relative">
         <Image
           height={562}

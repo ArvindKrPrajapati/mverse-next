@@ -6,6 +6,7 @@ import { mverseGet } from "@/lib/apiCalls";
 import InfiniteScroll from "./InfiniteScroll";
 import HorizontalCard from "../Card/HorizontalCard";
 import Card from "../Card";
+import Spinner from "../Loading/Spinner";
 
 export default function LoadMore({ url, children }: any) {
   const [loading, setLoading] = useState(false);
@@ -46,7 +47,13 @@ export default function LoadMore({ url, children }: any) {
       </div>
       {!allFetched ? (
         <>
-          {loading ? "loading..." : <InfiniteScroll onIntersect={loadMore} />}
+          {loading ? (
+            <div className="w-full flex justify-center py-3">
+              <Spinner />
+            </div>
+          ) : (
+            <InfiniteScroll onIntersect={loadMore} />
+          )}
         </>
       ) : null}
     </>
