@@ -12,7 +12,7 @@ export default function Cover({ user }: props) {
         <Image
           src={user.cover}
           height={100}
-          width={100}
+          width={1000}
           alt="cover"
           className="h-full w-full"
         />

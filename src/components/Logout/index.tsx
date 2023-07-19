@@ -40,7 +40,7 @@ export default function Logout({ className, text = false }: any) {
     <button
       onClick={logmeout}
       disabled={loading}
-      className={`p-1 border-0 hover:opacity-70 transition disabled:opacity-50 flex items-center ${className}`}
+      className={`p-3 w-full border-0 hover:opacity-70 transition disabled:opacity-50 flex items-center ${className}`}
     >
       <LogoutIcon />
       {text ? <p className="text-gray-200 pl-2">Logout</p> : null}

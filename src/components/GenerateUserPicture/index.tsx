@@ -13,8 +13,8 @@ export default function GenerateUserPicture({ user, className }: props) {
     return (
       <Image
         src={user.dp}
-        width={100}
-        height={100}
+        width={1000}
+        height={1000}
         alt="dp"
         className="rounded-full w-full aspect-square"
       />
