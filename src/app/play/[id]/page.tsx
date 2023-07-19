@@ -22,34 +22,34 @@ type Props = {
 export default async function PlayPage({ params }: Props) {
   const currentUser = getCurrentUser();
   const data = await getVideoById(params.id);
-  if (!data) {
-    notFound();
-  }
+
   const channelData = await getChannelByUsername(
-    data.by.username,
+    data?.by.username,
     currentUser?._id
   );
 
-  const videoData = await getAllVideosByUserId(0, limit, data.by.username);
-  const decodedUsername = decodeURIComponent(data.by.username);
-
+  const videoData = await getAllVideosByUserId(0, limit, data?.by.username);
+  const decodedUsername = decodeURIComponent(data?.by.username);
+  if (!data || !channelData || !videoData) {
+    notFound();
+  }
   return (
     <div className="xl:p-8 fixed md:relative w-full h-full top-0 z-30 dark:bg-neutral-900 overflow-auto">
       <div className="xl:flex gap-5">
         <div className="xl:w-2/3">
           <div className="md:hidden w-full aspect-video"></div>
           <div className="fixed z-20 md:static w-full top-0">
-            <MversePlayer url={data.link} title={data.title} />
+            <MversePlayer url={data?.link} title={data?.title} />
           </div>
-          <DescriptionModal description={data.description} />
+          <DescriptionModal description={data?.description} />
           <div className="p-4 xl:px-0  md:mt-0">
-            <p className="xl:text-xl text-sm max-two-line">{data.title}</p>
+            <p className="xl:text-xl text-sm max-two-line">{data?.title}</p>
             <p className="dark:text-gray-300 xl:text-base text-xs">
-              {handleViews(200000)} views {formatDate(data.createdAt)}
+              {handleViews(200000)} views {formatDate(data?.createdAt)}
             </p>
             <div className="flex items-center">
               <p className="xl:text-sm text-xs my-1  dark:text-gray-300 max-two-line">
-                {data.description}
+                {data?.description}
               </p>
               <Link href="?modal=desc" className="p-2">
                 <ChevronRight width={30} />
@@ -70,9 +70,9 @@ export default async function PlayPage({ params }: Props) {
             <ActionButtons
               currentUserId={currentUser?._id}
               videoId={params.id}
-              likes={data.likes}
-              dislikes={data.dislikes}
-              reaction={data.raection}
+              likes={data?.likes}
+              dislikes={data?.dislikes}
+              reaction={data?.raection}
             />
           </div>
         </div>

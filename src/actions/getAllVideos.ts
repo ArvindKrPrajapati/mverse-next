@@ -17,6 +17,10 @@ export async function getAllVideos(skip = 0, limit = constLimit) {
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(limit);
+
+    if (!data.length) {
+      return [];
+    }
     return data;
   } catch (error) {
     console.log("get error", error);

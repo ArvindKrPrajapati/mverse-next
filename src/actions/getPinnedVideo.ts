@@ -22,7 +22,9 @@ export async function getPinnedVideos(
       .sort({ craetedAt: -1 })
       .skip(skip)
       .limit(limit);
-
+    if (!data.length) {
+      return [];
+    }
     return data;
   } catch (error) {
     throw new Error("failed to get data from db");

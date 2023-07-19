@@ -15,16 +15,23 @@ export async function getAllVideosByUserId(
     await dbConnect();
     //  get userid using username
 
-    const { _id } = await User.findOne({ username });
+    const userData = await User.findOne({ username });
+    if (!userData) {
+      return [];
+    }
     // get user
-    const data = await Video.find({ by: _id })
+    const data = await Video.find({ by: userData._id })
       .populate("by", "_id channelName dp username")
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(limit);
-
+    if (!data.length) {
+      return [];
+    }
     return data;
   } catch (error) {
+    console.log(error);
+
     throw new Error("failed to get data from db");
   }
 }

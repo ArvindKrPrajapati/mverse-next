@@ -53,7 +53,9 @@ export async function getVideoById(_id: string) {
       videoId,
       by: currentUser?._id,
     });
-
+    if (!data) {
+      return null;
+    }
     const obj = {
       ...data._doc,
       ...reactions[0],
@@ -62,6 +64,8 @@ export async function getVideoById(_id: string) {
 
     return obj;
   } catch (error) {
+    console.log(error);
+
     throw new Error("failed to get data from db");
   }
 }
