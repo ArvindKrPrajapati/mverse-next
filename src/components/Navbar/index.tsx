@@ -77,7 +77,9 @@ export default function Navbar({ currentUser }: any) {
   }, [searchParams]);
 
   return (
-    <>
+    <main
+      className={`${pathname.startsWith("/play/") ? "hidden md:block" : ""}`}
+    >
       <div
         className="dark:bg-neutral-950 dark:text-slate-50 h-[50px] flex items-center justify-between px-5 pl-2 shadow sm:shadow-none py-2 fixed w-full  top-0 bg-white z-20"
         style={{ zIndex: "60" }}
@@ -128,6 +130,6 @@ export default function Navbar({ currentUser }: any) {
           )
         }
       />
-    </>
+    </main>
   );
 }

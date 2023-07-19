@@ -34,7 +34,9 @@ export default function Sidebar({ isMenuOpen }: props) {
 
   return (
     <div
-      className="w-[75px] lg:w-[230px] fixed left-0 z-10  transition duration-1000 "
+      className={`w-[75px] lg:w-[230px] fixed left-0 z-10  transition duration-1000 
+      ${pathname.startsWith("/play/") ? "hidden md:block" : ""}
+      `}
       style={!isMenuOpen ? { width: "75px" } : {}}
     >
       <div className="md:h-screen md:p-3 flex md:block md:relative fixed bottom-0 w-full justify-between dark:bg-neutral-950 bg-white transition duration-300">
