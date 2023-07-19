@@ -39,7 +39,7 @@ export default async function ProfileLayout({ children, params }: Props) {
     <main>
       <ChannelDetails data={data} />
       <Container>
-        <div className="flex overflow-auto items-center">
+        <div className="flex w-[98vw] overflow-auto items-center">
           {options.map((item, index) => (
             <TabHeader key={index} route={item.route} name={item.name} />
           ))}
