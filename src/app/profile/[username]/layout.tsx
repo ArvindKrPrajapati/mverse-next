@@ -5,6 +5,7 @@ import { getCurrentUser } from "@/lib/serverCookies";
 import TabHeader from "./TabHeader";
 import Link from "next/link";
 import { SettingIcon } from "@/components/MversePlayer/icons";
+import { notFound } from "next/navigation";
 type Props = {
   children: React.ReactNode;
   params: { username: string };
@@ -12,7 +13,9 @@ type Props = {
 export default async function ProfileLayout({ children, params }: Props) {
   const currentUser = getCurrentUser();
   const data = await getChannelByUsername(params.username, currentUser?._id);
-
+  if (!data) {
+    notFound();
+  }
   const username = decodeURIComponent(params.username);
   const options = [
     {

@@ -13,6 +13,7 @@ import { ChevronRight } from "@/components/_icons";
 import Link from "next/link";
 import DescriptionModal from "@/components/DescriptionModal";
 import CommentContainer from "@/components/CommentContainer";
+import { notFound } from "next/navigation";
 type Props = {
   params: {
     id: string;
@@ -21,6 +22,9 @@ type Props = {
 export default async function PlayPage({ params }: Props) {
   const currentUser = getCurrentUser();
   const data = await getVideoById(params.id);
+  if (!data) {
+    notFound();
+  }
   const channelData = await getChannelByUsername(
     data.by.username,
     currentUser?._id

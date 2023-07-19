@@ -1,4 +1,5 @@
 export const handleViews = (number: number) => {
+  number = number || 0;
   if (number >= 1000000) {
     return (number / 1000000).toFixed(1).replace(".0", "") + "M";
   } else if (number >= 1000) {
@@ -35,7 +36,7 @@ export const formatDate = (d: any) => {
 };
 
 export const formatTime = (seconds: number) => {
-  seconds = Math.floor(seconds);
+  seconds = Math.floor(seconds || 0);
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = seconds % 60;
 

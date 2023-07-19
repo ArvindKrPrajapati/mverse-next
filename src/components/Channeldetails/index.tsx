@@ -24,21 +24,21 @@ export default function ChannelDetails({ data }: Props) {
             </div>
             <div className="md:ml-5">
               <div className="text-center md:text-left my-3 md:m-0">
-                <p className="text-3xl font-bold">{data.channelName}</p>
+                <p className="text-3xl font-bold">{data?.channelName}</p>
                 <p className="text-xs font-semibold  dark:text-gray-300">
-                  {data.username} &nbsp; <br className="block md:hidden " />
-                  {handleViews(data.subscribers)} subscribers
+                  {data?.username} &nbsp; <br className="block md:hidden " />
+                  {handleViews(data?.subscribers)} subscribers
                 </p>
                 <p className="text-xs mt-2 font-semibold  dark:text-gray-300">
-                  {data.description}
+                  {data?.description}
                 </p>
               </div>
             </div>
           </main>
           <div className="w-[120px] mx-auto md:mx-0">
             <SubscribeButton
-              isSubscribed={data.isSubscribed}
-              username={data.username}
+              isSubscribed={data?.isSubscribed}
+              username={data?.username}
               currentUser={currentUser}
             />
           </div>
