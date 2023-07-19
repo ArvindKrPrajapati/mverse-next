@@ -7,6 +7,7 @@ import AddComment from "@/app/play/[id]/AddComment";
 import toast from "react-hot-toast";
 import { mverseGet } from "@/lib/apiCalls";
 import SingleComment from "./SingleComment";
+import Spinner from "../Loading/Spinner";
 
 export default function CommentContainer({ id }: any) {
   const [loading, setLoading] = useState(true);
@@ -91,7 +92,9 @@ export default function CommentContainer({ id }: any) {
           <section className="h-full overflow-auto">
             {/* show comment here */}
             {loading ? (
-              "loading..."
+              <div className="flex items-center justify-center h-full">
+                <Spinner />
+              </div>
             ) : (
               <div>
                 {comments.map((item: any, key: number) => (
