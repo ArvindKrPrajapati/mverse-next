@@ -1,5 +1,10 @@
+import HorizontalCardLoading from "@/components/Loading/HorizontalCardLoading";
 import React from "react";
 
 export default function Loading() {
-  return <div>Loading profile</div>;
+  return (
+    <div className="h-full overflow-hidden">
+      <HorizontalCardLoading />
+    </div>
+  );
 }

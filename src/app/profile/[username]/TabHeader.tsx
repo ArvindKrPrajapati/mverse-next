@@ -11,7 +11,7 @@ export default function TabHeader({ route, name }: Props) {
 
   return (
     <Link
-      className={`w-[100px]  transition-all duration-100 text-center uppercase p-1 py-2 text-sm md:text-xs ${
+      className={`w-[160px]  transition-all duration-100 text-center uppercase p-1 py-2 text-sm md:text-xs ${
         pathname === route ? "border-b-2 " : ""
       }`}
       href={route}
