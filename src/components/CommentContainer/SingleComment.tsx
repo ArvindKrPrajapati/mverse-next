@@ -17,7 +17,7 @@ export default function SingleComment({ id, user, content }: Props) {
           <p className="text-sm ml-2 whitespace-pre-wrap">{content}</p>
         </div>
       </div>
-      <hr className="h-[1px] border-none bg-neutral-900" />
+      <hr className="h-[1px] border-none dark:bg-neutral-900 bg-gray-200" />
     </div>
   );
 }

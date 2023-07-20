@@ -72,7 +72,7 @@ export default function CommentContainer({ id, currentUser }: any) {
       </div>
       {/* contemt */}
       <div
-        className={`fixed w-full xl:static xl:w-1/3 h-desc-height  xl:h-[80vh] xl:rounded-md right-0 bottom-0  dark:bg-neutral-950 bg-white overflow-auto transition duration-500 translate-y-0 
+        className={`fixed w-full xl:static xl:w-1/3 h-desc-height  xl:h-[80vh] xl:rounded-md right-0 bottom-0  dark:bg-neutral-950 bg-white xl:bg-gray-100 overflow-auto transition duration-500 translate-y-0 
       ${!open ? "translate-y-[100vh] xl:translate-y-0" : ""}
       `}
         style={{
@@ -80,7 +80,7 @@ export default function CommentContainer({ id, currentUser }: any) {
         }}
       >
         <div className="h-full flex flex-col justify-between">
-          <header className="bg-inherit flex sticky top-0 items-center justify-between px-4 py-1 border-b-[1px] border-gray-800 xl:py-2">
+          <header className="bg-inherit flex sticky top-0 items-center justify-between px-4 py-1 border-b-[1px] dark:border-gray-800 border-gray-200 xl:py-2">
             <p className="dark:text-gray-300 text-center">Comments</p>
             <button
               onClick={closeModal}

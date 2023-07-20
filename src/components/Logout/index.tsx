@@ -42,8 +42,8 @@ export default function Logout({ className, text = false }: any) {
       disabled={loading}
       className={`p-3 w-full border-0 hover:opacity-70 transition disabled:opacity-50 flex items-center ${className}`}
     >
-      <LogoutIcon />
-      {text ? <p className="text-gray-200 pl-2">Logout</p> : null}
+      <LogoutIcon color="red" />
+      {text ? <p className="text-[red] pl-2">Logout</p> : null}
     </button>
   );
 }

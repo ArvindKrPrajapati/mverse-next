@@ -133,7 +133,7 @@ export default function UploadForm() {
               type="text"
               value={formatTime(duration)}
               disable={true}
-              inputClassName="text-gray-200"
+              inputClassName="dark:text-gray-200 text-gray-400"
             />
             <Input
               label="Description"

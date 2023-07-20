@@ -4,8 +4,8 @@ import Container from "@/components/Container";
 import { getCurrentUser } from "@/lib/serverCookies";
 import TabHeader from "./TabHeader";
 import Link from "next/link";
-import { SettingIcon } from "@/components/MversePlayer/icons";
 import { notFound } from "next/navigation";
+import { SettingsIcon } from "@/components/_icons";
 type Props = {
   children: React.ReactNode;
   params: { username: string };
@@ -45,13 +45,13 @@ export default async function ProfileLayout({ children, params }: Props) {
           ))}
           {currentUser?.username === username ? (
             <Link href="/settings" className="flex items-center gap-2">
-              <SettingIcon width={20} />
+              <SettingsIcon width={20} />
               settings
             </Link>
           ) : null}
         </div>
       </Container>
-      <hr className="bg-gray-600 h-[1px] border-none" />
+      <hr className="dark:bg-gray-600 h-[1px] border-none bg-gray-200" />
       {children}
     </main>
   );

@@ -10,10 +10,13 @@ import Signup from "../Signup";
 import Verify from "../Verify";
 import MyPic from "./MyPic";
 import CreateChannel from "../CreateChannel";
+import { useTheme } from "next-themes";
 
 export default function Navbar({ currentUser }: any) {
   const { isOpen, onClose, onOpen, disabled, toggleDisabled } = useModal();
   const [auth, setAuth] = useState<string | null>();
+  const { theme } = useTheme();
+  const [myTheme, setMyTheme] = useState<string | undefined>("");
 
   const router = useRouter();
   const pathname = usePathname();
@@ -76,6 +79,10 @@ export default function Navbar({ currentUser }: any) {
     // eslint-disable-next-line
   }, [searchParams]);
 
+  useEffect(() => {
+    setMyTheme(theme);
+  }, [theme]);
+
   return (
     <>
       <main
@@ -89,9 +96,14 @@ export default function Navbar({ currentUser }: any) {
           <div className="flex items-center md:ml-14">
             <Link href="/">
               <Image
-                src="/images/light-logo.png"
-                width={100}
-                height={10}
+                src={
+                  myTheme === "dark"
+                    ? "/images/light-logo.png"
+                    : "/images/logo.png"
+                }
+                width={1000}
+                height={600}
+                className="w-[100px]"
                 alt="logo"
               />
             </Link>

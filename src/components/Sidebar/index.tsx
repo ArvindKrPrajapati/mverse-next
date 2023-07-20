@@ -45,15 +45,19 @@ export default function Sidebar({ isMenuOpen }: props) {
             <Link
               href={item.href}
               key={index}
-              className={`w-full block lg:flex items-center md:hover:bg-neutral-600 px-3 py-2 md:rounded-lg transition duration-300 ${
-                pathname === item.href ? "md:bg-neutral-600" : ""
+              className={`w-full block lg:flex items-center md:hover:dark:bg-neutral-600 md:hover:bg-gray-400 px-3 py-2 md:rounded-lg transition duration-300 ${
+                pathname === item.href
+                  ? "md:bg-gray-400 md:dark:bg-neutral-600"
+                  : ""
               }`}
               style={!isMenuOpen ? { display: "block" } : {}}
             >
               <div className="flex justify-center">{item.icon}</div>
               <p
                 className={`lg:text-base md:my-1 lg:my-0 text-[0.6em] text-center font-medium lg:ml-3 transition duration-300 ${
-                  pathname === item.href ? "text-gray-500 md:text-gray-200" : ""
+                  pathname === item.href
+                    ? "text-gray-500 md:dark:text-gray-200 md:text-black"
+                    : ""
                 }`}
                 style={
                   !isMenuOpen ? { fontSize: "0.6em", marginLeft: "0" } : {}

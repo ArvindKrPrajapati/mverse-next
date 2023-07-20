@@ -1,4 +1,5 @@
 import React from "react";
+import HorizontalCardLoading from "./HorizontalCardLoading";
 
 export default function ProfileLoading() {
   return (
@@ -21,6 +22,7 @@ export default function ProfileLoading() {
         </main>
         <div className="animate-pulse w-[120px] h-[35px] rounded-full mx-auto md:mx-0 dark:bg-neutral-800 bg-slate-200"></div>
       </div>
+      <HorizontalCardLoading />
     </main>
   );
 }

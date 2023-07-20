@@ -49,7 +49,7 @@ export default function DescriptionModal({ description }: Props) {
         </button>
       </div>
       <div
-        className={`fixed w-full xl:w-1/4 h-desc-height  xl:h-full xl:top-[50px] bottom-0 right-0 dark:bg-neutral-950 bg-white overflow-auto transition duration-500 translate-y-0 xl:translate-x-0
+        className={`fixed w-full xl:w-1/4 h-desc-height  xl:h-full xl:top-[50px] bottom-0 right-0 dark:bg-neutral-950 bg-gray-100 overflow-auto transition duration-500 translate-y-0 xl:translate-x-0
          ${
            !open
              ? "translate-y-[100vh] xl:translate-y-0 xl:translate-x-[100%]"
@@ -60,8 +60,8 @@ export default function DescriptionModal({ description }: Props) {
           zIndex: "1000",
         }}
       >
-        <div className="dark:bg-neutral-950 translate h-full lg:h-auto md:h-auto border-0 md:rounded-md shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-          <header className="bg-inherit flex sticky top-0 items-center justify-between px-4 py-1 border-b-[1px] border-gray-600">
+        <div className="translate h-full lg:h-auto md:h-auto border-0 md:rounded-md relative flex flex-col w-full bg-inherit outline-none focus:outline-none">
+          <header className="bg-inherit flex sticky top-0 items-center justify-between px-4 py-1 border-b-[1px] dark:border-gray-600 border-gray-200">
             <p className="dark:text-gray-300 text-center">Description</p>
             <button
               onClick={closeModal}
@@ -70,7 +70,9 @@ export default function DescriptionModal({ description }: Props) {
               <CloseIcon />
             </button>
           </header>
-          <div className="p-3 text-sm whitespace-pre-wrap">{description}</div>
+          <div className="p-3 text-sm whitespace-pre-wrap h-full">
+            {description}
+          </div>
         </div>
       </div>
     </>
