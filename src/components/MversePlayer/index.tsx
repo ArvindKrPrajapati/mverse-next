@@ -10,6 +10,7 @@ import "./style.css";
 import {
   AspectRatioIcon,
   BackwardIcon,
+  ChevronLeftIcon,
   ForwardIcon,
   FullscreenIcon,
   PauseIcon,
@@ -105,7 +106,10 @@ export default function MversePlayer({ url, title, onLoadedMetaData }: Props) {
     setTime(formatTime(toskip));
     setSlider(toskip);
   };
-
+  const goBack = (event: any) => {
+    event.stopPropagation();
+    window.history.back();
+  };
   const handleFullScreen = (event: any) => {
     event.stopPropagation();
     const video_container: any = document.querySelector(".video-container");
@@ -227,7 +231,12 @@ export default function MversePlayer({ url, title, onLoadedMetaData }: Props) {
         </div>
         <div className="controls" ref={controls} onClick={hideControls}>
           {/* header */}
-          <div className="video-header max-one-line">{title || "no title"}</div>
+          <div className="video-header">
+            <div className="d-md-none" onClick={goBack}>
+              <ChevronLeftIcon />
+            </div>
+            <p className="max-one-line">{title}</p>
+          </div>
           {/* middle */}
           <div className="video-controls">
             <div
