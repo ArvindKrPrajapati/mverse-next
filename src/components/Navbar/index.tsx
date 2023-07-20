@@ -77,29 +77,31 @@ export default function Navbar({ currentUser }: any) {
   }, [searchParams]);
 
   return (
-    <main
-      className={`${pathname.startsWith("/play/") ? "hidden md:block" : ""}`}
-    >
-      <div
-        className="dark:bg-neutral-950 dark:text-slate-50 h-[50px] flex items-center justify-between px-5 pl-2 shadow sm:shadow-none py-2 fixed w-full  top-0 bg-white z-20"
-        style={{ zIndex: "60" }}
+    <>
+      <main
+        className={`${pathname.startsWith("/play/") ? "hidden md:block" : ""}`}
       >
-        {/* left */}
-        <div className="flex items-center md:ml-14">
-          <Link href="/">
-            <Image
-              src="/images/light-logo.png"
-              width={100}
-              height={10}
-              alt="logo"
-            />
-          </Link>
+        <div
+          className="dark:bg-neutral-950 dark:text-slate-50 h-[50px] flex items-center justify-between px-5 pl-2 shadow sm:shadow-none py-2 fixed w-full  top-0 bg-white z-20"
+          style={{ zIndex: "60" }}
+        >
+          {/* left */}
+          <div className="flex items-center md:ml-14">
+            <Link href="/">
+              <Image
+                src="/images/light-logo.png"
+                width={100}
+                height={10}
+                alt="logo"
+              />
+            </Link>
+          </div>
+          {/* end */}
+          <div onClick={decideRoute} className="cursor-pointer">
+            <MyPic user={currentUser} />
+          </div>
         </div>
-        {/* end */}
-        <div onClick={decideRoute} className="cursor-pointer">
-          <MyPic user={currentUser} />
-        </div>
-      </div>
+      </main>
       <Modal
         isOpen={isOpen}
         onClose={closeModal}
@@ -130,6 +132,6 @@ export default function Navbar({ currentUser }: any) {
           )
         }
       />
-    </main>
+    </>
   );
 }

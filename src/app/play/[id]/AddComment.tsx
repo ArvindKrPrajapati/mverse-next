@@ -4,13 +4,21 @@ import { mversePost } from "@/lib/apiCalls";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
-export default function AddComment({ videoId, fetchComments }: any) {
+export default function AddComment({
+  videoId,
+  fetchComments,
+  currentUser,
+}: any) {
   const [commentValue, setCommentValue] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleCommentSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!commentValue) return;
+    if (!currentUser?._id) {
+      toast.error("login first!");
+      return;
+    }
     try {
       setLoading(true);
       const res = await mversePost("/api/video/comment", {

@@ -69,7 +69,7 @@ export default async function PlayPage({ params }: Props) {
             />
           </div>
         </div>
-        <CommentContainer id={params.id} />
+        <CommentContainer id={params.id} currentUser={currentUser} />
       </div>
       <CardList
         data={videoData}

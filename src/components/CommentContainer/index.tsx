@@ -9,7 +9,7 @@ import { mverseGet } from "@/lib/apiCalls";
 import SingleComment from "./SingleComment";
 import Spinner from "../Loading/Spinner";
 
-export default function CommentContainer({ id }: any) {
+export default function CommentContainer({ id, currentUser }: any) {
   const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState<any>([]);
   const [open, setOpen] = useState(false);
@@ -109,7 +109,11 @@ export default function CommentContainer({ id }: any) {
             )}
           </section>
           <footer>
-            <AddComment videoId={id} fetchComments={_init} />
+            <AddComment
+              videoId={id}
+              fetchComments={_init}
+              currentUser={currentUser}
+            />
           </footer>
         </div>
       </div>
