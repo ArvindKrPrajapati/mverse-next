@@ -41,20 +41,13 @@ export default async function PlayPage({ params }: Props) {
           <div className="fixed z-20 md:static w-full top-0">
             <MversePlayer url={data?.link} title={data?.title} />
           </div>
-          <DescriptionModal description={data?.description} />
+
           <div className="p-4 xl:px-0  md:mt-0">
             <p className="xl:text-xl text-sm max-two-line">{data?.title}</p>
             <p className="dark:text-gray-300 xl:text-base text-xs">
               {handleViews(200000)} views {formatDate(data?.createdAt)}
             </p>
-            <div className="flex items-center">
-              <p className="xl:text-sm text-xs my-1  dark:text-gray-300 max-two-line">
-                {data?.description}
-              </p>
-              <Link href="?modal=desc" className="p-2">
-                <ChevronRight width={30} />
-              </Link>
-            </div>
+            <DescriptionModal description={data?.description} />
             <ChannelDesc
               user={{
                 name: channelData.name,
