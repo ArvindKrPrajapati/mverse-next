@@ -49,8 +49,12 @@ export default function DescriptionModal({ description }: Props) {
         </button>
       </div>
       <div
-        className={`fixed w-full xl:w-1/4 h-desc-height  xl:h-full xl:top-[50px] bottom-0 right-0 dark:bg-neutral-950 bg-white overflow-auto transition duration-500 translate-y-0 
-         ${!open ? "translate-y-[100vh] xl:translate-y-0" : ""}
+        className={`fixed w-full xl:w-1/4 h-desc-height  xl:h-full xl:top-[50px] bottom-0 right-0 dark:bg-neutral-950 bg-white overflow-auto transition duration-500 translate-y-0 xl:translate-x-0
+         ${
+           !open
+             ? "translate-y-[100vh] xl:translate-y-0 xl:translate-x-[100%]"
+             : ""
+         }
         `}
         style={{
           zIndex: "1000",
