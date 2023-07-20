@@ -56,6 +56,7 @@ export async function POST(request: Request) {
       eamil: data.email,
       name: data.name,
       dp: data.dp,
+      cover: data.cover,
       channelName: data.channelName,
       username: data.username,
     };

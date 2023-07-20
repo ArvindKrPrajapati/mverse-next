@@ -4,6 +4,36 @@ import { getUserIdFromAuth } from "@/lib/serverCookies";
 import User from "@/models/user.model";
 import { NextRequest, NextResponse } from "next/server";
 
+export async function GET(request: NextRequest) {
+  try {
+    const query = request.nextUrl.searchParams;
+    const name = query.get("name")?.trim();
+    const skip = Number(query.get("skip") || 0);
+    const _limit = Number(query.get("limit") || limit);
+    if (!name) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "name is not provided",
+        },
+        { status: 422 }
+      );
+    }
+    await dbConnect();
+    const res = await User.find({
+      channelName: name,
+    })
+      .select("channelName")
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(_limit);
+    return NextResponse.json({ success: true, data: res, limit: _limit, skip });
+  } catch (error) {
+    console.log("get channel error:", error);
+    return NextResponse.json({ success: false, error: "server error" });
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     // get logged in userid fron cookies or header
@@ -108,32 +138,73 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GET(request: NextRequest) {
+export async function PATCH(request: NextRequest) {
   try {
-    const query = request.nextUrl.searchParams;
-    const name = query.get("name")?.trim();
-    const skip = Number(query.get("skip") || 0);
-    const _limit = Number(query.get("limit") || limit);
-    if (!name) {
+    // get logged in userid fron cookies or header
+    const userid = getUserIdFromAuth(request);
+
+    // if not userid then user is not logged in this operation needs user to login
+    if (!userid) {
+      return NextResponse.json({ success: false, error: "not logged in" });
+    }
+
+    // if user is logged in then extract channelName and description from body
+    const { dp, cover } = await request.json();
+
+    // if channelName is not provided throw an error cause its required
+    if (!dp && !cover) {
       return NextResponse.json(
-        {
-          success: false,
-          error: "name is not provided",
-        },
+        { success: false, error: "dp or cover is required" },
         { status: 422 }
       );
     }
+
+    let obj: any = {};
+    if (dp) {
+      obj["dp"] = dp;
+    }
+    if (cover) {
+      obj["cover"] = cover;
+    }
+    // connect database
     await dbConnect();
-    const res = await User.find({
-      channelName: name,
-    })
-      .select("channelName")
-      .sort({ createdAt: -1 })
-      .skip(skip)
-      .limit(_limit);
-    return NextResponse.json({ success: true, data: res, limit: _limit, skip });
+
+    // after all validation save into db
+    const data = await User.findByIdAndUpdate(userid, obj, { new: true });
+
+    // create user obj to save in db
+    const user = {
+      _id: data._id,
+      eamil: data.email,
+      name: data.name,
+      dp: data.dp,
+      cover: data.cover,
+      channelName: data.channelName,
+      username: data.username,
+    };
+
+    // create response
+    const res: NextResponse = NextResponse.json({
+      success: true,
+      data: user,
+    });
+
+    // set new cookie for user
+    res.cookies.set({
+      name: "user",
+      value: JSON.stringify(user),
+      httpOnly: true,
+      path: "/",
+      expires: new Date("9999-12-12"),
+    });
+
+    // return response
+    return res;
   } catch (error) {
-    console.log("get channel error:", error);
-    return NextResponse.json({ success: false, error: "server error" });
+    console.log("channel post error :", error);
+    return NextResponse.json(
+      { success: false, error: "server error" },
+      { status: 500 }
+    );
   }
 }
