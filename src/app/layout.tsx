@@ -21,7 +21,7 @@ export default function RootLayout({
   const currentUser = getCurrentUser();
 
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" className="h-full" suppressHydrationWarning>
       <body
         className={`${font.className} dark:bg-neutral-900 dark:text-slate-50 h-full`}
       >

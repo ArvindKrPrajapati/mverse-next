@@ -12,9 +12,10 @@ export default function SettingsPage() {
     <ProtectedContainer byId={true}>
       <main className="p-3">
         <b className="font-semibold text-base block mb-4">Settings</b>
-        <ChangeTheme />
         <ChangeDp user={currentUser} />
         <ChangeCover user={currentUser} />
+        <b className="font-semibold text-base block mt-4 mb-3">Themes</b>
+        <ChangeTheme />
         <Logout text={true} />
       </main>
     </ProtectedContainer>
