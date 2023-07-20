@@ -211,7 +211,11 @@ export default function MversePlayer({ url, title, onLoadedMetaData }: Props) {
       slider.current.value = ((currentTime / duration) * 100).toString();
     }
   };
-
+  useEffect(() => {
+    if (slider.current) {
+      slider.current.value = "0";
+    }
+  }, [url]);
   if (!url) {
     return (
       <div className="w-full aspect-video bg-black flex justify-center items-center">
