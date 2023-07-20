@@ -14,7 +14,7 @@ export default function HorizontalCard({ item, description = false }: Props) {
       className="w-full px-4 p-2 flex items-start"
       href={"/play/" + item?._id}
     >
-      <div className="relative">
+      <div className="relative w-2/5 max-w-[300px]">
         <Image
           height={562}
           width={1000}
@@ -26,7 +26,7 @@ export default function HorizontalCard({ item, description = false }: Props) {
           {formatTime(item?.duration)}
         </p>
       </div>
-      <div className={`flex m-2 w-full`}>
+      <div className={`flex m-2 w-3/5`}>
         <div className="ml-3">
           <p className="font-bold text-sm max-two-line">{item?.title}</p>
           {description ? (
