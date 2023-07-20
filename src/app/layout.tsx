@@ -11,7 +11,7 @@ const font = Nunito({ subsets: ["latin"] });
 export const metadata = {
   title: "Mverse",
   description: "Mverse App",
-  themeColor: "#000",
+  themeColor: { dark: "red", light: "green" },
 };
 
 export default function RootLayout({
