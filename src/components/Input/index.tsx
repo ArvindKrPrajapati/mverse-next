@@ -44,12 +44,12 @@ export default function Input({
             onChange={onChange}
             rows={rows}
             cols={cols}
-            className={`resize-none appearance text-gray-800 text-sm border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline ${inputClassName}`}
+            className={`resize-none appearance text-gray-800 dark:text-gray-100  text-sm border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline ${inputClassName}`}
           ></textarea>
         ) : (
           <input
             disabled={disable}
-            className={`appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline ${inputClassName}`}
+            className={`appearance-none dark:text-gray-100 border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline ${inputClassName}`}
             id={label}
             type={passwordVisible ? "text" : type}
             value={value}

@@ -84,7 +84,7 @@ export default function CreateChannel({ toggleDisabled, user }: props) {
             Your channel name *
           </label>
           <input
-            className="appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+            className="appearance-none border rounded dark:text-gray-100 w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
             id="channelName"
             type="text"
             value={name}
@@ -121,7 +121,7 @@ export default function CreateChannel({ toggleDisabled, user }: props) {
             onChange={(e) => {
               setDescription(e.target.value);
             }}
-            className="appearance-none text-gray-800 border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline resize-none"
+            className="appearance-none dark:text-gray-100 text-gray-800 border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline resize-none"
           ></textarea>
         </div>
         <Button
