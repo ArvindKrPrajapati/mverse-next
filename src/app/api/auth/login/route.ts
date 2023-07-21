@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dbConnect from "@/lib/dbConnect";
+import { createTokenAndSetCookies } from "@/actions/createTokenAndSetCookies";
 
 export async function POST(request: Request) {
   try {
@@ -49,8 +50,6 @@ export async function POST(request: Request) {
         { status: 500 }
       );
     }
-    const jwt_secret = process.env.JWT_SECRET as string;
-    const token = jwt.sign({ _id: data._id }, jwt_secret);
     const user = {
       _id: data._id,
       eamil: data.email,
@@ -60,25 +59,13 @@ export async function POST(request: Request) {
       channelName: data.channelName,
       username: data.username,
     };
+    const token = createTokenAndSetCookies(data);
     const res: NextResponse = NextResponse.json({
       success: true,
       data: user,
       token,
     });
-    res.cookies.set({
-      name: "token",
-      value: token,
-      httpOnly: true,
-      path: "/",
-      expires: new Date("9999-12-12"),
-    });
-    res.cookies.set({
-      name: "user",
-      value: JSON.stringify(user),
-      httpOnly: true,
-      path: "/",
-      expires: new Date("9999-12-12"),
-    });
+
     return res;
   } catch (error) {
     console.log("login error : ", error);

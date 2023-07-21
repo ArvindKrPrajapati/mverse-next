@@ -9,12 +9,6 @@ export async function GET(request: Request) {
     httpOnly: true,
     path: "/",
   });
-  cookieStore.set({
-    name: "user",
-    value: "",
-    httpOnly: true,
-    path: "/",
-  });
   const res = NextResponse.json({
     success: true,
     data: { message: "logged out successfully" },

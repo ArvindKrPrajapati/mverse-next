@@ -1,3 +1,4 @@
+import { createTokenAndSetCookies } from "@/actions/createTokenAndSetCookies";
 import { limit } from "@/lib/constants";
 import dbConnect from "@/lib/dbConnect";
 import { getUserIdFromAuth } from "@/lib/serverCookies";
@@ -112,22 +113,15 @@ export async function POST(request: NextRequest) {
       username: data.username,
     };
 
+    const token = createTokenAndSetCookies(data);
+
     // create response
     const res: NextResponse = NextResponse.json({
       success: true,
       data: user,
+      token,
     });
 
-    // set new cookie for user
-    res.cookies.set({
-      name: "user",
-      value: JSON.stringify(user),
-      httpOnly: true,
-      path: "/",
-      expires: new Date("9999-12-12"),
-    });
-
-    // return response
     return res;
   } catch (error) {
     console.log("channel post error :", error);
@@ -182,20 +176,12 @@ export async function PATCH(request: NextRequest) {
       channelName: data.channelName,
       username: data.username,
     };
-
+    const token = createTokenAndSetCookies(data);
     // create response
     const res: NextResponse = NextResponse.json({
       success: true,
       data: user,
-    });
-
-    // set new cookie for user
-    res.cookies.set({
-      name: "user",
-      value: JSON.stringify(user),
-      httpOnly: true,
-      path: "/",
-      expires: new Date("9999-12-12"),
+      token,
     });
 
     // return response

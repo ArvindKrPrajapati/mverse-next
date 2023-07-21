@@ -7,10 +7,15 @@ export const getToken = () => {
   return clientCookies.get("token")?.value;
 };
 export const getCurrentUser = () => {
-  const user: any = cookies().get("user")?.value;
+  const token: any = getToken();
+  if (!token) return null;
   try {
-    return user ? JSON.parse(user) : null;
+    const jwt_secret = process.env.JWT_SECRET as string;
+    const decoded: any = jwt.verify(token, jwt_secret);
+    return decoded;
   } catch (error) {
+    console.log(error);
+
     return null;
   }
 };

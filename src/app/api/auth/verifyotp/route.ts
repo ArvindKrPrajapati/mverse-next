@@ -3,6 +3,7 @@ import Otp from "@/models/otp.model";
 import User from "@/models/user.model";
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
+import { createTokenAndSetCookies } from "@/actions/createTokenAndSetCookies";
 
 export async function POST(request: Request) {
   const { email, otp } = await request.json();
@@ -34,8 +35,7 @@ export async function POST(request: Request) {
           accountCreated: true,
         }
       );
-      const jwt_secret = process.env.JWT_SECRET as string;
-      const token = jwt.sign({ _id: validOtp.userid._id }, jwt_secret);
+      const token = createTokenAndSetCookies(validOtp.userid);
       //    delete otp
       await Otp.findByIdAndDelete(validOtp._id);
       const userObj = {
@@ -44,27 +44,12 @@ export async function POST(request: Request) {
         name: validOtp.userid.name,
         dp: validOtp.userid.dp,
       };
+
       const res: NextResponse = NextResponse.json({
         success: true,
         data: userObj,
         token,
       });
-
-      res.cookies.set({
-        name: "token",
-        value: token,
-        httpOnly: true,
-        path: "/",
-        expires: new Date("9999-12-12"),
-      });
-      res.cookies.set({
-        name: "user",
-        value: JSON.stringify(userObj),
-        httpOnly: true,
-        path: "/",
-        expires: new Date("9999-12-12"),
-      });
-
       return res;
     }
     return NextResponse.json({
