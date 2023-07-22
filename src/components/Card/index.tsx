@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import GenerateUserPicture from "../GenerateUserPicture";
-import ClientOnly from "../ClientOnly";
 type props = {
   item: any;
 };
@@ -24,14 +23,12 @@ export default function Card({ item }: props) {
       </Link>
       <div className={`flex m-2`}>
         <div className="w-[40px]">
-          <ClientOnly>
-            <Link
-              href={"/profile/" + item?.by.username}
-              className={`w-[40px] rounded-full aspect-square bg-slate-200`}
-            >
-              <GenerateUserPicture user={item?.by} />
-            </Link>
-          </ClientOnly>
+          <Link
+            href={"/profile/" + item?.by.username}
+            className={`w-[40px] rounded-full aspect-square bg-slate-200`}
+          >
+            <GenerateUserPicture user={item?.by} />
+          </Link>
         </div>
         <Link href={"/play/" + item?._id} className="ml-3 w-full">
           <p className="font-bold text-sm max-two-line">{item?.title}</p>
