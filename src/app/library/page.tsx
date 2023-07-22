@@ -28,8 +28,11 @@ export default async function LibraryPage() {
         </main>
         <div className="px-3 flex md:flex-wrap gap-3 md:gap-0 overflow-auto">
           {data.map((item: any, index: number) => (
-            <div className="md:p-2 sm:w-1/3 lg:w-1/4 min-[1200px]:w-1/5 min-w-[200px]">
-              <Card key={index} item={item} history={true} />
+            <div
+              key={index}
+              className="md:p-2 sm:w-1/3 lg:w-1/4 min-[1200px]:w-1/5 min-w-[200px]"
+            >
+              <Card item={item} history={true} />
             </div>
           ))}
         </div>
