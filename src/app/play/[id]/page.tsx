@@ -1,5 +1,4 @@
 import { getVideoById } from "@/actions/getVideoById";
-import MversePlayer from "@/components/MversePlayer";
 import { formatDate, handleViews } from "@/lib/common";
 import React from "react";
 import ChannelDesc from "./ChannelDesc";
@@ -9,11 +8,10 @@ import ActionButtons from "./ActionButtons";
 import CardList from "@/components/CardList";
 import { getAllVideosByUserId } from "@/actions/getVideosByUserId";
 import { limit } from "@/lib/constants";
-import { ChevronRight } from "@/components/_icons";
-import Link from "next/link";
 import DescriptionModal from "@/components/DescriptionModal";
 import CommentContainer from "@/components/CommentContainer";
 import { notFound } from "next/navigation";
+import AddView from "./AddView";
 type Props = {
   params: {
     id: string;
@@ -39,7 +37,7 @@ export default async function PlayPage({ params }: Props) {
         <div className="xl:w-2/3">
           <div className="md:hidden w-full aspect-video"></div>
           <div className="fixed z-20 md:static w-full top-0">
-            <MversePlayer url={data?.link} title={data?.title} />
+            <AddView url={data?.link} title={data?.title} videoId={params.id} />
           </div>
 
           <div className="p-4 xl:px-0  md:mt-0">

@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from "react";
 type Props = {
   url?: string;
   onLoadedMetaData?: (e: React.SyntheticEvent<HTMLVideoElement, Event>) => void;
+  onProgressVideo?: (e: number) => void;
   title?: string;
 };
 
@@ -18,7 +19,12 @@ import {
 } from "./icons";
 import { formatTime } from "@/lib/common";
 
-export default function MversePlayer({ url, title, onLoadedMetaData }: Props) {
+export default function MversePlayer({
+  url,
+  title,
+  onLoadedMetaData,
+  onProgressVideo,
+}: Props) {
   const video = useRef<HTMLVideoElement>(null);
   const playBtn = useRef<HTMLDivElement>(null);
   const pauseBtn = useRef<HTMLDivElement>(null);
@@ -40,6 +46,9 @@ export default function MversePlayer({ url, title, onLoadedMetaData }: Props) {
   };
 
   const handleTimeUpdate = () => {
+    if (onProgressVideo) {
+      onProgressVideo(video.current?.currentTime || 0);
+    }
     var currentTime = formatTime(video.current?.currentTime || 0);
     setTime(currentTime);
     setSlider(video.current?.currentTime || 0);
