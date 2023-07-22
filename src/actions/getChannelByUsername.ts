@@ -1,7 +1,6 @@
 import dbConnect from "@/lib/dbConnect";
 import { getValidId } from "@/lib/serverCookies";
 import User from "@/models/user.model";
-import { ObjectId } from "mongoose";
 
 export async function getChannelByUsername(username: string, myid: any) {
   try {

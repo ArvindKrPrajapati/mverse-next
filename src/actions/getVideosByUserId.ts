@@ -19,12 +19,55 @@ export async function getAllVideosByUserId(
     if (!userData) {
       return [];
     }
-    // get user
-    const data = await Video.find({ by: userData._id })
-      .populate("by", "_id channelName dp username")
-      .sort({ createdAt: -1 })
-      .skip(skip)
-      .limit(limit);
+
+    const data = await Video.aggregate([
+      { $match: { by: userData._id } },
+      { $sort: { createdAt: -1 } },
+      { $skip: skip },
+      { $limit: limit },
+      {
+        $lookup: {
+          from: "users",
+          localField: "by",
+          foreignField: "_id",
+          as: "by",
+        },
+      },
+      {
+        $lookup: {
+          from: "views",
+          localField: "_id",
+          foreignField: "videoId",
+          as: "views",
+        },
+      },
+      { $unwind: "$by" },
+      {
+        $project: {
+          title: 1,
+          description: 1,
+          thumbnail: 1,
+          duration: 1,
+          link: 1,
+          pinned: 1,
+          createdAt: 1,
+          by: {
+            _id: 1,
+            channelName: 1,
+            username: 1,
+            dp: 1,
+          },
+          views: {
+            $cond: {
+              if: { $isArray: "$views" },
+              then: { $size: "$views" },
+              else: 0,
+            },
+          },
+        },
+      },
+    ]);
+
     if (!data.length) {
       return [];
     }

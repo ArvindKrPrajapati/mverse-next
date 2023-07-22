@@ -1,8 +1,8 @@
 import dbConnect from "@/lib/dbConnect";
 import Video from "@/models/video.model";
-import User from "@/models/user.model";
 import Reactions from "@/models/reaction.model";
 import { getCurrentUser, getValidId } from "@/lib/serverCookies";
+import View from "@/models/views.model";
 
 export async function getVideoById(_id: string) {
   try {
@@ -12,7 +12,6 @@ export async function getVideoById(_id: string) {
     // get loggedin userid
     const currentUser = getCurrentUser();
 
-    const user = await User.findOne();
     // get video
     const data = await Video.findById(videoId).populate(
       "by",
@@ -53,6 +52,9 @@ export async function getVideoById(_id: string) {
       videoId,
       by: currentUser?._id,
     });
+
+    const views = await View.find({ videoId }).count();
+
     if (!data) {
       return null;
     }
@@ -60,6 +62,7 @@ export async function getVideoById(_id: string) {
       ...data._doc,
       ...reactions[0],
       raection: myReaction?.reaction,
+      views,
     };
 
     return obj;

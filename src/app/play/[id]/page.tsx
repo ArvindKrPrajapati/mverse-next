@@ -43,7 +43,7 @@ export default async function PlayPage({ params }: Props) {
           <div className="p-4 xl:px-0  md:mt-0">
             <p className="xl:text-xl text-sm max-two-line">{data?.title}</p>
             <p className="dark:text-gray-300 xl:text-base text-xs">
-              {handleViews(200000)} views {formatDate(data?.createdAt)}
+              {handleViews(data.views || 0)} views {formatDate(data?.createdAt)}
             </p>
             <DescriptionModal description={data?.description} />
             <ChannelDesc

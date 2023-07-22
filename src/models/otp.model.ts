@@ -1,7 +1,8 @@
 import { Schema, Document, model, Types, models } from "mongoose";
+import IUser from "./user.model";
 
 interface IOtp extends Document {
-  userid: Types.ObjectId | undefined;
+  userid: Types.ObjectId | typeof IUser;
   email: string;
   otp: number;
   createdAt: Date;

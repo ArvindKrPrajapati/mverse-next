@@ -1,8 +1,10 @@
 import { Schema, Document, model, Types, models } from "mongoose";
+import IUser from "./user.model";
+import IVideo from "./video.model";
 
 interface IReaction extends Document {
-  by: Types.ObjectId | undefined;
-  videoId: Types.ObjectId | undefined;
+  by: Types.ObjectId | typeof IUser;
+  videoId: Types.ObjectId | typeof IVideo;
   reaction: String;
   createdAt: Date;
   updatedAt: Date;

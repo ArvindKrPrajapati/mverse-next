@@ -1,4 +1,5 @@
 import { Schema, Document, model, Types, models } from "mongoose";
+import IUser from "./user.model";
 
 interface IVideo extends Document {
   title: string;
@@ -6,7 +7,7 @@ interface IVideo extends Document {
   thumbnail: String;
   duration: Number;
   link: string;
-  by: Types.ObjectId;
+  by: Types.ObjectId | typeof IUser;
   pinned: Boolean;
   location?: String;
   createdAt: Date;
