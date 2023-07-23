@@ -29,6 +29,9 @@ export default function LoadMore({ url, children }: any) {
       }
       // const res
     } catch (error) {
+      console.log("my error :", error);
+
+      setAllFetched(true);
       toast.error("something went wrong");
     } finally {
       setLoading(false);
