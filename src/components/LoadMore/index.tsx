@@ -32,7 +32,7 @@ export default function LoadMore({ url, children }: any) {
       console.log("my error :", error);
 
       setAllFetched(true);
-      toast.error("something went wrong");
+      toast.error("something went wrong"+JSON.stringify(error));
     } finally {
       setLoading(false);
     }
