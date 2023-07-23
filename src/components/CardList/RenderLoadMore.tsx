@@ -7,11 +7,16 @@ export default function RenderLoadMore({
   loadMoreFromUrl,
   horizontal,
   description,
+  history,
 }: any) {
   return (
     <LoadMore url={loadMoreFromUrl}>
       {/* items will be automatically passed from loadmore to its child componentZ */}
-      <DecideCard horizontal={horizontal} description={description} />
+      <DecideCard
+        horizontal={horizontal}
+        description={description}
+        history={history}
+      />
     </LoadMore>
   );
 }

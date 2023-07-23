@@ -13,6 +13,15 @@ export default async function ShowList({ params }: any) {
     data = await getHistory(currentUser?._id);
     url = "/api/library/history";
   }
+  if (!data.length) {
+    return (
+      <ProtectedContainer byId={true}>
+        <div className="flex items-center justify-center h-[70vh] w-full">
+          No data
+        </div>
+      </ProtectedContainer>
+    );
+  }
   return (
     <ProtectedContainer byId={true}>
       <Container>
@@ -21,7 +30,12 @@ export default async function ShowList({ params }: any) {
             {params.type}
           </p>
         </div>
-        <CardList horizontal={true} data={data} loadMoreFromUrl={url} />
+        <CardList
+          horizontal={true}
+          data={data}
+          loadMoreFromUrl={url}
+          history={true}
+        />
       </Container>
     </ProtectedContainer>
   );

@@ -15,7 +15,7 @@ export async function getHistory(_id: any, skip = 0, limit = constLimit) {
 
     const data = await View.aggregate([
       { $match: { by: _id } },
-      { $sort: { createdAt: -1 } },
+      { $sort: { viewedAt: -1 } },
       { $skip: skip },
       { $limit: limit },
       {

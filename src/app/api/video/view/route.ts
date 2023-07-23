@@ -29,9 +29,12 @@ export async function POST(requeest: NextRequest) {
 
     const alreadyViewed = await View.findOne({ videoId, by: myid });
     if (alreadyViewed?._id) {
+      await View.findByIdAndUpdate(alreadyViewed._id, {
+        viewedAt: new Date(Date.now()),
+      });
       return NextResponse.json({
-        success: false,
-        error: "already viewed",
+        success: true,
+        error: "updated view",
       });
     }
 

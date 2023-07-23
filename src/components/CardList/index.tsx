@@ -7,12 +7,14 @@ type props = {
   horizontal?: boolean;
   description?: boolean;
   loadMoreFromUrl?: string;
+  history?: boolean;
 };
 export default async function CardList({
   data,
   horizontal,
   description = false,
   loadMoreFromUrl,
+  history = false,
 }: props) {
   return (
     <Container className="px-0 lg:px-6">
@@ -23,6 +25,7 @@ export default async function CardList({
             description={description}
             item={item}
             key={index}
+            history={history}
           />
         ))}
         {loadMoreFromUrl && data.length ? (
@@ -30,6 +33,7 @@ export default async function CardList({
             loadMoreFromUrl={loadMoreFromUrl}
             horizontal={horizontal}
             description={description}
+            history={history}
           />
         ) : null}
       </div>

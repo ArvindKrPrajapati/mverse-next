@@ -7,8 +7,13 @@ import ClientOnly from "../ClientOnly";
 type Props = {
   item: any;
   description?: boolean;
+  history?: boolean;
 };
-export default function HorizontalCard({ item, description = false }: Props) {
+export default function HorizontalCard({
+  item,
+  description = false,
+  history = false,
+}: Props) {
   return (
     <Link
       className="w-full px-4 p-2 flex items-start"
@@ -42,10 +47,14 @@ export default function HorizontalCard({ item, description = false }: Props) {
               <p className="text-xs font-medium">{item?.by.channelName}</p>
             </div>
           ) : null}
-          <p className="text-xs">
-            {handleViews(item?.views || 0)} views &#x2022;{" "}
-            {formatDate(item?.createdAt)}
-          </p>
+          {!history ? (
+            <p className="text-xs">
+              {handleViews(item?.views || 0)} views &#x2022;{" "}
+              {formatDate(item?.createdAt)}
+            </p>
+          ) : (
+            <p className="text-xs font-medium">{item?.by.channelName}</p>
+          )}
           {description ? (
             <div>
               <p className="text-[0.8em] mt-2 opacity-1 max-two-line">

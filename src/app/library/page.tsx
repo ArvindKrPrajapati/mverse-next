@@ -27,6 +27,9 @@ export default async function LibraryPage() {
           </Link>
         </main>
         <div className="px-3 flex md:flex-wrap gap-3 md:gap-0 overflow-auto">
+          {!data.length ? (
+            <div className="text-center my-3">No watch history</div>
+          ) : null}
           {data.map((item: any, index: number) => (
             <div
               key={index}
