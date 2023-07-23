@@ -18,9 +18,12 @@ export async function GET(request: NextRequest) {
     });
   } catch (error) {
     console.log("video get error:", error);
-    return NextResponse.json({
-      success: false,
-      error: "server error" + JSON.stringify(error),
-    });
+    return NextResponse.json(
+      {
+        success: false,
+        error: JSON.stringify(error),
+      },
+      { status: 500 }
+    );
   }
 }
