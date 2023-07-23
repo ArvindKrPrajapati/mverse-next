@@ -1,4 +1,5 @@
 import { getHistory } from "@/actions/getHistory";
+import { getReactedVideos } from "@/actions/getReactedvideos";
 import CardList from "@/components/CardList";
 import Container from "@/components/Container";
 import ProtectedContainer from "@/components/Container/ProtectedContainer";
@@ -12,7 +13,14 @@ export default async function ShowList({ params }: any) {
   if (params.type === "history") {
     data = await getHistory(currentUser?._id);
     url = "/api/library/history";
+  } else if (params.type === "liked") {
+    data = await getReactedVideos(currentUser?._id, "like");
+    url = "/api/library/reacted/like";
+  } else if (params.type === "disliked") {
+    data = await getReactedVideos(currentUser?._id, "dislike");
+    url = "/api/library/reacted/dislike";
   }
+
   if (!data.length) {
     return (
       <ProtectedContainer byId={true}>
