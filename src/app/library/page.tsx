@@ -30,7 +30,7 @@ export default async function LibraryPage() {
           {data.map((item: any, index: number) => (
             <div
               key={index}
-              className="md:p-2 sm:w-1/3 lg:w-1/4 min-[1200px]:w-1/5 min-w-[200px]"
+              className="md:p-2 sm:w-1/3 lg:w-1/4 min-[1200px]:w-1/5 min-w-[120px]"
             >
               <Card item={item} history={true} />
             </div>

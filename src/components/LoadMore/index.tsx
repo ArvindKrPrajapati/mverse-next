@@ -25,14 +25,13 @@ export default function LoadMore({ url, children }: any) {
         setData(res.data);
         setSkip((prev) => prev + limit);
       } else {
+        setAllFetched(true);
         toast.error(res.error);
       }
       // const res
     } catch (error) {
-      console.log("my error :", error);
-
       setAllFetched(true);
-      toast.error("something went wrong"+JSON.stringify(error));
+      toast.error("something went wrong");
     } finally {
       setLoading(false);
     }

@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
     console.log("video get error:", error);
     return NextResponse.json({
       success: false,
-      error: "server error",
+      error: "server error" + JSON.stringify(error),
     });
   }
 }
