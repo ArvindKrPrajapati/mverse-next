@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(
       {
         success: false,
-        error: JSON.stringify(error),
+        error: "server error",
       },
       { status: 500 }
     );
