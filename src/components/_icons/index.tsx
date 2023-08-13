@@ -298,3 +298,27 @@ export function SettingsIcon({ width, color }: props) {
     </svg>
   );
 }
+export function DotMenuIcon({ width, color }: props) {
+  return (
+    <svg
+      width={width || "24px"}
+      className="dark:fill-slate-50"
+      fill={color || "#000"}
+      viewBox="0 0 24 24"
+    >
+      <path d="M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z" />
+    </svg>
+  );
+}
+export function TimerIcon({ width, color }: props) {
+  return (
+    <svg
+      width={width || "24px"}
+      className="dark:fill-slate-50"
+      fill={color || "#000"}
+      viewBox="0 0 24 24"
+    >
+      <path d="M12 20C16.4 20 20 16.4 20 12S16.4 4 12 4 4 7.6 4 12 7.6 20 12 20M12 2C17.5 2 22 6.5 22 12S17.5 22 12 22C6.5 22 2 17.5 2 12C2 6.5 6.5 2 12 2M17 13.9L16.3 15.2L11 12.3V7H12.5V11.4L17 13.9Z" />
+    </svg>
+  );
+}

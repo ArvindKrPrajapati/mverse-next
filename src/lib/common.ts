@@ -55,3 +55,17 @@ export const formatTime = (seconds: number) => {
     return `${formattedHours}:${formattedRemainingMinutes}:${formattedSeconds}`;
   }
 };
+
+export const share = async (title: string, text: string, url: string) => {
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title,
+        text,
+        url,
+      });
+    } catch (error) {
+      console.error("Sharing failed:", error);
+    }
+  }
+};

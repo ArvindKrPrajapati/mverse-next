@@ -1,7 +1,7 @@
 "use client";
 import { DislikeIcon, LikeIcon, ShareIcon } from "@/components/_icons";
 import { mversePost } from "@/lib/apiCalls";
-import { handleViews } from "@/lib/common";
+import { handleViews, share } from "@/lib/common";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
@@ -22,17 +22,7 @@ export default function ActionButtons({
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const handleShare = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: "Your shared title",
-          text: "Your shared content",
-          url: window.location.href,
-        });
-      } catch (error) {
-        console.error("Sharing failed:", error);
-      }
-    }
+    await share("title", "test", window.location.href);
   };
 
   const handleReaction = async (type: string) => {
