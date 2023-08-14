@@ -56,8 +56,8 @@ export default function Modal({
       `}
     >
       <div
-        className={`relative w-full md:w-4/6 lg:w-3/6 xl:w-2/5  my-6 mx-auto h-full lg:h-auto md:h-auto
-        ${isMenu ? "h-auto my-0 p-2" : ""}`}
+        className={`relative w-full md:w-4/6 lg:w-3/6 xl:w-2/5  mx-auto lg:h-auto md:h-auto
+        ${isMenu ? "h-auto my-0 p-2" : "h-full my-6"}`}
       >
         <div
           className={`transalate duration-300 h-full ${
