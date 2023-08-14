@@ -55,7 +55,11 @@ function VideoMenu({ link, _id }: Props) {
         className={`${btnClass}`}
         disabled={loading}
       >
-        {loading ? <Spinner className="w-4 h-4" /> : <TimerIcon width={20} />}
+        {loading ? (
+          <Spinner className="w-[20px] h-[20px]" />
+        ) : (
+          <TimerIcon width={20} />
+        )}
         Add to watchlist
       </button>
       <button

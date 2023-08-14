@@ -5,11 +5,33 @@ interface IPlaylist extends Document {
   name: string;
   isPrivate: boolean;
   createdBy: Types.ObjectId | typeof IUser;
-  videos: Types.ObjectId[];
   createdAt: Date;
   updatedAt: Date;
 }
 
+interface IPlaylistVideos extends Document {
+  playlistId: Types.ObjectId;
+  videoId: Types.ObjectId;
+  createdAt: Date;
+  updatedAt: Date;
+}
+const videoSchema = new Schema<IPlaylistVideos>(
+  {
+    playlistId: {
+      type: Schema.Types.ObjectId,
+      ref: "playlist",
+      required: true,
+    },
+    videoId: {
+      type: Schema.Types.ObjectId,
+      ref: "videos",
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 const schema = new Schema<IPlaylist>(
   {
     name: {
@@ -26,16 +48,12 @@ const schema = new Schema<IPlaylist>(
       ref: "user",
       required: true,
     },
-    videos: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "videos",
-      },
-    ],
   },
   {
     timestamps: true,
   }
 );
 const Playlist = models.playlist || model<IPlaylist>("playlist", schema);
-export default Playlist;
+const PlaylistVideos =
+  models.playlistVideos || model<IPlaylist>("playlistVideos", videoSchema);
+export { Playlist, PlaylistVideos };

@@ -1,6 +1,6 @@
 import dbConnect from "@/lib/dbConnect";
 import { getUserIdFromAuth } from "@/lib/serverCookies";
-import Playlist from "@/models/playlist.model";
+import { Playlist, PlaylistVideos } from "@/models/playlist.model";
 import mongoose from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -8,7 +8,9 @@ export async function PATCH(request: NextRequest, { params }: any) {
   try {
     // get id from auth
     const myid: any = getUserIdFromAuth(request);
-
+    if (!myid) {
+      return NextResponse.json({ success: false, error: "not logged in" });
+    }
     // get playlist id
     const playlistId = params.id;
 
@@ -60,12 +62,10 @@ export async function PATCH(request: NextRequest, { params }: any) {
     }
 
     // update playlist
-    const data = await Playlist.findByIdAndUpdate(
-      playlistId,
-      {
-        $addToSet: { videos: videoId },
-      },
-      { new: true }
+    const data = await PlaylistVideos.updateOne(
+      { playlistId, videoId },
+      { playlistId, videoId },
+      { upsert: true }
     );
 
     // // check if playlist updated
@@ -73,7 +73,7 @@ export async function PATCH(request: NextRequest, { params }: any) {
       // success
       return NextResponse.json({
         success: true,
-        data,
+        data: { message: "added to playlist" },
       });
     }
     // playlist updation error

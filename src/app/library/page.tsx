@@ -2,7 +2,12 @@ import { getHistory } from "@/actions/getHistory";
 import Card from "@/components/Card";
 import Container from "@/components/Container";
 import ProtectedContainer from "@/components/Container/ProtectedContainer";
-import { ChevronRight, DislikeIcon, LikeIcon } from "@/components/_icons";
+import {
+  ChevronRight,
+  DislikeIcon,
+  LikeIcon,
+  TimerIcon,
+} from "@/components/_icons";
 import { getCurrentUser } from "@/lib/serverCookies";
 import Link from "next/link";
 import React from "react";
@@ -40,6 +45,13 @@ export default async function LibraryPage() {
           ))}
         </div>
         <div className="mt-3 p-5 border-t dark:border-gray-800 border-gray-200">
+          <Link
+            href="/library/watch-later"
+            className="flex gap-4 items-center py-3 -full"
+          >
+            <TimerIcon />
+            <p className="text-base font-bold">Watch later</p>
+          </Link>
           <Link
             href="/library/liked"
             className="flex gap-4 items-center py-3 -full"
