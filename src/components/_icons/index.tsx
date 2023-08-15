@@ -322,3 +322,64 @@ export function TimerIcon({ width, color }: props) {
     </svg>
   );
 }
+export function AddMultipleIcon({ width, color }: props) {
+  return (
+    <svg
+      width={width || "24px"}
+      className="dark:fill-slate-50"
+      fill={color || "#000"}
+      viewBox="0 0 24 24"
+    >
+      <path d="M19,11H15V15H13V11H9V9H13V5H15V9H19M20,2H8A2,2 0 0,0 6,4V16A2,2 0 0,0 8,18H20A2,2 0 0,0 22,16V4A2,2 0 0,0 20,2M4,6H2V20A2,2 0 0,0 4,22H18V20H4V6Z" />
+    </svg>
+  );
+}
+
+export function ChevronLeft({ width, color }: props) {
+  return (
+    <svg
+      width={width || "24px"}
+      className="dark:fill-slate-50"
+      fill={color || "#000"}
+      viewBox="0 0 24 24"
+    >
+      <path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" />
+    </svg>
+  );
+}
+export function Plusicon({ width, color }: props) {
+  return (
+    <svg
+      width={width || "24px"}
+      className="dark:fill-slate-50"
+      fill={color || "#000"}
+      viewBox="0 0 24 24"
+    >
+      <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+    </svg>
+  );
+}
+export function LockIcon({ width, color }: props) {
+  return (
+    <svg
+      width={width || "24px"}
+      className="dark:fill-slate-50"
+      fill={color || "#000"}
+      viewBox="0 0 24 24"
+    >
+      <path d="M12,17C10.89,17 10,16.1 10,15C10,13.89 10.89,13 12,13A2,2 0 0,1 14,15A2,2 0 0,1 12,17M18,20V10H6V20H18M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V10C4,8.89 4.89,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z" />
+    </svg>
+  );
+}
+export function EarthIcon({ width, color }: props) {
+  return (
+    <svg
+      width={width || "24px"}
+      className="dark:fill-slate-50"
+      fill={color || "#000"}
+      viewBox="0 0 24 24"
+    >
+      <path d="M17.9,17.39C17.64,16.59 16.89,16 16,16H15V13A1,1 0 0,0 14,12H8V10H10A1,1 0 0,0 11,9V7H13A2,2 0 0,0 15,5V4.59C17.93,5.77 20,8.64 20,12C20,14.08 19.2,15.97 17.9,17.39M11,19.93C7.05,19.44 4,16.08 4,12C4,11.38 4.08,10.78 4.21,10.21L9,15V16A2,2 0 0,0 11,18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+    </svg>
+  );
+}

@@ -12,6 +12,7 @@ type Props = {
   cols?: number;
   rows?: number;
   disable?: boolean;
+  maxLength?: number;
 };
 export default function Input({
   type,
@@ -24,6 +25,7 @@ export default function Input({
   cols,
   rows,
   disable,
+  maxLength,
 }: Props) {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -44,6 +46,7 @@ export default function Input({
             onChange={onChange}
             rows={rows}
             cols={cols}
+            maxLength={maxLength && maxLength}
             className={`resize-none appearance text-gray-800 dark:text-gray-100  text-sm border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline ${inputClassName}`}
           ></textarea>
         ) : (
@@ -54,6 +57,7 @@ export default function Input({
             type={passwordVisible ? "text" : type}
             value={value}
             onChange={onChange}
+            maxLength={maxLength && maxLength}
           />
         )}
         {type === "password" ? (

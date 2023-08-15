@@ -8,22 +8,22 @@ import HorizontalCard from "../Card/HorizontalCard";
 import Card from "../Card";
 import Spinner from "../Loading/Spinner";
 
-export default function LoadMore({ url, children }: any) {
+export default function LoadMore({ offset = limit, url, children }: any) {
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<any>([]);
   const [allFetched, setAllFetched] = useState(false);
-  const [skip, setSkip] = useState(limit);
+  const [skip, setSkip] = useState(offset);
   const loadMore = useCallback(async () => {
     try {
       setLoading(true);
       const res = await mverseGet(url + "?skip=" + skip);
       if (res.success) {
-        if (res.data.length === 0) {
+        setData((prev: any) => [...prev, ...res.data]);
+        setSkip((prev: any) => prev + limit);
+        if (res.data.length < limit) {
           setAllFetched(true);
           return;
         }
-        setData(res.data);
-        setSkip((prev) => prev + limit);
       } else {
         setAllFetched(true);
         toast.error(res.error);
@@ -47,6 +47,7 @@ export default function LoadMore({ url, children }: any) {
           </React.Fragment>
         ))}
       </div>
+      <br />
       {!allFetched ? (
         <>
           {loading ? (
