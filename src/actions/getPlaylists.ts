@@ -110,6 +110,6 @@ export async function getPlaylists(
   } catch (error) {
     console.log(error);
 
-    throw new Error("failed to get data from db");
+    throw error;
   }
 }

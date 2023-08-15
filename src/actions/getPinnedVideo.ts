@@ -73,6 +73,6 @@ export async function getPinnedVideos(
     }
     return data;
   } catch (error) {
-    throw new Error("failed to get data from db");
+    throw error;
   }
 }

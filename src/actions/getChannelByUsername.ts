@@ -47,6 +47,6 @@ export async function getChannelByUsername(username: string, myid: any) {
     }
     return data[0];
   } catch (error) {
-    throw new Error("failed to get data from db");
+    throw error;
   }
 }

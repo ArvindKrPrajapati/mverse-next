@@ -67,6 +67,6 @@ export async function getWatchLater(_id: any, skip = 0, limit = constLimit) {
   } catch (error) {
     console.log(error);
 
-    throw new Error("failed to get data from db");
+    throw error;
   }
 }

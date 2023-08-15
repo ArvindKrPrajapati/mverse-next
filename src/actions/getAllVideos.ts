@@ -60,7 +60,6 @@ export async function getAllVideos(skip = 0, limit = constLimit) {
     return data;
   } catch (error) {
     console.log("get error", error);
-
-    throw new Error("failed to get data from db");
+    throw error;
   }
 }

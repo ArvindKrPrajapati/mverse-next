@@ -69,6 +69,6 @@ export async function getVideoById(_id: string) {
   } catch (error) {
     console.log(error);
 
-    throw new Error("failed to get data from db");
+    throw error;
   }
 }

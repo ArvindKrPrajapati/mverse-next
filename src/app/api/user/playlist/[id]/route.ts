@@ -1,3 +1,5 @@
+import { getPlaylistVideos } from "@/actions/getplaylistVideos";
+import { limit } from "@/lib/constants";
 import dbConnect from "@/lib/dbConnect";
 import { getUserIdFromAuth } from "@/lib/serverCookies";
 import { Playlist, PlaylistVideos } from "@/models/playlist.model";
@@ -88,6 +90,34 @@ export async function PATCH(request: NextRequest, { params }: any) {
     console.log("patch playlist error:", error);
     return NextResponse.json(
       { success: false, error: "server error" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function GET(request: NextRequest, { params }: any) {
+  try {
+    const query = request.nextUrl.searchParams;
+    const myid = getUserIdFromAuth(request);
+    const skip = Number(query.get("skip") || 0);
+    const _limit = Number(query.get("limit") || limit);
+    const id = params.id;
+    const data = await getPlaylistVideos(id, myid, skip, _limit);
+    return NextResponse.json({
+      success: true,
+      limit: _limit,
+      skip,
+      data: data.data,
+      total: data.total,
+      playlist: data.playlist,
+    });
+  } catch (error) {
+    console.log("video get error:", error);
+    return NextResponse.json(
+      {
+        success: false,
+        error: "server error",
+      },
       { status: 500 }
     );
   }
