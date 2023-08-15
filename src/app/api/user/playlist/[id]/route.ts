@@ -21,7 +21,21 @@ export async function PATCH(request: NextRequest, { params }: any) {
         error: "invalid playlist id " + playlistId,
       });
     }
+    // extract payload
+    const { videoId } = await request.json();
 
+    // validate payload
+    if (!videoId) {
+      return NextResponse.json({
+        success: false,
+        error: "videoid is required",
+      });
+    }
+
+    // validate id
+    if (!mongoose.Types.ObjectId.isValid(videoId)) {
+      return NextResponse.json({ success: false, error: "invalid video id" });
+    }
     // connect db
     await dbConnect();
 
@@ -45,21 +59,6 @@ export async function PATCH(request: NextRequest, { params }: any) {
         error: "playlist is not yours",
       });
     }
-    // extract payload
-    const { videoId } = await request.json();
-
-    // validate payload
-    if (!videoId) {
-      return NextResponse.json({
-        success: false,
-        error: "videoid is required",
-      });
-    }
-
-    // validate id
-    if (!mongoose.Types.ObjectId.isValid(videoId)) {
-      return NextResponse.json({ success: false, error: "invalid video id" });
-    }
 
     // update playlist
     const data = await PlaylistVideos.updateOne(
@@ -67,7 +66,11 @@ export async function PATCH(request: NextRequest, { params }: any) {
       { playlistId, videoId },
       { upsert: true }
     );
-
+    await Playlist.findByIdAndUpdate(
+      playlistId,
+      { updatedAt: new Date(Date.now()) },
+      { new: true }
+    );
     // // check if playlist updated
     if (data) {
       // success

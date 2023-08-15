@@ -6,6 +6,7 @@ import {
   ChevronRight,
   DislikeIcon,
   LikeIcon,
+  LockIcon,
   TimerIcon,
 } from "@/components/_icons";
 import { getCurrentUser } from "@/lib/serverCookies";
@@ -45,6 +46,13 @@ export default async function LibraryPage() {
           ))}
         </div>
         <div className="mt-3 p-5 border-t dark:border-gray-800 border-gray-200">
+          <Link
+            href="/library/private-playlist"
+            className="flex gap-4 items-center py-3 -full"
+          >
+            <LockIcon />
+            <p className="text-base font-bold">Private Playlist</p>
+          </Link>
           <Link
             href="/library/watch-later"
             className="flex gap-4 items-center py-3 -full"

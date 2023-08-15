@@ -55,5 +55,5 @@ const schema = new Schema<IPlaylist>(
 );
 const Playlist = models.playlist || model<IPlaylist>("playlist", schema);
 const PlaylistVideos =
-  models.playlistVideos || model<IPlaylist>("playlistVideos", videoSchema);
+  models.playlistvideos || model<IPlaylist>("playlistvideos", videoSchema);
 export { Playlist, PlaylistVideos };

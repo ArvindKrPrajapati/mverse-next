@@ -1,3 +1,4 @@
+import { getPlaylists } from "@/actions/getPlaylists";
 import { limit } from "@/lib/constants";
 import dbConnect from "@/lib/dbConnect";
 import { getUserIdFromAuth } from "@/lib/serverCookies";
@@ -11,10 +12,8 @@ export async function GET(request: NextRequest) {
     const myid = getUserIdFromAuth(request);
     const skip = Number(query.get("skip") || 0);
     const _limit = Number(query.get("limit") || limit);
-    const data = await Playlist.find({ createdBy: myid })
-      .sort({ updatedAt: -1 })
-      .skip(skip)
-      .limit(_limit);
+    const type = query.get("type") || "all";
+    const data = await getPlaylists(myid, type, skip, _limit);
     return NextResponse.json({
       success: true,
       limit: _limit,

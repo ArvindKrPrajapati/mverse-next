@@ -14,9 +14,12 @@ export default function LoadMore({ offset = limit, url, children }: any) {
   const [allFetched, setAllFetched] = useState(false);
   const [skip, setSkip] = useState(offset);
   const loadMore = useCallback(async () => {
+    const _url = url.includes("?")
+      ? url + "&skip=" + skip
+      : url + "?skip=" + skip;
     try {
       setLoading(true);
-      const res = await mverseGet(url + "?skip=" + skip);
+      const res = await mverseGet(_url);
       if (res.success) {
         setData((prev: any) => [...prev, ...res.data]);
         setSkip((prev: any) => prev + limit);
