@@ -10,6 +10,15 @@ export async function GET(request: NextRequest) {
   try {
     const query = request.nextUrl.searchParams;
     const myid = getUserIdFromAuth(request);
+    if (!myid) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "login first",
+        },
+        { status: 500 }
+      );
+    }
     const skip = Number(query.get("skip") || 0);
     const _limit = Number(query.get("limit") || limit);
     const type = query.get("type") || "all";

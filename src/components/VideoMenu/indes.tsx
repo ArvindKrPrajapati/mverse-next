@@ -47,11 +47,14 @@ function VideoMenu({ link, _id }: Props) {
       case "watchlist":
         try {
           setLoading(true);
-          await mversePost("/api/user/playlist", {
+          const res = await mversePost("/api/user/playlist", {
             videoId: _id,
             name: "Watch later",
             isPrivate: true,
           });
+          if (res.error) {
+            toast.error(res.error);
+          }
         } catch (error) {
           toast.error("error while adding");
         } finally {
