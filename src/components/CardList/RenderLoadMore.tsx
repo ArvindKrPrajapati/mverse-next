@@ -8,6 +8,7 @@ export default function RenderLoadMore({
   horizontal,
   description,
   history,
+  currentUser,
 }: any) {
   return (
     <LoadMore url={loadMoreFromUrl}>
@@ -16,6 +17,7 @@ export default function RenderLoadMore({
         horizontal={horizontal}
         description={description}
         history={history}
+        currentUser={currentUser}
       />
     </LoadMore>
   );

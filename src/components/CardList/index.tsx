@@ -2,6 +2,7 @@ import React from "react";
 import Container from "../Container";
 import RenderLoadMore from "./RenderLoadMore";
 import DecideCard from "./DecideCard";
+import { getCurrentUser } from "@/lib/serverCookies";
 type props = {
   data: any;
   horizontal?: boolean;
@@ -16,6 +17,7 @@ export default async function CardList({
   loadMoreFromUrl,
   history = false,
 }: props) {
+  const currentUser = getCurrentUser();
   return (
     <Container className="px-0 lg:px-6">
       <div className={`flex flex-wrap`}>
@@ -25,6 +27,7 @@ export default async function CardList({
             description={description}
             item={item}
             key={index}
+            currentUser={currentUser}
             history={history}
           />
         ))}
@@ -34,6 +37,7 @@ export default async function CardList({
             horizontal={horizontal}
             description={description}
             history={history}
+            currentUser={currentUser}
           />
         ) : null}
       </div>

@@ -9,11 +9,13 @@ type Props = {
   item: any;
   description?: boolean;
   history?: boolean;
+  currentUser?: any;
 };
 export default function HorizontalCard({
   item,
   description = false,
   history = false,
+  currentUser = {},
 }: Props) {
   return (
     <div className="flex justify-between w-full items-start">
@@ -67,7 +69,11 @@ export default function HorizontalCard({
           </div>
         </div>
       </Link>
-      <VideoMenu link={item.link} _id={item._id.toString()} />
+      <VideoMenu
+        link={item.link}
+        _id={item._id.toString()}
+        currentUser={currentUser}
+      />
     </div>
   );
 }

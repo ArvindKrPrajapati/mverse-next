@@ -23,12 +23,13 @@ import LoadMore from "../LoadMore";
 type Props = {
   _id: string;
   link: string;
+  currentUser?: any;
 };
 
 const btnClass =
   "w-full flex hover:outline-none justify-start py-2 px-3 rounded-md active:dark:bg-neutral-800 active:bg-gray-200 flex gap-2 items-center transition";
 
-function VideoMenu({ link, _id }: Props) {
+function VideoMenu({ link, _id, currentUser = {} }: Props) {
   const { isOpen, onClose, onOpen } = useModal();
   const [loading, setLoading] = useState(false);
   const [screen, setScreen] = useState("");
@@ -111,25 +112,29 @@ function VideoMenu({ link, _id }: Props) {
 
   let content = (
     <>
-      <button
-        onClick={(e) => handleClick(e, "playlist")}
-        className={`${btnClass}`}
-      >
-        <AddMultipleIcon width={20} />
-        Add to playlist
-      </button>
-      <button
-        onClick={(e) => handleClick(e, "watchlist")}
-        className={`${btnClass}`}
-        disabled={loading}
-      >
-        {loading ? (
-          <Spinner className="w-[20px] h-[20px]" />
-        ) : (
-          <TimerIcon width={20} />
-        )}
-        Add to watchlist
-      </button>
+      {currentUser?._id ? (
+        <>
+          <button
+            onClick={(e) => handleClick(e, "playlist")}
+            className={`${btnClass}`}
+          >
+            <AddMultipleIcon width={20} />
+            Add to playlist
+          </button>
+          <button
+            onClick={(e) => handleClick(e, "watchlist")}
+            className={`${btnClass}`}
+            disabled={loading}
+          >
+            {loading ? (
+              <Spinner className="w-[20px] h-[20px]" />
+            ) : (
+              <TimerIcon width={20} />
+            )}
+            Add to watchlist
+          </button>
+        </>
+      ) : null}
       <button
         onClick={(e) => handleClick(e, "share")}
         className={`${btnClass}`}
@@ -203,16 +208,18 @@ function VideoMenu({ link, _id }: Props) {
               />
               <span>Private</span>
             </label>
-            <label className="flex items-center space-x-2">
-              <input
-                type="radio"
-                value="false"
-                checked={!isPrivate}
-                onChange={() => setIsPrivate(false)}
-                className="form-radio text-blue-500"
-              />
-              <span>Public</span>
-            </label>
+            {currentUser?.username ? (
+              <label className="flex items-center space-x-2">
+                <input
+                  type="radio"
+                  value="false"
+                  checked={!isPrivate}
+                  onChange={() => setIsPrivate(false)}
+                  className="form-radio text-blue-500"
+                />
+                <span>Public</span>
+              </label>
+            ) : null}
           </div>
           <Button
             label={playlistCreating ? "createing..." : "Create"}

@@ -7,8 +7,13 @@ import VideoMenu from "../VideoMenu/indes";
 type props = {
   item: any;
   history?: boolean;
+  currentUser?: any;
 };
-export default function Card({ item, history = false }: props) {
+export default function Card({
+  item,
+  history = false,
+  currentUser = {},
+}: props) {
   return (
     <>
       <Link href={"/play/" + item?._id} className="relative">
@@ -55,7 +60,11 @@ export default function Card({ item, history = false }: props) {
             </div>
           </Link>
         </div>
-        <VideoMenu link={item.link} _id={item._id.toString()} />
+        <VideoMenu
+          link={item.link}
+          _id={item._id.toString()}
+          currentUser={currentUser}
+        />
       </div>
     </>
   );
