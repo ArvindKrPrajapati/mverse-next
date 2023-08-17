@@ -11,12 +11,19 @@ import Verify from "../Verify";
 import MyPic from "./MyPic";
 import CreateChannel from "../CreateChannel";
 import { useTheme } from "next-themes";
+import { SearchIcon } from "../_icons";
+import Search from "../Search";
+import toast from "react-hot-toast";
+import { mverseGet } from "@/lib/apiCalls";
 
 export default function Navbar({ currentUser }: any) {
   const { isOpen, onClose, onOpen, disabled, toggleDisabled } = useModal();
   const [auth, setAuth] = useState<string | null>();
   const { theme } = useTheme();
   const [myTheme, setMyTheme] = useState<string | undefined>("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searching, setSearching] = useState(false);
+  const [searchResult, setSearchResult] = useState([]);
 
   const router = useRouter();
   const pathname = usePathname();
@@ -52,18 +59,23 @@ export default function Navbar({ currentUser }: any) {
     }
   };
 
-  const openModal = (value: string) => {
+  const setQuery = (value: string, type: string) => {
     const current = new URLSearchParams(Array.from(searchParams.entries())); // -> has to use this form
-    current.set("user", value);
+    current.set(type, value);
     const search = current.toString();
     const query = search ? `?${search}` : "";
     router.push(`${pathname}${query}`);
+  };
+
+  const openModal = (value: string) => {
+    setQuery(value, "user");
     onOpen();
   };
 
   const closeModal = () => {
     const current = new URLSearchParams(Array.from(searchParams.entries())); // -> has to use this form
     current.delete("user");
+    current.delete("v");
     const search = current.toString();
     const query = search ? `?${search}` : "";
     router.push(`${pathname}${query}`);
@@ -71,7 +83,12 @@ export default function Navbar({ currentUser }: any) {
 
   useEffect(() => {
     const a: string | null = searchParams.get("user");
+    const b: string | null = searchParams.get("v");
     if (!a) {
+      if (b) {
+        openSearch();
+        return;
+      }
       onClose();
     } else {
       decideRoute();
@@ -82,6 +99,37 @@ export default function Navbar({ currentUser }: any) {
   useEffect(() => {
     setMyTheme(theme);
   }, [theme]);
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    router.push("/search?q=" + searchQuery.replaceAll(" ", "-"));
+  };
+
+  const openSearch = () => {
+    setQuery("search", "v");
+    setAuth("search");
+    onOpen();
+  };
+
+  const handleChange = async (text: string) => {
+    setSearchQuery(text);
+    if (text.length < 1) setSearchResult([]);
+    if (text.length < 3) return;
+    try {
+      setSearchResult([]);
+      setSearching(true);
+      const res = await mverseGet("/api/search?name=" + text);
+      if (res.success) {
+        setSearchResult(res.data);
+      } else {
+        toast.error(res.error);
+      }
+    } catch (error: any) {
+      toast.error(error.message || "something went wrong");
+    } finally {
+      setSearching(false);
+    }
+  };
 
   return (
     <>
@@ -108,9 +156,38 @@ export default function Navbar({ currentUser }: any) {
               />
             </Link>
           </div>
+          <div>
+            <form
+              className="hidden md:flex items-center rounded-full border-2 p-0 overflow-hidden min-w-[400px] dark:border-neutral-600"
+              onSubmit={handleSubmit}
+            >
+              <input
+                type="search"
+                className="text-sm h-full w-full p-[6px] px-3 pl-5 focus:outline-none text-gray-800 dark:text-gray-100 focus:shadow-outline"
+                placeholder="search"
+                onChange={(e) => handleChange(e.target.value)}
+                onClick={openSearch}
+                value={searchQuery}
+              />
+              <button
+                type="submit"
+                className="flex items-center justify-center px-3 h-full"
+              >
+                <SearchIcon width={20} />
+              </button>
+            </form>
+          </div>
           {/* end */}
-          <div onClick={decideRoute} className="cursor-pointer">
-            <MyPic user={currentUser} />
+          <div className="flex items-center gap-2">
+            <button
+              onClick={openSearch}
+              className="transition focus:outline-none rounded-full p-2 h-full md:hidden dark:active:bg-neutral-800 active:bg-gray-300"
+            >
+              <SearchIcon />
+            </button>
+            <div onClick={decideRoute} className="cursor-pointer">
+              <MyPic user={currentUser} />
+            </div>
           </div>
         </div>
       </main>
@@ -119,6 +196,9 @@ export default function Navbar({ currentUser }: any) {
         onClose={closeModal}
         disabled={disabled}
         showSettings={auth == "channel" ? true : false}
+        showHeader={auth == "search" ? false : true}
+        backdropClose={auth == "search" ? true : false}
+        isSearch={auth == "search" ? true : false}
         title={
           auth == "signup"
             ? "Create new account"
@@ -139,6 +219,15 @@ export default function Navbar({ currentUser }: any) {
             <Login toggleDisabled={toggleDisabled} />
           ) : auth == "channel" ? (
             <CreateChannel user={currentUser} toggleDisabled={toggleDisabled} />
+          ) : auth == "search" ? (
+            <Search
+              closeModal={closeModal}
+              handleChange={handleChange}
+              searchQuery={searchQuery}
+              searchResult={searchResult}
+              searching={searching}
+              handleSubmit={handleSubmit}
+            />
           ) : (
             <main>loading</main>
           )

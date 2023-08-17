@@ -14,6 +14,8 @@ type ModalProps = {
   showSettings?: boolean;
   isMenu?: boolean;
   backdropClose?: boolean;
+  showHeader?: boolean;
+  isSearch?: boolean;
 };
 
 export default function Modal({
@@ -25,6 +27,8 @@ export default function Modal({
   isMenu = false,
   showSettings = false,
   backdropClose = false,
+  showHeader = true,
+  isSearch = false,
 }: ModalProps) {
   const [showModal, setShowModal] = useState(isOpen);
 
@@ -51,8 +55,11 @@ export default function Modal({
       onClick={backdropClose ? handleClose : () => {}}
       style={{ zIndex: "2000" }}
       className={`justify-center flex overflow-hidden fixed inset-0 z-50 outline-none focus:outline-none bg-neutral-800/70 ${
-        isMenu ? "items-end bg-neutral-800/10" : "items-center"
+        isMenu ? "items-end bg-neutral-800/10" : ""
+      } ${
+        isSearch ? "items-center md:items-start bg-neutral-800/0 md:mt-7" : ""
       }
+      ${!isSearch && !isMenu ? "items-center" : ""}
       `}
     >
       <div
@@ -74,7 +81,7 @@ export default function Modal({
               isMenu ? "h-auto rounded-md" : ""
             }`}
           >
-            {!isMenu ? (
+            {showHeader ? (
               <div
                 className={`flex item-center p-6 md:rounded-t justify-center relative border-b-[1px] dark:border-slate-800`}
               >
@@ -92,7 +99,13 @@ export default function Modal({
                 ) : null}
               </div>
             ) : null}
-            <div className={`relative flex-auto ${isMenu ? "p-2" : "p-6"}`}>
+            <div
+              className={`relative flex-auto ${
+                isMenu ? "p-2" : showHeader ? "p-6" : "p-0"
+              }
+              ${isSearch ? "md:max-h-[400px] overflow-auto" : ""}
+              `}
+            >
               {body}
             </div>
           </div>

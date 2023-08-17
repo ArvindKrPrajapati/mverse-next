@@ -248,6 +248,7 @@ function VideoMenu({ link, _id, currentUser = {} }: Props) {
         isMenu={true}
         body={content}
         backdropClose={true}
+        showHeader={false}
       />
       <button onClick={onOpen} className="hover:outline-none p-2">
         <DotMenuIcon width={20} />
