@@ -6,7 +6,12 @@ import { mverseGet } from "@/lib/apiCalls";
 import InfiniteScroll from "./InfiniteScroll";
 import Spinner from "../Loading/Spinner";
 
-export default function LoadMore({ offset = limit, url, children }: any) {
+export default function LoadMore({
+  offset = limit,
+  url,
+  children,
+  loaderClassName,
+}: any) {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<any>([]);
   const [allFetched, setAllFetched] = useState(false);
@@ -52,7 +57,9 @@ export default function LoadMore({ offset = limit, url, children }: any) {
       {!allFetched ? (
         <>
           {loading ? (
-            <div className="w-full flex justify-center py-3">
+            <div
+              className={`w-full flex justify-center py-3 items-center ${loaderClassName}`}
+            >
               <Spinner />
             </div>
           ) : (

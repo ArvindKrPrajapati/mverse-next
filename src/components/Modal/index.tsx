@@ -63,9 +63,9 @@ export default function Modal({
       <div
         onClick={(e) => e.stopPropagation()}
         className={`relative w-full md:w-4/6 lg:w-3/6 xl:w-2/5  mx-auto lg:h-auto md:h-auto
-        ${isMenu ? "h-auto max-h-[90%] my-0 p-2 overflow-auto" : "h-full"} ${
-          isSearch ? "my-0" : "my-6"
-        }`}
+        ${isMenu ? "h-auto max-h-[90%] my-0 p-2 overflow-auto" : "h-full"}
+        ${isSearch ? "md:my-6" : ""}
+        `}
       >
         <div
           className={`transalate duration-300 h-full ${

@@ -35,6 +35,7 @@ function Search({
       <div className="px-4 text-sm">
         {searchQuery ? (
           <Link
+            replace={true}
             href={`/search/${searchQuery.trim().replaceAll(" ", "-")}`}
             className="flex w-full p-1 gap-2"
           >
@@ -49,6 +50,7 @@ function Search({
         {searchResult.map((item: any, index: number) => (
           <Link
             key={index}
+            replace={true}
             href={`/search/${item.title.trim().replaceAll(" ", "-")}`}
             className="flex w-full p-[6px] gap-2"
           >
