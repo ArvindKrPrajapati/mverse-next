@@ -1,22 +1,9 @@
 "use client";
 import Card from "@/components/Card";
 import HorizontalCard from "@/components/Card/HorizontalCard";
-import React, { useEffect, useState } from "react";
+import useViewPort from "@/hooks/useViewPort";
 function SearchView({ item, currentUser }: any) {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 639);
-
-  useEffect(() => {
-    const checkScreenWidth = () => {
-      setIsMobile(window.innerWidth <= 639);
-    };
-
-    checkScreenWidth();
-    window.addEventListener("resize", checkScreenWidth);
-
-    return () => {
-      window.removeEventListener("resize", checkScreenWidth);
-    };
-  }, []);
+  const { isMobile } = useViewPort();
 
   if (isMobile) {
     return (

@@ -11,7 +11,7 @@ import Verify from "../Verify";
 import MyPic from "./MyPic";
 import CreateChannel from "../CreateChannel";
 import { useTheme } from "next-themes";
-import { SearchIcon } from "../_icons";
+import { ChevronLeft, SearchIcon } from "../_icons";
 import Search from "../Search";
 import toast from "react-hot-toast";
 import { mverseGet } from "@/lib/apiCalls";
@@ -21,18 +21,26 @@ export default function Navbar({ currentUser }: any) {
   const [auth, setAuth] = useState<string | null>();
   const { theme } = useTheme();
   const [myTheme, setMyTheme] = useState<string | undefined>("");
-  const [searchQuery, setSearchQuery] = useState("");
   const [searching, setSearching] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
-
   const router = useRouter();
   const pathname = usePathname();
+  const [isSearch, setIsSearch] = useState(
+    pathname.startsWith("/search/") ? true : false
+  );
+  const [searchQuery, setSearchQuery] = useState(
+    pathname.split("/search/")[1] || ""
+  );
   const searchParams = useSearchParams();
 
   useEffect(() => {
     if (pathname.startsWith("/search/")) {
       const text = pathname.split("/search/")[1];
       setSearchQuery(text.replaceAll("-", " ").trim());
+      setIsSearch(true);
+    } else {
+      setIsSearch(false);
+      setSearchQuery("");
     }
   }, [pathname]);
 
@@ -148,8 +156,29 @@ export default function Navbar({ currentUser }: any) {
           style={{ zIndex: "60" }}
         >
           {/* left */}
-          <div className="flex items-center md:ml-14">
-            <Link href="/">
+          <div
+            className={`flex items-center md:ml-14 ${
+              isSearch ? "w-full md:w-auto" : ""
+            }`}
+          >
+            <button
+              onClick={() => router.back()}
+              className={`transition focus:outline-none rounded-full p-2 dark:active:bg-neutral-800 active:bg-gray-300 ${
+                isSearch ? "md:hidden block" : "hidden"
+              }`}
+            >
+              <ChevronLeft />
+            </button>
+            {searchQuery ? (
+              <input
+                type="text"
+                value={searchQuery}
+                readOnly={true}
+                className="text-sm h-full w-full p-[6px] px-3 pl-5 focus:outline-none text-gray-800 dark:text-gray-100 focus:shadow-outline rounded-full md:hidden"
+                onClick={openSearch}
+              />
+            ) : null}
+            <Link href="/" className={`${isSearch ? "hidden md:block" : ""}`}>
               <Image
                 src={
                   myTheme === "dark"
@@ -185,7 +214,11 @@ export default function Navbar({ currentUser }: any) {
             </form>
           </div>
           {/* end */}
-          <div className="flex items-center gap-2">
+          <div
+            className={`flex items-center gap-2 ${
+              isSearch ? "hidden md:flex" : ""
+            }`}
+          >
             <button
               onClick={openSearch}
               className="transition focus:outline-none rounded-full p-2 h-full md:hidden dark:active:bg-neutral-800 active:bg-gray-300"
