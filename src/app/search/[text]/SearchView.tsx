@@ -3,7 +3,7 @@ import Card from "@/components/Card";
 import HorizontalCard from "@/components/Card/HorizontalCard";
 import React, { useEffect, useState } from "react";
 function SearchView({ item }: any) {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 639);
 
   useEffect(() => {
     const checkScreenWidth = () => {
