@@ -34,7 +34,7 @@ function Search({
       <div className="px-4 text-sm">
         {searchQuery ? (
           <Link
-            href={`/search?q=${searchQuery.replaceAll(" ", "-")}`}
+            href={`/search/${searchQuery.replaceAll(" ", "-")}`}
             className="flex w-full p-1 gap-2"
           >
             {searching ? (
@@ -48,7 +48,7 @@ function Search({
         {searchResult.map((item: any, index: number) => (
           <Link
             key={index}
-            href={`/search?q=${item.title.replaceAll(" ", "-")}`}
+            href={`/search/${item.title.replaceAll(" ", "-")}`}
             className="flex w-full p-[6px] gap-2"
           >
             <SearchIcon width={14} />

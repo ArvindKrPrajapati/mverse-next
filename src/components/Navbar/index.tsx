@@ -102,7 +102,7 @@ export default function Navbar({ currentUser }: any) {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    router.push("/search?q=" + searchQuery.replaceAll(" ", "-"));
+    router.push("/search/" + searchQuery.replaceAll(" ", "-"));
   };
 
   const openSearch = () => {

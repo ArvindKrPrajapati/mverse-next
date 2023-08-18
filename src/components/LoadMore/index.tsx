@@ -4,8 +4,6 @@ import { toast } from "react-hot-toast";
 import { limit } from "@/lib/constants";
 import { mverseGet } from "@/lib/apiCalls";
 import InfiniteScroll from "./InfiniteScroll";
-import HorizontalCard from "../Card/HorizontalCard";
-import Card from "../Card";
 import Spinner from "../Loading/Spinner";
 
 export default function LoadMore({ offset = limit, url, children }: any) {
