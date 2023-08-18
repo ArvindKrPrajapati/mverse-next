@@ -29,6 +29,13 @@ export default function Navbar({ currentUser }: any) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
+  useEffect(() => {
+    if (pathname.startsWith("/search/")) {
+      const text = pathname.split("/search/")[1];
+      setSearchQuery(text.replaceAll("-", " ").trim());
+    }
+  }, [pathname]);
+
   const decideRoute = () => {
     const rawemail = localStorage.getItem("rawemail");
     if (rawemail) {
@@ -102,7 +109,7 @@ export default function Navbar({ currentUser }: any) {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    router.push("/search/" + searchQuery.replaceAll(" ", "-"));
+    router.push("/search/" + searchQuery.trim().replaceAll(" ", "-"));
   };
 
   const openSearch = () => {
@@ -118,7 +125,7 @@ export default function Navbar({ currentUser }: any) {
     try {
       setSearchResult([]);
       setSearching(true);
-      const res = await mverseGet("/api/search?name=" + text);
+      const res = await mverseGet("/api/search?name=" + text.trim());
       if (res.success) {
         setSearchResult(res.data);
       } else {

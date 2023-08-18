@@ -27,6 +27,7 @@ function Search({
             className="w-full text-sm p-1 pl-2 bg-inherit focus:outline-none text-gray-800 dark:text-gray-100 focus:shadow-outline"
             onChange={(e) => handleChange(e.target.value)}
             value={searchQuery}
+            autoFocus={true}
           />
         </form>
       </div>
@@ -34,7 +35,7 @@ function Search({
       <div className="px-4 text-sm">
         {searchQuery ? (
           <Link
-            href={`/search/${searchQuery.replaceAll(" ", "-")}`}
+            href={`/search/${searchQuery.trim().replaceAll(" ", "-")}`}
             className="flex w-full p-1 gap-2"
           >
             {searching ? (
@@ -48,7 +49,7 @@ function Search({
         {searchResult.map((item: any, index: number) => (
           <Link
             key={index}
-            href={`/search/${item.title.replaceAll(" ", "-")}`}
+            href={`/search/${item.title.trim().replaceAll(" ", "-")}`}
             className="flex w-full p-[6px] gap-2"
           >
             <SearchIcon width={14} />

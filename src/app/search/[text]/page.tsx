@@ -6,7 +6,7 @@ import Container from "@/components/Container";
 function SearchPage({ params }: any) {
   return (
     <Container className="md:pt-5">
-      <LoadMore url={"/api/search?name=" + params.text} offset={0}>
+      <LoadMore url={"/api/search?name=" + params.text.replaceAll("-"," ").trim()} offset={0}>
         <SearchView />
       </LoadMore>
     </Container>
