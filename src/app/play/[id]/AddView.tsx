@@ -14,7 +14,7 @@ export default function AddView({ videoId, url, title }: Props) {
   const router = useRouter();
 
   const _init = async (time: number) => {
-    if (Math.floor(time) >= 5 && !apiCalled) {
+    if (Math.floor(time) >= 2 && !apiCalled) {
       setApiCalled(true);
       await mversePost("/api/video/view", { videoId });
       // router.refresh();

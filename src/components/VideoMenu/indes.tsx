@@ -23,14 +23,14 @@ import Menu from "../Menu";
 
 type Props = {
   _id: string;
-  link: string;
   currentUser?: any;
+  text?: string;
 };
 
 const btnClass =
   "w-full flex hover:outline-none justify-start py-2 px-3 rounded-md active:dark:bg-neutral-800 active:bg-gray-200 flex gap-2 items-center transition";
 
-function VideoMenu({ link, _id, currentUser = {} }: Props) {
+function VideoMenu({ _id, currentUser = {}, text }: Props) {
   const { isOpen, onClose, onOpen } = useModal();
   const [loading, setLoading] = useState(false);
   const [screen, setScreen] = useState("");
@@ -43,7 +43,7 @@ function VideoMenu({ link, _id, currentUser = {} }: Props) {
 
     switch (type) {
       case "share":
-        await share("title", "test", link);
+        await share("title", "test", "/play/" + _id);
         onClose();
         break;
       case "watchlist":
@@ -247,6 +247,7 @@ function VideoMenu({ link, _id, currentUser = {} }: Props) {
       content={content}
       onOpen={onOpen}
       iconWidth={20}
+      text={text}
     />
   );
 }

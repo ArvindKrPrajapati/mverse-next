@@ -12,6 +12,7 @@ import DescriptionModal from "@/components/DescriptionModal";
 import CommentContainer from "@/components/CommentContainer";
 import { notFound } from "next/navigation";
 import AddView from "./AddView";
+import StickyContainer from "@/components/StickyTopContent";
 type Props = {
   params: {
     id: string;
@@ -59,7 +60,7 @@ export default async function PlayPage({ params }: Props) {
               currentUser={currentUser}
             />
             <ActionButtons
-              currentUserId={currentUser?._id}
+              currentUser={currentUser}
               videoId={params.id}
               likes={data?.likes}
               dislikes={data?.dislikes}
@@ -69,6 +70,8 @@ export default async function PlayPage({ params }: Props) {
         </div>
         <CommentContainer id={params.id} currentUser={currentUser} />
       </div>
+      <StickyContainer />
+
       <CardList
         data={videoData}
         loadMoreFromUrl={`/api/user/channel/${decodedUsername}/videos`}
