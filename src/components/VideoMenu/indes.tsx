@@ -19,6 +19,7 @@ import { mversePatch, mversePost } from "@/lib/apiCalls";
 import Input from "../Input";
 import Button from "../Button";
 import LoadMore from "../LoadMore";
+import Menu from "../Menu";
 
 type Props = {
   _id: string;
@@ -240,20 +241,13 @@ function VideoMenu({ link, _id, currentUser = {} }: Props) {
     onClose();
   };
   return (
-    <>
-      <Modal
-        title="menu"
-        isOpen={isOpen}
-        onClose={handleClose}
-        isMenu={true}
-        body={content}
-        backdropClose={true}
-        showHeader={false}
-      />
-      <button onClick={onOpen} className="hover:outline-none p-2">
-        <DotMenuIcon width={20} />
-      </button>
-    </>
+    <Menu
+      isOpen={isOpen}
+      onClose={handleClose}
+      content={content}
+      onOpen={onOpen}
+      iconWidth={20}
+    />
   );
 }
 
