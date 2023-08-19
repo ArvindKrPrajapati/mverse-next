@@ -60,11 +60,7 @@ export default function Card({
             </div>
           </Link>
         </div>
-        <VideoMenu
-          link={item.link}
-          _id={item._id.toString()}
-          currentUser={currentUser}
-        />
+        <VideoMenu _id={item._id.toString()} currentUser={currentUser} />
       </div>
     </>
   );
