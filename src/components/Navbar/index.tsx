@@ -153,7 +153,7 @@ export default function Navbar({ currentUser }: any) {
         className={`${pathname.startsWith("/play/") ? "hidden md:block" : ""}`}
       >
         <div
-          className="dark:bg-neutral-950 dark:text-slate-50 h-[50px] flex items-center justify-between pl-5 pl-2 shadow sm:shadow-none py-2 fixed w-full  top-0 bg-white z-20"
+          className="dark:bg-neutral-950 dark:text-slate-50 h-[50px] flex items-center justify-between px-5 pl-2 shadow sm:shadow-none py-2 fixed w-full  top-0 bg-white z-20"
           style={{ zIndex: "60" }}
         >
           {/* left */}
@@ -229,7 +229,11 @@ export default function Navbar({ currentUser }: any) {
             <div onClick={decideRoute} className="cursor-pointer">
               <MyPic user={currentUser} />
             </div>
-            {currentUser?._id ? <HeaderMenu /> : null}
+            {currentUser?._id ? (
+              <div className="-mr-4">
+                <HeaderMenu />
+              </div>
+            ) : null}
           </div>
         </div>
       </main>
