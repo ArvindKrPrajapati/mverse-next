@@ -69,11 +69,7 @@ export default function HorizontalCard({
           </div>
         </div>
       </Link>
-      <VideoMenu
-        link={item.link}
-        _id={item._id.toString()}
-        currentUser={currentUser}
-      />
+      <VideoMenu _id={item._id.toString()} currentUser={currentUser} />
     </div>
   );
 }
