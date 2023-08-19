@@ -75,7 +75,7 @@ export default function Modal({
           }`}
         >
           <div
-            className={`dark:bg-neutral-950 translate h-full lg:h-auto md:h-auto border-0 md:rounded-md shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none ${
+            className={`dark:bg-neutral-900 translate h-full lg:h-auto md:h-auto border-0 md:rounded-md shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none ${
               isMenu ? "h-auto rounded-md" : ""
             }`}
           >

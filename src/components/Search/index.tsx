@@ -12,7 +12,7 @@ function Search({
   handleSubmit,
 }: any) {
   return (
-    <main className="dark:bg-neutral-950 bg-white">
+    <main className="dark:bg-neutral-900 bg-white">
       <div className="flex items-center px-2 h-[50px] md:hidden sticky top-0 md:z-10 bg-inherit">
         <button
           onClick={closeModal}

@@ -33,7 +33,7 @@ export default async function PlayPage({ params }: Props) {
     notFound();
   }
   return (
-    <div className="xl:p-8 fixed md:relative w-full h-full top-0 z-30 dark:bg-neutral-900 overflow-auto">
+    <div className="xl:p-8 fixed md:relative w-full h-full top-0 z-30 dark:bg-neutral-800 overflow-auto">
       <div className="xl:flex gap-5">
         <div className="xl:w-2/3">
           <div className="md:hidden w-full aspect-video"></div>

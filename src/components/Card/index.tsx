@@ -21,7 +21,7 @@ export default function Card({
           height={562}
           width={1000}
           src={item?.thumbnail}
-          className={`sm:rounded-lg w-full aspect-[16/10] bg-slate-200 dark:bg-neutral-950 ${
+          className={`sm:rounded-lg w-full aspect-[16/10] bg-slate-200 dark:bg-neutral-900 ${
             history ? "rounded-lg" : ""
           }`}
           alt="thumbnail"

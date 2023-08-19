@@ -39,7 +39,7 @@ export default function Sidebar({ isMenuOpen }: props) {
       `}
       style={!isMenuOpen ? { width: "75px" } : {}}
     >
-      <div className="md:h-screen md:p-3 flex md:block md:relative fixed bottom-0 w-full justify-between dark:bg-neutral-950 bg-white transition duration-300">
+      <div className="md:h-screen md:p-3 flex md:block md:relative fixed bottom-0 w-full justify-between dark:bg-neutral-900 bg-white transition duration-300">
         {options.map((item, index) => {
           return (
             <Link

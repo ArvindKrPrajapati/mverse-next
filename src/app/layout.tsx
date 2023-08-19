@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full" suppressHydrationWarning>
       <body
-        className={`${font.className} dark:bg-neutral-900 dark:text-slate-50 h-full`}
+        className={`${font.className} dark:bg-neutral-800 dark:text-slate-50 h-full`}
       >
         <MyThemeProvider>
           <ToasterProvider />
