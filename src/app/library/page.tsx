@@ -32,14 +32,18 @@ export default async function LibraryPage() {
             <ChevronRight />
           </Link>
         </main>
-        <div className="px-3 flex md:flex-wrap gap-3 md:gap-0 overflow-auto">
+        <div className="px-3 flex md:flex-wrap gap-3 overflow-auto mx-auto">
           {!data.length ? (
             <div className="text-center my-3">No watch history</div>
           ) : null}
           {data.map((item: any, index: number) => (
             <div
               key={index}
-              className="md:p-2 md:w-1/4 lg:w-1/5 min-[1200px]:w-1/6 min-w-[120px]"
+              className={`${
+                data.length == 1
+                  ? "w-full md:max-w-[450px]"
+                  : "w-[180px] min-w-[180px] md:w-[21%] md:min-w-[21%] lg:w-[15%] lg:min-w-[15%]"
+              }`}
             >
               <Card item={item} history={true} />
             </div>

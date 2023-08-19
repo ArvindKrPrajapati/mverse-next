@@ -4,6 +4,7 @@ import { getWatchLater } from "@/actions/getWatchLater";
 import CardList from "@/components/CardList";
 import Container from "@/components/Container";
 import ProtectedContainer from "@/components/Container/ProtectedContainer";
+import { LockIcon } from "@/components/_icons";
 import { getCurrentUser } from "@/lib/serverCookies";
 import React from "react";
 
@@ -36,10 +37,35 @@ export default async function ShowList({ params }: any) {
   }
   return (
     <ProtectedContainer byId={true}>
+      <div className="relative w-full mb-2 text-gray-300">
+        <div
+          className="absolute inset-0 bg-cover bg-center blur-lg"
+          style={{ backgroundImage: `url(${data[0].thumbnail})` }}
+        ></div>
+
+        <div className="relative z-10 p-4 h-full md:flex items-center gap-10 ">
+          <img
+            className="w-full md:w-64 rounded-lg mb-2 md:mb-0 my-auto"
+            src={data[0].thumbnail}
+            alt="Image"
+          />
+          <div>
+            <h1 className="text-lg font-semibold text-white">{params.type}</h1>
+            <div className="flex gap-3 text-xs">
+              <div>
+                <div className="flex gap-1 items-center font-bold capitalize">
+                  <LockIcon width={15} color="#eee" />
+                  Private
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <Container>
         <div className="p-4">
           <p className="font-bold capitalize pb-2  border-b dark:border-gray-800 border-gray-200">
-            {params.type}
+            {/* {params.type} */}
           </p>
         </div>
         <CardList

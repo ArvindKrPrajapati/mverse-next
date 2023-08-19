@@ -30,10 +30,10 @@ export default function Card({
           {formatTime(item?.duration)}
         </p>
       </Link>
-      <div className="flex justify-between items-center">
-        <div className={`flex m-2`}>
+      <div className="flex justify-between items-center w-full mt-1">
+        <div className={`flex m-2 w-full`}>
           {!history ? (
-            <div className="w-[40px]">
+            <div className="w-[35px]">
               <Link
                 href={"/profile/" + item?.by.username}
                 className={`w-[40px] rounded-full aspect-square bg-slate-200`}
@@ -44,7 +44,7 @@ export default function Card({
           ) : null}
           <Link
             href={"/play/" + item?._id}
-            className={`${!history ? "ml-3" : ""} w-full}`}
+            className={`${!history ? "ml-3" : ""} w-[calc(100%-35px)]`}
           >
             <p className="font-bold text-sm max-two-line">{item?.title}</p>
             <div className="flex md:block flex-wrap">

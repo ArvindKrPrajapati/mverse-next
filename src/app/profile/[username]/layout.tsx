@@ -43,12 +43,6 @@ export default async function ProfileLayout({ children, params }: Props) {
           {options.map((item, index) => (
             <TabHeader key={index} route={item.route} name={item.name} />
           ))}
-          {currentUser?.username === username ? (
-            <Link href="/settings" className="flex items-center gap-2">
-              <SettingsIcon width={20} />
-              settings
-            </Link>
-          ) : null}
         </div>
       </Container>
       <hr className="dark:bg-gray-600 h-[1px] border-none bg-gray-200" />

@@ -15,6 +15,7 @@ import { ChevronLeft, SearchIcon } from "../_icons";
 import Search from "../Search";
 import toast from "react-hot-toast";
 import { mverseGet } from "@/lib/apiCalls";
+import HeaderMenu from "./HeaderMenu";
 
 export default function Navbar({ currentUser }: any) {
   const { isOpen, onClose, onOpen, disabled, toggleDisabled } = useModal();
@@ -228,6 +229,7 @@ export default function Navbar({ currentUser }: any) {
             <div onClick={decideRoute} className="cursor-pointer">
               <MyPic user={currentUser} />
             </div>
+            {currentUser?._id ? <HeaderMenu /> : null}
           </div>
         </div>
       </main>

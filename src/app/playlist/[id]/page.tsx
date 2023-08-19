@@ -26,7 +26,7 @@ async function PlaylistPage({ params }: Props) {
 
   return (
     <>
-      <div className="relative w-full mb-2 text-gray-300">
+      <div className="relative w-full mb-4 text-gray-300">
         <div
           className="absolute inset-0 bg-cover bg-center blur-lg"
           style={{ backgroundImage: `url(${data.data[0].thumbnail})` }}
