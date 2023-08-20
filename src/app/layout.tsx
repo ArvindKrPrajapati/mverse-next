@@ -13,7 +13,7 @@ export const metadata = {
   description: "Mverse App",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#fff" },
-    { media: "(prefers-color-scheme: dark)", color: "#2d3748" },
+    { media: "(prefers-color-scheme: dark)", color: "#171717" },
   ],
 };
 
