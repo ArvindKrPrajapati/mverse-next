@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
     await dbConnect();
     const data = await Video.aggregate([
       {
-        $match: { title: { $regex: "^" + name, $options: "i" } },
+        $match: { title: { $regex: name, $options: "i" } },
       },
       { $sort: { createdAt: -1 } },
       { $skip: skip },
