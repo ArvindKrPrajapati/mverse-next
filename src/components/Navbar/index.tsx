@@ -153,7 +153,7 @@ export default function Navbar({ currentUser }: any) {
         className={`${pathname.startsWith("/play/") ? "hidden md:block" : ""}`}
       >
         <div
-          className="dark:bg-neutral-900 dark:text-slate-50 h-[50px] flex items-center justify-between px-5 pl-2 shadow sm:shadow-none py-2 fixed w-full  top-0 bg-white z-20"
+          className="dark:bg-neutral-900/90 backdrop-blur-xl  dark:text-slate-50 h-[50px] flex items-center justify-between px-5 pl-2 shadow sm:shadow-none py-2 fixed w-full  top-0 bg-white z-20"
           style={{ zIndex: "60" }}
         >
           {/* left */}
