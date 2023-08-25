@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import { mverseGet } from "@/lib/apiCalls";
 import SingleComment from "./SingleComment";
 import Spinner from "../Loading/Spinner";
+import LoadMore from "../LoadMore";
 
 export default function CommentContainer({ id, currentUser }: any) {
   const [loading, setLoading] = useState(true);
@@ -72,7 +73,7 @@ export default function CommentContainer({ id, currentUser }: any) {
       </div>
       {/* contemt */}
       <div
-        className={`fixed w-full xl:static xl:w-1/3 h-desc-height  xl:h-[80vh] xl:rounded-md right-0 bottom-0  dark:bg-neutral-900 bg-white xl:bg-gray-100 overflow-auto transition duration-500 translate-y-0 
+        className={`fixed w-full xl:static xl:w-1/3 h-desc-height  xl:h-[80vh] xl:rounded-md right-0 bottom-0  dark:bg-neutral-900 bg-white xl:bg-gray-100 overflow-hidden transition duration-500 translate-y-0 
       ${!open ? "translate-y-[100vh] xl:translate-y-0" : ""}
       `}
         style={{
@@ -96,16 +97,14 @@ export default function CommentContainer({ id, currentUser }: any) {
                 <Spinner />
               </div>
             ) : (
-              <div>
+              <>
                 {comments.map((item: any, key: number) => (
-                  <SingleComment
-                    key={key}
-                    id={item._id}
-                    user={item.author}
-                    content={item.content}
-                  />
+                  <SingleComment key={key} item={item} />
                 ))}
-              </div>
+                <LoadMore url={`/api/video/comment?videoId=${id}`}>
+                  <SingleComment />
+                </LoadMore>
+              </>
             )}
           </section>
           <footer>

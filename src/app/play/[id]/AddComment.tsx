@@ -37,13 +37,20 @@ export default function AddComment({
       setCommentValue("");
     }
   };
-
+  const handleTextareaKeyDown = (event: any) => {
+    if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+      event.preventDefault();
+      event.stopPropagation();
+      handleCommentSubmit(event);
+    }
+  };
   return (
     <div className="h-[60px] dark:bg-neutral-800 bg-gray-200">
       <form className="h-full flex" onSubmit={handleCommentSubmit}>
         <textarea
           value={commentValue}
           placeholder="write comment..."
+          onKeyDown={handleTextareaKeyDown}
           onChange={(e) => {
             setCommentValue(e.target.value);
           }}
