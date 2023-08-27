@@ -54,7 +54,7 @@ export default function Modal({
     <div
       onClick={backdropClose ? handleClose : () => {}}
       style={{ zIndex: "2000" }}
-      className={`justify-center flex overflow-hidden fixed inset-0 z-50 outline-none focus:outline-none  ${
+      className={`justify-center h-screen flex overflow-hidden fixed inset-0 z-50 outline-none focus:outline-none  ${
         isMenu ? "items-end bg-neutral-800/10" : ""
       } ${isSearch ? "items-center md:items-start md:mt-7" : ""}
       ${!isSearch && !isMenu ? "items-center bg-neutral-800/70" : ""}
