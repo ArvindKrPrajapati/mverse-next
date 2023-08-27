@@ -1,6 +1,6 @@
 import { limit } from "@/lib/constants";
 import dbConnect from "@/lib/dbConnect";
-import { getCurrentUser } from "@/lib/serverCookies";
+import { getCurrentUser, getUserIdFromAuth } from "@/lib/serverCookies";
 import { Comment } from "@/models/comments.model";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -55,11 +55,88 @@ export async function GET(request: NextRequest) {
       );
     }
     await dbConnect();
-    const data = await Comment.find({ videoId })
-      .populate("author", "_id channelName dp username")
-      .sort({ createdAt: -1 })
-      .skip(skip)
-      .limit(_limit);
+    // const data = await Comment.find({ videoId })
+    //   .populate("author", "_id channelName dp username")
+    //   .sort({ createdAt: -1 })
+    //   .skip(skip)
+    //   .limit(_limit);
+
+    const yourUserId = getUserIdFromAuth(request);
+
+    const data = await Comment.aggregate([
+      { $sort: { createdAt: -1 } },
+      { $skip: skip },
+      { $limit: _limit },
+      {
+        $lookup: {
+          from: "users",
+          localField: "author",
+          foreignField: "_id",
+          as: "author",
+        },
+      },
+      { $unwind: "$author" },
+      {
+        $lookup: {
+          from: "comment_reactions",
+          localField: "_id",
+          foreignField: "commentId",
+          as: "reactions",
+        },
+      },
+      {
+        $lookup: {
+          from: "comment_reactions",
+          let: { commentId: "$_id" },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $and: [
+                    { $eq: ["$userId", yourUserId] },
+                    { $eq: ["$commentId", "$$commentId"] },
+                  ],
+                },
+              },
+            },
+          ],
+          as: "userReaction",
+        },
+      },
+      {
+        $project: {
+          videoId: 1,
+          content: 1,
+          createdAt: 1,
+          author: {
+            _id: 1,
+            channelName: 1,
+            username: 1,
+            dp: 1,
+          },
+          likes: {
+            $size: {
+              $filter: {
+                input: "$reactions",
+                as: "reaction",
+                cond: { $eq: ["$$reaction.reactionType", "like"] },
+              },
+            },
+          },
+          dislikes: {
+            $size: {
+              $filter: {
+                input: "$reactions",
+                as: "reaction",
+                cond: { $eq: ["$$reaction.reactionType", "dislike"] },
+              },
+            },
+          },
+          reaction: { $arrayElemAt: ["$userReaction.reactionType", 0] },
+        },
+      },
+    ]);
+
     return NextResponse.json({ success: true, data, limit: _limit, skip });
   } catch (error) {
     console.log("comment error", error);

@@ -81,7 +81,7 @@ export default function CommentContainer({ id, currentUser }: any) {
         }}
       >
         <div className="h-full flex flex-col justify-between">
-          <header className="bg-inherit flex sticky top-0 items-center justify-between px-4 py-1 border-b-[1px] dark:border-gray-800 border-gray-200 xl:py-2">
+          <header className="bg-inherit flex sticky top-0 items-center mb-3 justify-between px-4 py-1 border-b-[1px] dark:border-gray-800 border-gray-200 xl:py-2">
             <p className="dark:text-gray-300 text-center">Comments</p>
             <button
               onClick={closeModal}

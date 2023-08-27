@@ -45,7 +45,7 @@ export default function AddComment({
     }
   };
   return (
-    <div className="h-[60px] dark:bg-neutral-800 bg-gray-200">
+    <div className="h-[60px] dark:bg-neutral-700 bg-gray-200">
       <form className="h-full flex" onSubmit={handleCommentSubmit}>
         <textarea
           value={commentValue}
@@ -54,7 +54,7 @@ export default function AddComment({
           onChange={(e) => {
             setCommentValue(e.target.value);
           }}
-          className="p-3 outline-none h-full w-full text-sm resize-none dark:bg-neutral-800 dark:text-gray-200 bg-gray-200"
+          className="p-3 outline-none h-full w-full text-sm resize-none dark:bg-neutral-700 dark:text-gray-200 bg-gray-200"
         ></textarea>
         <button
           type="submit"
