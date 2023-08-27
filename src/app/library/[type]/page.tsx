@@ -9,10 +9,7 @@ import { getCurrentUser } from "@/lib/serverCookies";
 import { Metadata, ResolvingMetadata } from "next";
 import React from "react";
 
-export async function generateMetadata(
-  { params, searchParams }: any,
-  parent?: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({ params }: any): Promise<Metadata> {
   return {
     title: params.type.replaceAll("-", " "),
   };
