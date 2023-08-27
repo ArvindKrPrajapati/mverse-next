@@ -3,6 +3,7 @@ import CardList from "@/components/CardList";
 import Container from "@/components/Container";
 import { EarthIcon, LockIcon } from "@/components/_icons";
 import { getCurrentUser } from "@/lib/serverCookies";
+import { Metadata } from "next";
 import Image from "next/image";
 import React from "react";
 
@@ -12,6 +13,20 @@ type Props = {
   };
 };
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // read route params
+  const currentUser = getCurrentUser();
+  const data = await getPlaylistVideos(params.id, currentUser?._id);
+  if (!data) {
+    return {
+      title: "Not found",
+    };
+  }
+
+  return {
+    title: data.playlist.name || "Playlist",
+  };
+}
 async function PlaylistPage({ params }: Props) {
   const currentUser = getCurrentUser();
   const data = await getPlaylistVideos(params.id, currentUser?._id);

@@ -6,10 +6,29 @@ import TabHeader from "./TabHeader";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SettingsIcon } from "@/components/_icons";
+import { Metadata } from "next";
 type Props = {
   children: React.ReactNode;
   params: { username: string };
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // read route params
+  const username = decodeURIComponent(params.username);
+  const currentUser = getCurrentUser();
+  const data = await getChannelByUsername(params.username, currentUser?._id);
+  if (!data) {
+    return {
+      title: "Not found",
+    };
+  }
+
+  return {
+    title: data.channelName || "Profile |" + data.name,
+    description: data.description || "",
+  };
+}
+
 export default async function ProfileLayout({ children, params }: Props) {
   const currentUser = getCurrentUser();
   const data = await getChannelByUsername(params.username, currentUser?._id);

@@ -10,8 +10,14 @@ import {
   TimerIcon,
 } from "@/components/_icons";
 import { getCurrentUser } from "@/lib/serverCookies";
+import { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "Mverse | Library",
+  description: "Your watch history, playlist etc",
+};
 
 export default async function LibraryPage() {
   const currentUser = getCurrentUser();

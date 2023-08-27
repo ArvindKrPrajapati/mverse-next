@@ -13,11 +13,27 @@ import CommentContainer from "@/components/CommentContainer";
 import { notFound } from "next/navigation";
 import AddView from "./AddView";
 import StickyContainer from "@/components/StickyTopContent";
+import { Metadata } from "next";
 type Props = {
   params: {
     id: string;
   };
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // read route params
+  const id = params.id;
+  const data = await getVideoById(params.id);
+
+  return {
+    title: data.title,
+    openGraph: {
+      images: [data.thumbnail],
+    },
+    description: data.description,
+  };
+}
+
 export default async function PlayPage({ params }: Props) {
   const currentUser = getCurrentUser();
   const data = await getVideoById(params.id);

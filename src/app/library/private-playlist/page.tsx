@@ -2,12 +2,15 @@ import { getPlaylists } from "@/actions/getPlaylists";
 import Container from "@/components/Container";
 import ProtectedContainer from "@/components/Container/ProtectedContainer";
 import LoadMore from "@/components/LoadMore";
-import { EarthIcon, LockIcon } from "@/components/_icons";
 import { getCurrentUser } from "@/lib/serverCookies";
-import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 import Singleplaylist from "./Singleplaylist";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Private Playlist",
+  description: "Your private playlists are here",
+};
 
 async function PrivatePlaylist() {
   const currentUser: any = getCurrentUser();

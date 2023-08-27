@@ -6,7 +6,17 @@ import Container from "@/components/Container";
 import ProtectedContainer from "@/components/Container/ProtectedContainer";
 import { LockIcon } from "@/components/_icons";
 import { getCurrentUser } from "@/lib/serverCookies";
+import { Metadata, ResolvingMetadata } from "next";
 import React from "react";
+
+export async function generateMetadata(
+  { params, searchParams }: any,
+  parent?: ResolvingMetadata
+): Promise<Metadata> {
+  return {
+    title: params.type.replaceAll("-", " "),
+  };
+}
 
 export default async function ShowList({ params }: any) {
   const currentUser = getCurrentUser();

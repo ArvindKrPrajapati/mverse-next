@@ -3,6 +3,13 @@ import SearchView from "./SearchView";
 import LoadMore from "@/components/LoadMore";
 import Container from "@/components/Container";
 import { getCurrentUser } from "@/lib/serverCookies";
+import { Metadata } from "next";
+
+export async function generateMetadata({ params }: any): Promise<Metadata> {
+  return {
+    title: "Search - " + params.text.replaceAll("-", " ").trim(),
+  };
+}
 
 function SearchPage({ params }: any) {
   const currentUser = getCurrentUser();

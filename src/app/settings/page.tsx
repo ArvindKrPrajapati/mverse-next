@@ -5,7 +5,11 @@ import ChangeDp from "./ChangeDp";
 import ChangeCover from "./ChangeCover";
 import { getCurrentUser } from "@/lib/serverCookies";
 import ChangeTheme from "./ChangeTheme";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Settings",
+};
 export default function SettingsPage() {
   const currentUser = getCurrentUser();
   return (
