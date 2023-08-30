@@ -1,6 +1,7 @@
 import dbConnect from "@/lib/dbConnect";
 import { getValidId } from "@/lib/serverCookies";
 import User from "@/models/user.model";
+import Video from "@/models/video.model";
 
 export async function getChannelByUsername(username: string, myid: any) {
   try {
@@ -42,9 +43,15 @@ export async function getChannelByUsername(username: string, myid: any) {
         },
       },
     ]);
+
     if (!data.length) {
       return null;
     }
+    const userId = data[0]._id;
+    const videos = await Video.find({ by: userId }).count();
+
+    data[0]["videos"] = videos;
+
     return data[0];
   } catch (error) {
     throw error;

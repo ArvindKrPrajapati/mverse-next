@@ -1,6 +1,6 @@
 import { limit } from "@/lib/constants";
 import dbConnect from "@/lib/dbConnect";
-import { getCurrentUser, getUserIdFromAuth } from "@/lib/serverCookies";
+import { getCurrentUser, getUserIdFromAuth, getValidId } from "@/lib/serverCookies";
 import { Comment } from "@/models/comments.model";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -54,6 +54,7 @@ export async function GET(request: NextRequest) {
         { status: 422 }
       );
     }
+    const _videoId=getValidId(videoId)
     await dbConnect();
     // const data = await Comment.find({ videoId })
     //   .populate("author", "_id channelName dp username")
@@ -64,6 +65,7 @@ export async function GET(request: NextRequest) {
     const yourUserId = getUserIdFromAuth(request);
 
     const data = await Comment.aggregate([
+      {$match:{videoId:_videoId}},
       { $sort: { createdAt: -1 } },
       { $skip: skip },
       { $limit: _limit },

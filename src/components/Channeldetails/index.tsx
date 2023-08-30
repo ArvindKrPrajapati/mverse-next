@@ -27,7 +27,8 @@ export default function ChannelDetails({ data }: Props) {
                 <p className="text-3xl font-bold">{data?.channelName}</p>
                 <p className="text-xs font-semibold  dark:text-gray-300">
                   {data?.username} &nbsp; <br className="block md:hidden " />
-                  {handleViews(data?.subscribers)} subscribers
+                  {handleViews(data?.subscribers)} subscribers &nbsp;
+                  {data?.videos} videos
                 </p>
                 <p className="text-xs mt-2 font-semibold  dark:text-gray-300">
                   {data?.description}
