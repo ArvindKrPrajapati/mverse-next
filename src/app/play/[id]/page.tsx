@@ -14,6 +14,7 @@ import { notFound } from "next/navigation";
 import AddView from "./AddView";
 import StickyContainer from "@/components/StickyTopContent";
 import { Metadata } from "next";
+import SafeAreaView from "@/components/SafeAreaView";
 type Props = {
   params: {
     id: string;
@@ -49,52 +50,59 @@ export default async function PlayPage({ params }: Props) {
     notFound();
   }
   return (
-    <div
-      className="xl:p-8 fixed md:relative w-full h-full top-0 z-30 dark:bg-neutral-800 overflow-auto"
-      id="scroll"
-    >
-      <div className="xl:flex gap-5">
-        <div className="xl:w-2/3">
-          <div className="md:hidden w-full aspect-video"></div>
-          <div className="fixed z-20 md:static w-full top-0">
-            <AddView url={data?.link} title={data?.title} videoId={params.id} />
-          </div>
+    <SafeAreaView>
+      <div
+        className="xl:p-8 fixed md:relative w-full h-full top-0 z-30 dark:bg-neutral-800 overflow-auto"
+        id="scroll"
+      >
+        <div className="xl:flex gap-5">
+          <div className="xl:w-2/3">
+            <div className="md:hidden w-full aspect-video"></div>
+            <div className="fixed z-20 md:static w-full top-0">
+              <AddView
+                url={data?.link}
+                title={data?.title}
+                videoId={params.id}
+              />
+            </div>
 
-          <div className="p-4 xl:px-0  md:mt-0">
-            <p className="xl:text-xl text-sm max-two-line">{data?.title}</p>
-            <p className="dark:text-gray-300 xl:text-base text-xs">
-              {handleViews(data.views || 0)} views {formatDate(data?.createdAt)}
-            </p>
-            <DescriptionModal description={data?.description} />
-            <ChannelDesc
-              user={{
-                name: channelData.name,
-                dp: channelData.dp,
-                channelName: channelData.channelName,
-              }}
-              channelName={channelData.channelName}
-              subscribers={channelData.subscribers}
-              isSubscribed={channelData.isSubscribed}
-              username={channelData.username}
-              currentUser={currentUser}
-            />
-            <ActionButtons
-              currentUser={currentUser}
-              videoId={params.id}
-              likes={data?.likes}
-              dislikes={data?.dislikes}
-              reaction={data?.raection}
-            />
+            <div className="p-4 xl:px-0  md:mt-0">
+              <p className="xl:text-xl text-sm max-two-line">{data?.title}</p>
+              <p className="dark:text-gray-300 xl:text-base text-xs">
+                {handleViews(data.views || 0)} views{" "}
+                {formatDate(data?.createdAt)}
+              </p>
+              <DescriptionModal description={data?.description} />
+              <ChannelDesc
+                user={{
+                  name: channelData.name,
+                  dp: channelData.dp,
+                  channelName: channelData.channelName,
+                }}
+                channelName={channelData.channelName}
+                subscribers={channelData.subscribers}
+                isSubscribed={channelData.isSubscribed}
+                username={channelData.username}
+                currentUser={currentUser}
+              />
+              <ActionButtons
+                currentUser={currentUser}
+                videoId={params.id}
+                likes={data?.likes}
+                dislikes={data?.dislikes}
+                reaction={data?.raection}
+              />
+            </div>
           </div>
+          <CommentContainer id={params.id} currentUser={currentUser} />
         </div>
-        <CommentContainer id={params.id} currentUser={currentUser} />
-      </div>
-      <StickyContainer />
+        <StickyContainer />
 
-      <CardList
-        data={videoData}
-        loadMoreFromUrl={`/api/user/channel/${decodedUsername}/videos`}
-      />
-    </div>
+        <CardList
+          data={videoData}
+          loadMoreFromUrl={`/api/user/channel/${decodedUsername}/videos`}
+        />
+      </div>
+    </SafeAreaView>
   );
 }

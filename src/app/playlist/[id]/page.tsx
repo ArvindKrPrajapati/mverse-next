@@ -1,6 +1,7 @@
 import { getPlaylistVideos } from "@/actions/getplaylistVideos";
 import CardList from "@/components/CardList";
 import Container from "@/components/Container";
+import SafeAreaView from "@/components/SafeAreaView";
 import { EarthIcon, LockIcon } from "@/components/_icons";
 import { getCurrentUser } from "@/lib/serverCookies";
 import { Metadata } from "next";
@@ -40,7 +41,7 @@ async function PlaylistPage({ params }: Props) {
   }
 
   return (
-    <>
+    <SafeAreaView>
       <div className="relative w-full mb-4 text-gray-300">
         <div
           className="absolute inset-0 bg-cover bg-center blur-lg"
@@ -89,7 +90,7 @@ async function PlaylistPage({ params }: Props) {
           history={true}
         />
       </Container>
-    </>
+    </SafeAreaView>
   );
 }
 

@@ -32,7 +32,7 @@ export default function RootLayout({
         <MyThemeProvider>
           <ToasterProvider />
           <Navbar currentUser={currentUser} />
-          <div className="flex mt-[50px]">
+          <div className="flex">
             <SideBarContainer />
             <div className="w-full mb-[70px] md:mb-0">{children}</div>
           </div>

@@ -4,6 +4,7 @@ import LoadMore from "@/components/LoadMore";
 import Container from "@/components/Container";
 import { getCurrentUser } from "@/lib/serverCookies";
 import { Metadata } from "next";
+import SafeAreaView from "@/components/SafeAreaView";
 
 export async function generateMetadata({ params }: any): Promise<Metadata> {
   return {
@@ -14,15 +15,17 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
 function SearchPage({ params }: any) {
   const currentUser = getCurrentUser();
   return (
-    <Container className="md:pt-5">
-      <LoadMore
-        loaderClassName="h-[70vh]"
-        url={"/api/search?name=" + params.text.replaceAll("-", " ").trim()}
-        offset={0}
-      >
-        <SearchView currentUser={currentUser} />
-      </LoadMore>
-    </Container>
+    <SafeAreaView>
+      <Container className="md:pt-5">
+        <LoadMore
+          loaderClassName="h-[70vh]"
+          url={"/api/search?name=" + params.text.replaceAll("-", " ").trim()}
+          offset={0}
+        >
+          <SearchView currentUser={currentUser} />
+        </LoadMore>
+      </Container>
+    </SafeAreaView>
   );
 }
 

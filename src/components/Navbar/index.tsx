@@ -26,6 +26,7 @@ export default function Navbar({ currentUser }: any) {
   const [searchResult, setSearchResult] = useState([]);
   const router = useRouter();
   const pathname = usePathname();
+
   const [isSearch, setIsSearch] = useState(
     pathname.startsWith("/search/") ? true : false
   );
@@ -147,6 +148,9 @@ export default function Navbar({ currentUser }: any) {
     }
   };
 
+  if (pathname.startsWith("/blogs/") && !pathname.endsWith("/blogs/")) {
+    return null;
+  }
   return (
     <>
       <main

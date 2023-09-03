@@ -7,6 +7,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SettingsIcon } from "@/components/_icons";
 import { Metadata } from "next";
+import SafeAreaView from "@/components/SafeAreaView";
 type Props = {
   children: React.ReactNode;
   params: { username: string };
@@ -59,7 +60,7 @@ export default async function ProfileLayout({ children, params }: Props) {
     },
   ];
   return (
-    <main>
+    <SafeAreaView>
       <ChannelDetails data={data} />
       <Container>
         <div className="flex overflow-auto items-center">
@@ -70,6 +71,6 @@ export default async function ProfileLayout({ children, params }: Props) {
       </Container>
       <hr className="dark:bg-gray-600 h-[1px] border-none bg-gray-200" />
       {children}
-    </main>
+    </SafeAreaView>
   );
 }

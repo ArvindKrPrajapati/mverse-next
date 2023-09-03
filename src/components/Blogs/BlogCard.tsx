@@ -44,14 +44,14 @@ function BlogCard({ item }: any) {
         {/* menu */}
         <ShareIcon />
       </div>
-      <div className="p-4">
+      <Link href={"/blogs/" + item.slug} className="p-4">
         <p className="text-lg font-bold max-two-line capitalize">
           {item.slug.replace(/-/g, " ").replace(/\s\S*$/, "")}
         </p>
         {img ? (
           <img className="w-full my-2 rounded-md" src={img} alt="img" />
         ) : null}
-      </div>
+      </Link>
 
       {/* <div
         dangerouslySetInnerHTML={{ __html: item.content }}
