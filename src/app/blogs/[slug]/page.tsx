@@ -35,7 +35,7 @@ async function SingleBlogPage({ params }: any) {
         <section className="md:w-[50%]">
           <div
             dangerouslySetInnerHTML={{ __html: data.content }}
-            className="prose dark:text-gray-200"
+            className="prose max-w-full dark:text-gray-200"
           />
         </section>
         {/* right side */}
