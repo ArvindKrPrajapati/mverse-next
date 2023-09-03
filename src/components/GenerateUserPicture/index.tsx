@@ -16,7 +16,7 @@ export default function GenerateUserPicture({ user, className }: props) {
         width={1000}
         height={1000}
         alt="dp"
-        className="rounded-full w-full aspect-square"
+        className={`rounded-full w-full aspect-square ${className}`}
       />
     );
   }

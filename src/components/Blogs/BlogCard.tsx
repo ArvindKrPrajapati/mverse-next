@@ -52,13 +52,6 @@ function BlogCard({ item }: any) {
           <img className="w-full my-2 rounded-md" src={img} alt="img" />
         ) : null}
       </Link>
-
-      {/* <div
-        dangerouslySetInnerHTML={{ __html: item.content }}
-        className="prose"
-      />
-      <br />
-      <br /> */}
     </div>
   );
 }
