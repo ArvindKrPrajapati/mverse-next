@@ -1,0 +1,22 @@
+/* editor-display.css */
+
+/* Change color for all h1 elements */
+div.prose *{
+margin: 0;
+}
+div.prose {
+    width: 100% !important;
+}
+div.prose h1 {
+    color: white;
+}
+div.prose img{
+    border-radius: 10px;
+    width: 100%;
+}
+
+/* Make all bold text white */
+div.prose strong {
+    font-weight: bold;
+    color: white;
+}

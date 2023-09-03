@@ -1,9 +1,9 @@
 import { getBlogBySlug } from "@/actions/getBlogBySlug";
-import Container from "@/components/Container";
 import GenerateUserPicture from "@/components/GenerateUserPicture";
 import { SearchIcon } from "@/components/_icons";
 import { notFound } from "next/navigation";
 import React from "react";
+import "./editor.css";
 
 async function SingleBlogPage({ params }: any) {
   const data = await getBlogBySlug(params.slug);
@@ -35,8 +35,7 @@ async function SingleBlogPage({ params }: any) {
         <section className="md:w-[50%]">
           <div
             dangerouslySetInnerHTML={{ __html: data.content }}
-            className="prose text-white"
-            style={{ color: "white !important" }}
+            className="prose dark:text-white"
           />
         </section>
         {/* right side */}
