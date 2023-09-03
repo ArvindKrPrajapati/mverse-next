@@ -16,6 +16,7 @@ type ModalProps = {
   backdropClose?: boolean;
   showHeader?: boolean;
   isSearch?: boolean;
+  wider?: boolean;
 };
 
 export default function Modal({
@@ -29,6 +30,7 @@ export default function Modal({
   backdropClose = false,
   showHeader = true,
   isSearch = false,
+  wider = false,
 }: ModalProps) {
   const [showModal, setShowModal] = useState(isOpen);
 
@@ -62,7 +64,8 @@ export default function Modal({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className={`relative w-full md:w-4/6 lg:w-3/6 xl:w-2/5  mx-auto lg:h-auto md:h-auto
+        className={`relative w-full mx-auto lg:h-auto md:h-auto 
+        ${wider ? "md:w-4/6 md:max-w-[1000px]" : "md:w-4/6 lg:w-3/6 xl:w-2/5"}
         ${isMenu ? "h-auto max-h-[90%] my-0 p-2 overflow-auto" : "h-full"}
         ${isSearch ? "md:my-6" : ""}
         `}

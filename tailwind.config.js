@@ -23,5 +23,5 @@ module.exports = {
       height: ["responsive", "lg"],
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };

@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-import { AddIcon, HomeIcon, LibraryIcon } from "../_icons";
+import { AddIcon, HomeIcon, LibraryIcon, NewsIcon } from "../_icons";
 import { usePathname } from "next/navigation";
 
 type props = {
@@ -16,6 +16,11 @@ export default function Sidebar({ isMenuOpen }: props) {
       name: "Home",
       icon: <HomeIcon />,
       href: "/",
+    },
+    {
+      name: "Blogs",
+      icon: <NewsIcon />,
+      href: "/blogs",
     },
 
     {

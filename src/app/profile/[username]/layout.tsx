@@ -50,6 +50,10 @@ export default async function ProfileLayout({ children, params }: Props) {
       route: "/profile/" + username + "/playlist",
     },
     {
+      name: "blogs",
+      route: "/profile/" + username + "/blogs",
+    },
+    {
       name: "about",
       route: "/profile/" + username + "/about",
     },
