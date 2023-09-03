@@ -1,22 +1,25 @@
 /* editor-display.css */
-
+/* Dark theme */
+[data-theme="dark"] {
+  --text-color: #eee;
+}
 /* Change color for all h1 elements */
-div.prose *{
-margin: 0;
+div.prose * {
+  margin: 0;
 }
 div.prose {
-    width: 100% !important;
+  width: 100% !important;
 }
 div.prose h1 {
-    color: white;
+  color: var(--text-color);
 }
-div.prose img{
-    border-radius: 10px;
-    width: 100%;
+div.prose img {
+  border-radius: 10px;
+  width: 100%;
 }
 
 /* Make all bold text white */
 div.prose strong {
-    font-weight: bold;
-    color: white;
+  font-weight: bold;
+  color: var(--text-color);
 }
