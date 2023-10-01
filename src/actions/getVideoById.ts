@@ -6,7 +6,7 @@ import View from "@/models/views.model";
 import User from "@/models/user.model";
 import { getChannelByUsername } from "./getChannelByUsername";
 
-export async function getVideoById(_id: string, myid = "") {
+export async function getVideoById(_id: string, myid: any = "") {
   try {
     // connect db
     const videoId = getValidId(_id);

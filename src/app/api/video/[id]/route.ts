@@ -13,7 +13,7 @@ export async function GET(request: Request, { params }: Params) {
     // get username from url params
     const { id } = params;
     const myid = getUserIdFromAuth(request);
-    const data = await getVideoById(id);
+    const data = await getVideoById(id, myid);
 
     return NextResponse.json({ success: true, data });
   } catch (error: any) {
