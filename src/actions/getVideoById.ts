@@ -3,8 +3,10 @@ import Video from "@/models/video.model";
 import Reactions from "@/models/reaction.model";
 import { getCurrentUser, getValidId } from "@/lib/serverCookies";
 import View from "@/models/views.model";
+import User from "@/models/user.model";
+import { getChannelByUsername } from "./getChannelByUsername";
 
-export async function getVideoById(_id: string) {
+export async function getVideoById(_id: string, myid = "") {
   try {
     // connect db
     const videoId = getValidId(_id);
@@ -13,10 +15,10 @@ export async function getVideoById(_id: string) {
     const currentUser = getCurrentUser();
 
     // get video
-    const data = await Video.findById(videoId).populate(
-      "by",
-      "_id channelName dp username"
-    );
+    const data = await Video.findById(videoId);
+
+    const u = await User.findById(data.by).select("username");
+    const channel = await getChannelByUsername(u.username, myid);
 
     const reactions = await Reactions.aggregate([
       {
@@ -63,6 +65,7 @@ export async function getVideoById(_id: string) {
       ...reactions[0],
       raection: myReaction?.reaction,
       views,
+      by: channel,
     };
 
     return obj;
