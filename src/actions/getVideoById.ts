@@ -4,9 +4,8 @@ import Reactions from "@/models/reaction.model";
 import { getCurrentUser, getValidId } from "@/lib/serverCookies";
 import View from "@/models/views.model";
 import User from "@/models/user.model";
-import { getChannelByUsername } from "./getChannelByUsername";
 
-export async function getVideoById(_id: string, myid: any = "") {
+export async function getVideoById(_id: string) {
   try {
     // connect db
     const videoId = getValidId(_id);
@@ -17,9 +16,7 @@ export async function getVideoById(_id: string, myid: any = "") {
     // get video
     const data = await Video.findById(videoId);
 
-    const u = await User.findById(data.by).select("username");
-    const channel = await getChannelByUsername(u.username, myid);
-
+    const u = await User.findById(data.by);
     const reactions = await Reactions.aggregate([
       {
         $match: {
@@ -65,7 +62,12 @@ export async function getVideoById(_id: string, myid: any = "") {
       ...reactions[0],
       raection: myReaction?.reaction,
       views,
-      by: channel,
+      by: {
+        _id: u._id,
+        channelName: u.channelName,
+        dp: u.dp,
+        username: u.username,
+      },
     };
 
     return obj;
