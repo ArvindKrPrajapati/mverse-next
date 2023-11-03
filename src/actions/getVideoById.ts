@@ -4,6 +4,7 @@ import Reactions from "@/models/reaction.model";
 import { getCurrentUser, getValidId } from "@/lib/serverCookies";
 import View from "@/models/views.model";
 import User from "@/models/user.model";
+import { Comment } from "@/models/comments.model";
 
 export async function getVideoById(_id: string) {
   try {
@@ -53,6 +54,7 @@ export async function getVideoById(_id: string) {
     });
 
     const views = await View.find({ videoId }).count();
+    const comments = await Comment.find({ videoId }).count();
 
     if (!data) {
       return null;
@@ -62,6 +64,7 @@ export async function getVideoById(_id: string) {
       ...reactions[0],
       raection: myReaction?.reaction,
       views,
+      comments,
       by: {
         _id: u._id,
         channelName: u.channelName,
