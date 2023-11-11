@@ -3,10 +3,11 @@ import IUser from "./user.model";
 
 interface IPost extends Document {
   userid: Types.ObjectId | typeof IUser;
-  text:String,
-  images:String[],
-  tags:string[],
-  mentions:string[],
+  belongsTo: any;
+  text: String;
+  images: String[];
+  tags: string[];
+  mentions: string[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -17,22 +18,27 @@ const schema = new Schema<IPost>(
       type: Types.ObjectId,
       ref: "user",
     },
-    text:{
-        type:String,
-        required:false,
-        trim:true
+    belongsTo: {
+      type: Types.ObjectId,
+      ref: "posts",
+      default: null,
     },
-    images:{
-        type:[String],
-        default:[]
+    text: {
+      type: String,
+      required: false,
+      trim: true,
     },
-    tags:{
-        type:[String],
-        default:[]
+    images: {
+      type: [String],
+      default: [],
     },
-    mentions:{
-        type:[String],
-        default:[]
+    tags: {
+      type: [String],
+      default: [],
+    },
+    mentions: {
+      type: [String],
+      default: [],
     },
   },
   { timestamps: true }
