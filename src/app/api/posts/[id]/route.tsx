@@ -1,3 +1,4 @@
+import { getAllPosts } from "@/actions/getAllPosts";
 import { limit } from "@/lib/constants";
 import dbConnect from "@/lib/dbConnect";
 import { getUserIdFromAuth, getValidId } from "@/lib/serverCookies";
@@ -28,47 +29,7 @@ export async function GET(request: NextRequest, { params }: Params) {
     const skip = Number(query.get("skip") || 0);
     const _limit = Number(query.get("limit") || limit);
 
-    const data = await PostModel.aggregate([
-      {
-        $match: {
-          $or: [{ _id: id }, { belongsTo: id }],
-        },
-      },
-      {
-        $addFields: {
-          isNullBelongsTo: { $eq: ["$belongsTo", null] },
-        },
-      },
-      { $sort: { isNullBelongsTo: -1, createdAt: -1 } },
-      { $skip: skip },
-      { $limit: _limit },
-      {
-        $lookup: {
-          from: "users",
-          localField: "userid",
-          foreignField: "_id",
-          as: "user",
-        },
-      },
-      { $unwind: "$user" },
-      {
-        $project: {
-          text: 1,
-          images: 1,
-          tags: 1,
-          belongsTo: 1,
-          mentions: 1,
-          createdAt: 1,
-          user: {
-            _id: 1,
-            channelName: 1,
-            username: 1,
-            dp: 1,
-            name: 1,
-          },
-        },
-      },
-    ]);
+    const data = await getAllPosts(skip, _limit, id);
 
     return NextResponse.json({
       success: true,
