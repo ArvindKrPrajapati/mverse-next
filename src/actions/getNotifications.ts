@@ -71,6 +71,7 @@ export async function getNotifications(
           post: {
             text: 1,
             images: 1,
+            belongsTo: 1,
           },
           createdAt: 1,
           sender: {
