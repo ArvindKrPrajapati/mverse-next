@@ -56,6 +56,26 @@ export async function getNotifications(
                 $expr: { $eq: ["$_id", "$$postId"] },
               },
             },
+            {
+              $lookup: {
+                from: "posts",
+                let: { belongsToId: "$belongsTo" },
+                pipeline: [
+                  {
+                    $match: {
+                      $expr: { $eq: ["$_id", "$$belongsToId"] },
+                    },
+                  },
+                ],
+                as: "belongsToPost",
+              },
+            },
+            {
+              $unwind: {
+                path: "$belongsToPost",
+                preserveNullAndEmptyArrays: true,
+              },
+            },
           ],
           as: "post",
         },
@@ -63,15 +83,17 @@ export async function getNotifications(
       {
         $unwind: {
           path: "$post",
-          preserveNullAndEmptyArrays: true, // To handle missing or non-matching posts
+          preserveNullAndEmptyArrays: true,
         },
       },
       {
         $project: {
           post: {
+            _id: 1,
+            belongsTo: 1,
             text: 1,
             images: 1,
-            belongsTo: 1,
+            belongsToPost: 1,
           },
           createdAt: 1,
           sender: {
