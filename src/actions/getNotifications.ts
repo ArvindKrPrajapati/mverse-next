@@ -49,13 +49,23 @@ export async function getNotifications(
       {
         $lookup: {
           from: "posts",
-          localField: "postId",
-          foreignField: "_id",
+          let: { postId: "$postId" },
+          pipeline: [
+            {
+              $match: {
+                $expr: { $eq: ["$_id", "$$postId"] },
+              },
+            },
+          ],
           as: "post",
         },
       },
-      { $unwind: "$post" },
-
+      {
+        $unwind: {
+          path: "$post",
+          preserveNullAndEmptyArrays: true, // To handle missing or non-matching posts
+        },
+      },
       {
         $project: {
           post: {

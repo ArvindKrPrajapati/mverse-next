@@ -1,6 +1,7 @@
 import { postNotication } from "@/actions/postNotification";
 import dbConnect from "@/lib/dbConnect";
 import { getUserIdFromAuth, getValidId } from "@/lib/serverCookies";
+import NotificationModel from "@/models/notification.model";
 import PostLikes from "@/models/post-likes.model";
 import PostModel from "@/models/posts.model";
 import mongoose from "mongoose";
@@ -33,8 +34,16 @@ export async function POST(request: NextRequest) {
     // check if reaction exists
     const isExist = await PostLikes.findOne({ by: myid, postId });
     let message;
+    const post = await PostModel.findById(postId);
+
     if (isExist?._id) {
       await PostLikes.findOneAndDelete({ by: myid, postId });
+      await NotificationModel.findOneAndDelete({
+        senderId: myid,
+        receiverId: post.userid,
+        type: "LIKE",
+        postId,
+      });
       message = "Unliked";
     } else {
       await PostLikes.create({
@@ -42,8 +51,6 @@ export async function POST(request: NextRequest) {
         postId,
       });
       message = "Liked";
-
-      const post = await PostModel.findById(postId);
 
       await postNotication({
         senderId: myid,
