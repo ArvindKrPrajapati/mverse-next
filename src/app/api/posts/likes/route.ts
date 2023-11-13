@@ -1,6 +1,8 @@
+import { postNotication } from "@/actions/postNotification";
 import dbConnect from "@/lib/dbConnect";
-import { getUserIdFromAuth } from "@/lib/serverCookies";
+import { getUserIdFromAuth, getValidId } from "@/lib/serverCookies";
 import PostLikes from "@/models/post-likes.model";
+import PostModel from "@/models/posts.model";
 import mongoose from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -40,6 +42,15 @@ export async function POST(request: NextRequest) {
         postId,
       });
       message = "Liked";
+
+      const post = await PostModel.findById(postId);
+
+      await postNotication({
+        senderId: myid,
+        receiverId: post.userid,
+        type: "LIKE",
+        postId,
+      });
     }
 
     return NextResponse.json({ success: true, data: { message } });

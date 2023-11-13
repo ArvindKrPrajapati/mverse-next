@@ -1,17 +1,15 @@
-import { getAllPosts } from "@/actions/getAllPosts";
-import { postNotication } from "@/actions/postNotification";
+import { getNotifications } from "@/actions/getNotifications";
 import { limit } from "@/lib/constants";
 import dbConnect from "@/lib/dbConnect";
 import { getUserIdFromAuth } from "@/lib/serverCookies";
-import PostModel from "@/models/posts.model";
-import User from "@/models/user.model";
-import Video from "@/models/video.model";
+import NotificationModel from "@/models/notification.model";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   try {
     const query = request.nextUrl.searchParams;
     const myid = getUserIdFromAuth(request);
+
     if (!myid) {
       return NextResponse.json({
         success: false,
@@ -21,8 +19,10 @@ export async function GET(request: NextRequest) {
 
     const skip = Number(query.get("skip") || 0);
     const _limit = Number(query.get("limit") || limit);
-
-    const data = await getAllPosts(skip, _limit, null);
+    const data = await getNotifications(skip, _limit, myid);
+    // const data = await NotificationModel.find({ receiverId: myid })
+    //   .skip(skip)
+    //   .limit(_limit);
 
     return NextResponse.json({
       success: true,
@@ -38,7 +38,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-export async function POST(requeest: Request) {
+export async function PATCH(requeest: Request) {
   try {
     // get myid if i am login
     const myid = getUserIdFromAuth(requeest);
@@ -51,46 +51,21 @@ export async function POST(requeest: Request) {
       });
     }
 
-    // get the required fields
-    const { text, images, tags, mentions, belongsTo } = await requeest.json();
-
-    // checck of required fields are provided in the body
-    if (!text && !images.length) {
-      return NextResponse.json({
-        success: false,
-        error: "text or image is required",
-      });
-    }
-
     await dbConnect();
-    const data = await PostModel.create({
-      userid: myid,
-      text,
-      images,
-      tags,
-      mentions,
-      belongsTo: belongsTo || null,
+    const data = await NotificationModel.updateMany({
+      receiverId: myid,
+      seen: true,
     });
 
-    // add notification
-    if (belongsTo) {
-      const post = await PostModel.findById(data.belongsTo);
-      await postNotication({
-        senderId: myid,
-        receiverId: post.userid,
-        type: "COMMENT",
-        postId: data._id,
-      });
-    }
     if (data) {
       return NextResponse.json({
         success: true,
-        data: { message: "Post created" },
+        data: { message: "Notification marked seen" },
       });
     }
     return NextResponse.json({
       success: false,
-      error: "Post creation failed",
+      error: "operation failed",
     });
   } catch (error: any) {
     return NextResponse.json({
