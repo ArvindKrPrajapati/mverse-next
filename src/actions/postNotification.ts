@@ -22,7 +22,6 @@ export async function postNotication(payload: props) {
     const noti_token = await NotificationToken.find({
       userId: payload.receiverId,
     });
-    console.log(noti_token);
 
     const tokens: string[] = [];
     await Promise.all(
