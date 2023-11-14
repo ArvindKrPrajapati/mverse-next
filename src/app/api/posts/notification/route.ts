@@ -52,10 +52,14 @@ export async function PATCH(requeest: Request) {
     }
 
     await dbConnect();
-    const data = await NotificationModel.updateMany({
-      receiverId: myid,
-      seen: true,
-    });
+    const data = await NotificationModel.updateMany(
+      {
+        receiverId: myid,
+      },
+      {
+        seen: true,
+      }
+    );
 
     if (data) {
       return NextResponse.json({
