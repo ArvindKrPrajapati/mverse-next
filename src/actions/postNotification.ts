@@ -1,6 +1,8 @@
 import { getValidId } from "@/lib/serverCookies";
 import NotificationToken from "@/models/notification-token";
 import NotificationModel from "@/models/notification.model";
+import PostModel from "@/models/posts.model";
+import User from "@/models/user.model";
 import Expo from "expo-server-sdk";
 
 type props = {
@@ -18,6 +20,37 @@ export async function postNotication(payload: props) {
       return null;
     }
 
+    const sender = await User.findById(payload.senderId);
+    const body: any = {
+      message: `${sender.name} - ${sender.username} - `,
+    };
+    if (payload.postId) {
+      const mypost = await PostModel.findById(payload.postId).populate(
+        "belongsTo"
+      );
+      if (payload.type == "LIKE") {
+        if (mypost.belongsTo?._id) {
+          if (mypost.belongsTo?.belongsTo) {
+            body["message"] = body.message + `liked your reply`;
+          } else {
+            body["message"] = body.message + `liked your comment`;
+          }
+        } else {
+          body["message"] = body.message + `liked your post`;
+        }
+        body["post"] = mypost;
+      }
+      // comment
+      if (payload.type == "COMMENT") {
+        if (mypost.belongsTo?.belongsTo) {
+          body["message"] = body.message + `replied to your comment`;
+        } else {
+          body["message"] = body.message + `commented on your post`;
+        }
+        body["post"] = mypost;
+      }
+    }
+
     // send push noti
     const noti_token = await NotificationToken.find({
       userId: payload.receiverId,
@@ -31,7 +64,7 @@ export async function postNotication(payload: props) {
     );
 
     if (noti_token) {
-      await sendPushNotification(tokens);
+      await sendPushNotification(tokens, body);
     }
     // end
     const data = await NotificationModel.create(payload);
@@ -43,7 +76,10 @@ export async function postNotication(payload: props) {
   }
 }
 
-const sendPushNotification = async (targetExpoPushToken: string[]) => {
+const sendPushNotification = async (
+  targetExpoPushToken: string[],
+  bodyMessage: any
+) => {
   let expo = new Expo();
 
   // Create the messages that you want to send to clients
@@ -61,8 +97,8 @@ const sendPushNotification = async (targetExpoPushToken: string[]) => {
     messages.push({
       to: pushToken,
       sound: "default",
-      body: "This is a test notification",
-      data: { withSome: "data" },
+      body: bodyMessage.message,
+      data: { post: bodyMessage.post },
     });
   }
 
